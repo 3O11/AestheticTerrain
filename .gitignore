@@ -1,0 +1,4 @@
+# Visual Studio custom settings and intermediates
+.vs/
+*/bin/*
+*/obj/*
