@@ -14,5 +14,6 @@ namespace AestheticTerrain {
             InitializeComponent();
         }
 
+        // This will contain ONLY event handlers
     }
 }

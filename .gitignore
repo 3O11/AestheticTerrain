@@ -1,4 +1,6 @@
 # Visual Studio custom settings and intermediates
-.vs/
-*/bin/*
-*/obj/*
+AestheticTerrain/.vs/
+
+# Inore build
+AestheticTerrain/AestheticTerrain/bin/*
+AestheticTerrain/AestheticTerrain/obj/*
