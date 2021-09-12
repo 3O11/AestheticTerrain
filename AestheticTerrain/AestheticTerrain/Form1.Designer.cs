@@ -50,23 +50,24 @@ namespace AestheticTerrain {
             this.imageOptions = new System.Windows.Forms.TabPage();
             this.imageType = new System.Windows.Forms.ComboBox();
             this.imageTypeLabel = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.imageHeight = new System.Windows.Forms.NumericUpDown();
+            this.imageWidth = new System.Windows.Forms.NumericUpDown();
             this.heightLabel = new System.Windows.Forms.Label();
             this.widthLabel = new System.Windows.Forms.Label();
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.terrainOptions = new System.Windows.Forms.TabPage();
             this.backgroundOptions = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.presetSaveButton = new System.Windows.Forms.Button();
+            this.presetLoadButton = new System.Windows.Forms.Button();
+            this.previewRenderButton = new System.Windows.Forms.Button();
+            this.previewImage = new System.Windows.Forms.PictureBox();
+            this.imageRenderButton = new System.Windows.Forms.Button();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewImage)).BeginInit();
             this.SuspendLayout();
             // 
             // topMenu
@@ -249,8 +250,8 @@ namespace AestheticTerrain {
             // 
             this.imageOptions.Controls.Add(this.imageType);
             this.imageOptions.Controls.Add(this.imageTypeLabel);
-            this.imageOptions.Controls.Add(this.numericUpDown2);
-            this.imageOptions.Controls.Add(this.numericUpDown1);
+            this.imageOptions.Controls.Add(this.imageHeight);
+            this.imageOptions.Controls.Add(this.imageWidth);
             this.imageOptions.Controls.Add(this.heightLabel);
             this.imageOptions.Controls.Add(this.widthLabel);
             this.imageOptions.Controls.Add(this.resolutionLabel);
@@ -274,6 +275,7 @@ namespace AestheticTerrain {
             this.imageType.Size = new System.Drawing.Size(151, 28);
             this.imageType.TabIndex = 6;
             this.imageType.Text = "PNG";
+            this.imageType.SelectedIndexChanged += new System.EventHandler(this.imageType_SelectedIndexChanged);
             // 
             // imageTypeLabel
             // 
@@ -284,19 +286,31 @@ namespace AestheticTerrain {
             this.imageTypeLabel.TabIndex = 5;
             this.imageTypeLabel.Text = "Image Type:";
             // 
-            // numericUpDown2
+            // imageHeight
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(89, 62);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(86, 27);
-            this.numericUpDown2.TabIndex = 4;
+            this.imageHeight.Location = new System.Drawing.Point(89, 62);
+            this.imageHeight.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+            this.imageHeight.Name = "imageHeight";
+            this.imageHeight.Size = new System.Drawing.Size(86, 27);
+            this.imageHeight.TabIndex = 4;
+            this.imageHeight.ValueChanged += new System.EventHandler(this.imageHeight_ValueChanged);
             // 
-            // numericUpDown1
+            // imageWidth
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(89, 29);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(86, 27);
-            this.numericUpDown1.TabIndex = 3;
+            this.imageWidth.Location = new System.Drawing.Point(89, 29);
+            this.imageWidth.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+            this.imageWidth.Name = "imageWidth";
+            this.imageWidth.Size = new System.Drawing.Size(86, 27);
+            this.imageWidth.TabIndex = 3;
+            this.imageWidth.ValueChanged += new System.EventHandler(this.imageWidth_ValueChanged);
             // 
             // heightLabel
             // 
@@ -345,56 +359,68 @@ namespace AestheticTerrain {
             this.backgroundOptions.Text = "Background Options";
             this.backgroundOptions.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // presetSaveButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1594, 761);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save Preset";
-            this.button1.UseVisualStyleBackColor = true;
+            this.presetSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.presetSaveButton.Location = new System.Drawing.Point(1594, 761);
+            this.presetSaveButton.Name = "presetSaveButton";
+            this.presetSaveButton.Size = new System.Drawing.Size(94, 29);
+            this.presetSaveButton.TabIndex = 2;
+            this.presetSaveButton.Text = "Save Preset";
+            this.presetSaveButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // presetLoadButton
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(1594, 796);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Save Image";
-            this.button2.UseVisualStyleBackColor = true;
+            this.presetLoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.presetLoadButton.Location = new System.Drawing.Point(1594, 796);
+            this.presetLoadButton.Name = "presetLoadButton";
+            this.presetLoadButton.Size = new System.Drawing.Size(94, 29);
+            this.presetLoadButton.TabIndex = 3;
+            this.presetLoadButton.Text = "Load Preset";
+            this.presetLoadButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // previewRenderButton
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1303, 761);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 29);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Generate Preview";
-            this.button3.UseVisualStyleBackColor = true;
+            this.previewRenderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewRenderButton.Location = new System.Drawing.Point(1303, 761);
+            this.previewRenderButton.Name = "previewRenderButton";
+            this.previewRenderButton.Size = new System.Drawing.Size(144, 29);
+            this.previewRenderButton.TabIndex = 4;
+            this.previewRenderButton.Text = "Generate Preview";
+            this.previewRenderButton.UseVisualStyleBackColor = true;
+            this.previewRenderButton.Click += new System.EventHandler(this.previewRenderButton_Click);
             // 
-            // pictureBox1
+            // previewImage
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.previewImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(13, 31);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1280, 720);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.previewImage.Location = new System.Drawing.Point(13, 31);
+            this.previewImage.Name = "previewImage";
+            this.previewImage.Size = new System.Drawing.Size(1280, 720);
+            this.previewImage.TabIndex = 5;
+            this.previewImage.TabStop = false;
+            // 
+            // imageRenderButton
+            // 
+            this.imageRenderButton.Location = new System.Drawing.Point(1303, 796);
+            this.imageRenderButton.Name = "imageRenderButton";
+            this.imageRenderButton.Size = new System.Drawing.Size(144, 29);
+            this.imageRenderButton.TabIndex = 6;
+            this.imageRenderButton.Text = "Render Image";
+            this.imageRenderButton.UseVisualStyleBackColor = true;
+            this.imageRenderButton.Click += new System.EventHandler(this.imageRenderButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1692, 886);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.imageRenderButton);
+            this.Controls.Add(this.previewImage);
+            this.Controls.Add(this.previewRenderButton);
+            this.Controls.Add(this.presetLoadButton);
+            this.Controls.Add(this.presetSaveButton);
             this.Controls.Add(this.options);
             this.Controls.Add(this.topMenu);
             this.MainMenuStrip = this.topMenu;
@@ -405,9 +431,9 @@ namespace AestheticTerrain {
             this.options.ResumeLayout(false);
             this.imageOptions.ResumeLayout(false);
             this.imageOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previewImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,17 +466,18 @@ namespace AestheticTerrain {
         private System.Windows.Forms.TabPage imageOptions;
         private System.Windows.Forms.TabPage terrainOptions;
         private System.Windows.Forms.TabPage backgroundOptions;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button presetSaveButton;
+        private System.Windows.Forms.Button presetLoadButton;
+        private System.Windows.Forms.Button previewRenderButton;
+        private System.Windows.Forms.NumericUpDown imageHeight;
+        private System.Windows.Forms.NumericUpDown imageWidth;
         private System.Windows.Forms.Label heightLabel;
         private System.Windows.Forms.Label widthLabel;
         private System.Windows.Forms.Label resolutionLabel;
         private System.Windows.Forms.Label imageTypeLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox previewImage;
         private System.Windows.Forms.ComboBox imageType;
+        private System.Windows.Forms.Button imageRenderButton;
     }
 }
 
