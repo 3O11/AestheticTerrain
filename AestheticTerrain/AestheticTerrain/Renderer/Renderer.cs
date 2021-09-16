@@ -28,29 +28,11 @@ namespace AestheticTerrain {
             shader.SetUniformMat4f("u_View", _camera.GetViewMatrix());
             shader.SetUniformMat4f("u_Projection", _camera.GetProjectionMatrix());
             shader.SetUniformMat4f("u_Model", Matrix4.Identity);
-            //shader.SetUniformMat4f("u_View", Matrix4.Identity);
-            //shader.SetUniformMat4f("u_Projection", Matrix4.Identity);
 
-            Vertex[] triangle = {
-                new Vertex() { Position = new Vector3( -0.5f,  0.5f,  0.0f)},
-                new Vertex() { Position = new Vector3( -0.5f, -0.5f,  0.0f)},
-                new Vertex() { Position = new Vector3(  0.5f, -0.5f,  0.0f)},
-            };
-
-            int[] indices = {
-                0, 1, 2,
-            };
-
-            Mesh triangleMesh = new Mesh(triangle, indices);
-            triangleMesh.Bind();
-            GL.DrawElements(BeginMode.Triangles, triangleMesh.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
-
-            Mesh terrain = Mesh.GeneratePlane(10);
+            Mesh terrain = Mesh.GeneratePlane(100);
             terrain.Bind();
             GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
-
             GL.Flush();
-            _renderWindow.SwapBuffers();
 
             // Return final product
             return createImage();
@@ -69,7 +51,7 @@ namespace AestheticTerrain {
             };
 
             _renderWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
-            //_renderWindow.IsVisible = false;
+            _renderWindow.IsVisible = false;
 
             GL.Enable(EnableCap.DebugOutput);
             GL.Enable(EnableCap.Blend);
@@ -93,10 +75,6 @@ namespace AestheticTerrain {
         void updateCanvasSize(Resolution res) {
             _renderWindow.Size = res.AsVector();
         }
-
-        //Bitmap generateBackground(State s) {
-
-        //}
 
         Bitmap createBackground(State s) {
             Bitmap background = new Bitmap(s.ImgResolution.Width, s.ImgResolution.Height);

@@ -15,7 +15,7 @@ namespace AestheticTerrain {
         }
 
         public void SetUniformMat4f(string name, Matrix4 matrix) {
-            GL.UniformMatrix4(getUniformLocation(name), true, ref matrix);
+            GL.UniformMatrix4(getUniformLocation(name), false, ref matrix);
         }
 
         public void Bind() {

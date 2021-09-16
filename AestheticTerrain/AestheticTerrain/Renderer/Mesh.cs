@@ -7,13 +7,8 @@ using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
 
 namespace AestheticTerrain {
-    struct Vertex {
-        public Vector3 Position { get; set; }
-        public Vector2 TexCoords { get; set; }
-    }
-
     class Mesh {
-        public Mesh(Vertex[] vertices, int[] indices) {
+        public Mesh(Vector3[] vertices, int[] indices) {
             // Generate Vertex Array
             _VAO = GL.GenVertexArray();
             GL.BindVertexArray(_VAO);
@@ -21,13 +16,11 @@ namespace AestheticTerrain {
             // Generate Vertex Buffer, fill it with data and declare interleaved layout
             _VBO = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ArrayBuffer, _VBO);
-            int vertexSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vertex));
+            int vertexSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * vertexSize, vertices, BufferUsageHint.StaticDraw);
 
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, vertexSize, 0);
-            GL.EnableVertexAttribArray(1);
-            GL.VertexAttribPointer(1, 2, VertexAttribPointerType.Float, false, vertexSize, 3 * sizeof(float));
 
             // Generate Index Buffer and fill it with data
             _IBO = GL.GenBuffer();
@@ -37,12 +30,12 @@ namespace AestheticTerrain {
         }
 
         public static Mesh GeneratePlane(int radius) {
-            List<Vertex> vertices = new List<Vertex>();
+            List<Vector3> vertices = new List<Vector3>();
             List<int> indices = new List<int>();
 
             for (int i = 0; i < (radius * 2) + 1; i++) {
                 for (int j = 0; j < (radius * 2) + 1; j++) {
-                    vertices.Add( new Vertex() { Position = new Vector3(i, 0, j), TexCoords = new Vector2(i, j) } );
+                    vertices.Add( new Vector3(i - radius, 0, j - radius) );
 
                     if (i > 0 && j > 0) {
                         int currentPoint = i * (radius * 2 + 1) + j;
@@ -52,12 +45,12 @@ namespace AestheticTerrain {
 
                         // Adding a new square.
                         indices.Add(currentPoint);
-                        indices.Add(prevRowPoint);
                         indices.Add(prevPoint);
+                        indices.Add(prevRowPoint);
 
                         indices.Add(prevRowPoint);
-                        indices.Add(prevRowPrevPoint);
                         indices.Add(prevPoint);
+                        indices.Add(prevRowPrevPoint);
                     }
                 }
             }
