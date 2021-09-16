@@ -16,6 +16,10 @@ namespace AestheticTerrain {
 
             imageWidth.Value = 1280;
             imageHeight.Value = 720;
+
+            _renderer.InitContext(_state.ImgResolution);
+
+            FormClosing += window_Closing;
         }
 
         // Image Options
@@ -49,6 +53,10 @@ namespace AestheticTerrain {
 
         private void imageRenderButton_Click(object sender, EventArgs e) {
             _state.BgSunColour = new Vector3i(255, 0, 0);
+        }
+
+        private void window_Closing(object sender, EventArgs e) {
+            _renderer.DestroyContext();
         }
 
         // Members

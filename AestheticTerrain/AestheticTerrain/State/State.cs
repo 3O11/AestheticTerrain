@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using OpenTK.Mathematics;
 
 namespace AestheticTerrain {
@@ -20,8 +19,17 @@ namespace AestheticTerrain {
             Height = height;
         }
 
+        public Resolution(Resolution r) {
+            Width = r.Width;
+            Height = r.Height;
+        }
+
         public Vector2i AsVector() {
             return new Vector2i(Width, Height);
+        }
+
+        public float GetAspectRatio() {
+            return (float)Width / Height;
         }
 
         public int Width { get; set; }
@@ -29,6 +37,27 @@ namespace AestheticTerrain {
     }
 
     class State {
+        public State() {
+
+        }
+
+        public State(State s) {
+            ImgType = s.ImgType;
+            ImgResolution = new Resolution(s.ImgResolution);
+
+            TerrainMeshRadius = s.TerrainMeshRadius;
+            TerrainSeed = s.TerrainSeed;
+            TerrainLowerCutoff = s.TerrainLowerCutoff;
+            TerrainUpperCutoff = s.TerrainUpperCutoff;
+
+            BgSunPosition = new Vector2i(s.BgSunPosition.X, s.BgSunPosition.Y);
+            BgSunRadius = s.BgSunRadius;
+            BgSunColour = new Vector3i(s.BgSunColour.X, s.BgSunColour.Y, s.BgSunColour.Z);
+            BgStarCount = s.BgStarCount;
+            BgStarSpacing = s.BgStarSpacing;
+            BgStarColour = new Vector3i(s.BgStarColour.X, s.BgStarColour.Y, s.BgStarColour.Z);
+        }
+
         // Image Options
         public ImageType ImgType { get; set; }
         public Resolution ImgResolution { get; set; }
@@ -53,7 +82,7 @@ namespace AestheticTerrain {
             s.ImgType = ImageType.PNG;
             s.ImgResolution = new Resolution(1280, 720);
 
-            s.BgSunColour = new Vector3i(0, 0, 255);
+            s.BgSunColour = new Vector3i(176, 38, 255);
 
             return s;
         }
