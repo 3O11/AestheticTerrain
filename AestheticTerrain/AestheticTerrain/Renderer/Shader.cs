@@ -18,8 +18,16 @@ namespace AestheticTerrain {
             GL.UniformMatrix4(getUniformLocation(name), false, ref matrix);
         }
 
+        public void SetUniform1i(string name, int i) {
+            GL.Uniform1(getUniformLocation(name), i);
+        }
+
         public void Bind() {
             GL.UseProgram(_shaderID);
+        }
+
+        public void Destroy() {
+            GL.DeleteProgram(_shaderID);
         }
 
         int getUniformLocation(string name) {

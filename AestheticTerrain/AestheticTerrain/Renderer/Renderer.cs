@@ -15,24 +15,35 @@ using System.Diagnostics;
 namespace AestheticTerrain {
     class Renderer {
         public Renderer() {
-            _camera = new Camera(new Vector3(-1, 5, -1), 16.0f / 9.0f);
+            _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
         }
 
         public Bitmap Render(State s) {
             GL.ClearColor(Color.FromArgb(s.BgSunColour.X, s.BgSunColour.Y, s.BgSunColour.Z));
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            Shader shader = new Shader("Assets/01_vs_basic.glsl", "Assets/01_fs_basic.glsl");
+            Texture terrainTexture = new Texture("Assets/03-terrainTile.jpeg");
+            terrainTexture.Bind(0);
+
+            Shader shader = new Shader("Assets/01-vert.glsl", "Assets/02-frag.glsl");
             shader.Bind();
 
             shader.SetUniformMat4f("u_View", _camera.GetViewMatrix());
             shader.SetUniformMat4f("u_Projection", _camera.GetProjectionMatrix());
-            shader.SetUniformMat4f("u_Model", Matrix4.Identity);
+            Matrix4 transform = Matrix4.CreateScale(5, 1, 5);
+            shader.SetUniformMat4f("u_Model", transform);
+            shader.SetUniform1i("u_Texture", 0);
 
-            Mesh terrain = Mesh.GeneratePlane(100);
+
+            Mesh terrain = Mesh.GenerateTerrain(100, 41865);
             terrain.Bind();
             GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
             GL.Flush();
+
+
+            terrainTexture.Destroy();
+            shader.Destroy();
+            terrain.Destroy();
 
             // Return final product
             return createImage();
@@ -60,7 +71,7 @@ namespace AestheticTerrain {
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
-
+            GL.Enable(EnableCap.Multisample);
         }
 
         /// <summary>
