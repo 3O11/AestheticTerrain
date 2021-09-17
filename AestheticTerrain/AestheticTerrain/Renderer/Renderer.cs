@@ -18,8 +18,8 @@ namespace AestheticTerrain {
             _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
         }
 
-        public Bitmap Render(State s) {
-            GL.ClearColor(Color.FromArgb(s.BgSunColour.X, s.BgSunColour.Y, s.BgSunColour.Z));
+        public Bitmap Render() {
+            GL.ClearColor(Color.FromArgb(80, 120, 255));
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             Texture terrainTexture = new Texture("Assets/03-terrainTile.jpeg");
@@ -54,10 +54,12 @@ namespace AestheticTerrain {
         /// Must be called before trying to call the Render() method!
         /// </summary>
         /// <param name="res"> The initial window resolution. </param>
-        public void InitContext(Resolution res) {
+        public void InitContext(int width, int height) {
+            _width = width;
+            _height = height;
             var gameWindowSettings = GameWindowSettings.Default;
             var nativeWindowSettings = new NativeWindowSettings() {
-                Size = res.AsVector(),
+                Size = new Vector2i(_width, _height),
                 Title = "Invisible."
             };
 
@@ -83,17 +85,19 @@ namespace AestheticTerrain {
             _renderWindow.Dispose();
         }
 
-        void updateCanvasSize(Resolution res) {
-            _renderWindow.Size = res.AsVector();
+        void updateCanvasSize(int width, int height) {
+            _width = width;
+            _height = height;
+            _renderWindow.Size = new Vector2i(_width, _height);
         }
 
-        Bitmap createBackground(State s) {
-            Bitmap background = new Bitmap(s.ImgResolution.Width, s.ImgResolution.Height);
+        Bitmap createBackground() {
+            Bitmap background = new Bitmap(_width, _height);
 
             using (Graphics g = Graphics.FromImage(background)) {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
-                g.FillRectangle(Brushes.White, new Rectangle(0, 0, s.ImgResolution.Width, s.ImgResolution.Height));
+                g.FillRectangle(Brushes.White, new Rectangle(0, 0, _width, _height));
             }
 
             return background;
@@ -113,6 +117,8 @@ namespace AestheticTerrain {
             return bitmap;
         }
 
+        int _width;
+        int _height;
         GameWindow _renderWindow;
         Camera _camera;
     }
