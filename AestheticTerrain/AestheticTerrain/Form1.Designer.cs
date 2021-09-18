@@ -48,7 +48,8 @@ namespace AestheticTerrain {
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.options = new System.Windows.Forms.TabControl();
             this.imageOptions = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.imageName = new System.Windows.Forms.TextBox();
+            this.imageNameLabel = new System.Windows.Forms.Label();
             this.cameraFov = new System.Windows.Forms.NumericUpDown();
             this.fovLabel = new System.Windows.Forms.Label();
             this.cameraPitch = new System.Windows.Forms.NumericUpDown();
@@ -72,12 +73,34 @@ namespace AestheticTerrain {
             this.widthLabel = new System.Windows.Forms.Label();
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.terrainOptions = new System.Windows.Forms.TabPage();
+            this.interpolationDirection = new System.Windows.Forms.ComboBox();
+            this.interpolationLabel = new System.Windows.Forms.Label();
+            this.backColourLabel = new System.Windows.Forms.Label();
+            this.backColourButton = new System.Windows.Forms.Button();
+            this.frontColourButton = new System.Windows.Forms.Button();
+            this.frontColourLabel = new System.Windows.Forms.Label();
+            this.terrainScaleLabel = new System.Windows.Forms.Label();
+            this.terrainColourOptionsLabel = new System.Windows.Forms.Label();
+            this.generalOptionsLabel = new System.Windows.Forms.Label();
+            this.noiseAmplitudeLabel = new System.Windows.Forms.Label();
+            this.terrainScale = new System.Windows.Forms.NumericUpDown();
+            this.noiseAmplitude = new System.Windows.Forms.NumericUpDown();
+            this.noiseFrequency = new System.Windows.Forms.NumericUpDown();
+            this.noiseFreqLabel = new System.Windows.Forms.Label();
+            this.noiseSeed = new System.Windows.Forms.NumericUpDown();
+            this.noiseSeedLabel = new System.Windows.Forms.Label();
+            this.noiseOptionsLabel = new System.Windows.Forms.Label();
             this.backgroundOptions = new System.Windows.Forms.TabPage();
             this.presetSaveButton = new System.Windows.Forms.Button();
             this.presetLoadButton = new System.Windows.Forms.Button();
             this.previewRenderButton = new System.Windows.Forms.Button();
             this.previewImage = new System.Windows.Forms.PictureBox();
             this.imageRenderButton = new System.Windows.Forms.Button();
+            this.logBox = new System.Windows.Forms.RichTextBox();
+            this.upperCutoff = new System.Windows.Forms.NumericUpDown();
+            this.lowerCutoff = new System.Windows.Forms.NumericUpDown();
+            this.upperCutoffLabel = new System.Windows.Forms.Label();
+            this.lowerCutoffLabel = new System.Windows.Forms.Label();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
@@ -89,7 +112,14 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.cameraXValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).BeginInit();
+            this.terrainOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).BeginInit();
             this.SuspendLayout();
             // 
             // topMenu
@@ -270,7 +300,8 @@ namespace AestheticTerrain {
             // 
             // imageOptions
             // 
-            this.imageOptions.Controls.Add(this.label1);
+            this.imageOptions.Controls.Add(this.imageName);
+            this.imageOptions.Controls.Add(this.imageNameLabel);
             this.imageOptions.Controls.Add(this.cameraFov);
             this.imageOptions.Controls.Add(this.fovLabel);
             this.imageOptions.Controls.Add(this.cameraPitch);
@@ -301,17 +332,27 @@ namespace AestheticTerrain {
             this.imageOptions.Text = "Image Options";
             this.imageOptions.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // imageName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 470);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 20);
-            this.label1.TabIndex = 22;
+            this.imageName.Location = new System.Drawing.Point(117, 37);
+            this.imageName.Name = "imageName";
+            this.imageName.Size = new System.Drawing.Size(216, 27);
+            this.imageName.TabIndex = 24;
+            this.imageName.Text = "001-Render";
+            // 
+            // imageNameLabel
+            // 
+            this.imageNameLabel.AutoSize = true;
+            this.imageNameLabel.Location = new System.Drawing.Point(13, 40);
+            this.imageNameLabel.Name = "imageNameLabel";
+            this.imageNameLabel.Size = new System.Drawing.Size(98, 20);
+            this.imageNameLabel.TabIndex = 23;
+            this.imageNameLabel.Text = "Image Name:";
             // 
             // cameraFov
             // 
-            this.cameraFov.Location = new System.Drawing.Point(80, 427);
+            this.cameraFov.DecimalPlaces = 2;
+            this.cameraFov.Location = new System.Drawing.Point(80, 386);
             this.cameraFov.Maximum = new decimal(new int[] {
             180,
             0,
@@ -335,7 +376,7 @@ namespace AestheticTerrain {
             // fovLabel
             // 
             this.fovLabel.AutoSize = true;
-            this.fovLabel.Location = new System.Drawing.Point(13, 429);
+            this.fovLabel.Location = new System.Drawing.Point(13, 388);
             this.fovLabel.Name = "fovLabel";
             this.fovLabel.Size = new System.Drawing.Size(37, 20);
             this.fovLabel.TabIndex = 20;
@@ -343,7 +384,8 @@ namespace AestheticTerrain {
             // 
             // cameraPitch
             // 
-            this.cameraPitch.Location = new System.Drawing.Point(80, 394);
+            this.cameraPitch.DecimalPlaces = 2;
+            this.cameraPitch.Location = new System.Drawing.Point(80, 353);
             this.cameraPitch.Maximum = new decimal(new int[] {
             90,
             0,
@@ -362,7 +404,7 @@ namespace AestheticTerrain {
             // cameraPitchLabel
             // 
             this.cameraPitchLabel.AutoSize = true;
-            this.cameraPitchLabel.Location = new System.Drawing.Point(13, 396);
+            this.cameraPitchLabel.Location = new System.Drawing.Point(13, 355);
             this.cameraPitchLabel.Name = "cameraPitchLabel";
             this.cameraPitchLabel.Size = new System.Drawing.Size(44, 20);
             this.cameraPitchLabel.TabIndex = 18;
@@ -370,7 +412,8 @@ namespace AestheticTerrain {
             // 
             // cameraYaw
             // 
-            this.cameraYaw.Location = new System.Drawing.Point(80, 361);
+            this.cameraYaw.DecimalPlaces = 2;
+            this.cameraYaw.Location = new System.Drawing.Point(80, 320);
             this.cameraYaw.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -389,7 +432,7 @@ namespace AestheticTerrain {
             // cameraYawLabel
             // 
             this.cameraYawLabel.AutoSize = true;
-            this.cameraYawLabel.Location = new System.Drawing.Point(13, 363);
+            this.cameraYawLabel.Location = new System.Drawing.Point(13, 322);
             this.cameraYawLabel.Name = "cameraYawLabel";
             this.cameraYawLabel.Size = new System.Drawing.Size(38, 20);
             this.cameraYawLabel.TabIndex = 16;
@@ -398,7 +441,7 @@ namespace AestheticTerrain {
             // cameraZ
             // 
             this.cameraZ.AutoSize = true;
-            this.cameraZ.Location = new System.Drawing.Point(242, 318);
+            this.cameraZ.Location = new System.Drawing.Point(242, 277);
             this.cameraZ.Name = "cameraZ";
             this.cameraZ.Size = new System.Drawing.Size(21, 20);
             this.cameraZ.TabIndex = 15;
@@ -407,7 +450,17 @@ namespace AestheticTerrain {
             // cameraYValue
             // 
             this.cameraYValue.DecimalPlaces = 2;
-            this.cameraYValue.Location = new System.Drawing.Point(161, 316);
+            this.cameraYValue.Location = new System.Drawing.Point(161, 275);
+            this.cameraYValue.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraYValue.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.cameraYValue.Name = "cameraYValue";
             this.cameraYValue.Size = new System.Drawing.Size(75, 27);
             this.cameraYValue.TabIndex = 14;
@@ -416,7 +469,17 @@ namespace AestheticTerrain {
             // cameraZValue
             // 
             this.cameraZValue.DecimalPlaces = 2;
-            this.cameraZValue.Location = new System.Drawing.Point(269, 316);
+            this.cameraZValue.Location = new System.Drawing.Point(269, 275);
+            this.cameraZValue.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraZValue.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.cameraZValue.Name = "cameraZValue";
             this.cameraZValue.Size = new System.Drawing.Size(75, 27);
             this.cameraZValue.TabIndex = 13;
@@ -425,7 +488,7 @@ namespace AestheticTerrain {
             // cameraY
             // 
             this.cameraY.AutoSize = true;
-            this.cameraY.Location = new System.Drawing.Point(135, 318);
+            this.cameraY.Location = new System.Drawing.Point(135, 277);
             this.cameraY.Name = "cameraY";
             this.cameraY.Size = new System.Drawing.Size(20, 20);
             this.cameraY.TabIndex = 12;
@@ -434,7 +497,17 @@ namespace AestheticTerrain {
             // cameraXValue
             // 
             this.cameraXValue.DecimalPlaces = 2;
-            this.cameraXValue.Location = new System.Drawing.Point(54, 316);
+            this.cameraXValue.Location = new System.Drawing.Point(54, 275);
+            this.cameraXValue.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cameraXValue.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.cameraXValue.Name = "cameraXValue";
             this.cameraXValue.Size = new System.Drawing.Size(75, 27);
             this.cameraXValue.TabIndex = 11;
@@ -443,7 +516,7 @@ namespace AestheticTerrain {
             // cameraX
             // 
             this.cameraX.AutoSize = true;
-            this.cameraX.Location = new System.Drawing.Point(27, 318);
+            this.cameraX.Location = new System.Drawing.Point(27, 277);
             this.cameraX.Name = "cameraX";
             this.cameraX.Size = new System.Drawing.Size(21, 20);
             this.cameraX.TabIndex = 10;
@@ -452,7 +525,7 @@ namespace AestheticTerrain {
             // cameraPosition
             // 
             this.cameraPosition.AutoSize = true;
-            this.cameraPosition.Location = new System.Drawing.Point(13, 292);
+            this.cameraPosition.Location = new System.Drawing.Point(13, 251);
             this.cameraPosition.Name = "cameraPosition";
             this.cameraPosition.Size = new System.Drawing.Size(61, 20);
             this.cameraPosition.TabIndex = 9;
@@ -472,7 +545,7 @@ namespace AestheticTerrain {
             // 
             this.cameraSettings.AutoSize = true;
             this.cameraSettings.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cameraSettings.Location = new System.Drawing.Point(4, 265);
+            this.cameraSettings.Location = new System.Drawing.Point(4, 224);
             this.cameraSettings.Name = "cameraSettings";
             this.cameraSettings.Size = new System.Drawing.Size(142, 23);
             this.cameraSettings.TabIndex = 7;
@@ -485,7 +558,7 @@ namespace AestheticTerrain {
             "PNG",
             "JPG",
             "BMP"});
-            this.imageType.Location = new System.Drawing.Point(108, 134);
+            this.imageType.Location = new System.Drawing.Point(117, 81);
             this.imageType.Name = "imageType";
             this.imageType.Size = new System.Drawing.Size(151, 28);
             this.imageType.TabIndex = 6;
@@ -494,7 +567,7 @@ namespace AestheticTerrain {
             // imageTypeLabel
             // 
             this.imageTypeLabel.AutoSize = true;
-            this.imageTypeLabel.Location = new System.Drawing.Point(13, 137);
+            this.imageTypeLabel.Location = new System.Drawing.Point(13, 84);
             this.imageTypeLabel.Name = "imageTypeLabel";
             this.imageTypeLabel.Size = new System.Drawing.Size(89, 20);
             this.imageTypeLabel.TabIndex = 5;
@@ -502,7 +575,7 @@ namespace AestheticTerrain {
             // 
             // imageHeight
             // 
-            this.imageHeight.Location = new System.Drawing.Point(89, 92);
+            this.imageHeight.Location = new System.Drawing.Point(90, 180);
             this.imageHeight.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -525,7 +598,7 @@ namespace AestheticTerrain {
             // 
             // imageWidth
             // 
-            this.imageWidth.Location = new System.Drawing.Point(89, 59);
+            this.imageWidth.Location = new System.Drawing.Point(90, 147);
             this.imageWidth.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -549,7 +622,7 @@ namespace AestheticTerrain {
             // heightLabel
             // 
             this.heightLabel.AutoSize = true;
-            this.heightLabel.Location = new System.Drawing.Point(26, 94);
+            this.heightLabel.Location = new System.Drawing.Point(27, 182);
             this.heightLabel.Name = "heightLabel";
             this.heightLabel.Size = new System.Drawing.Size(57, 20);
             this.heightLabel.TabIndex = 2;
@@ -558,7 +631,7 @@ namespace AestheticTerrain {
             // widthLabel
             // 
             this.widthLabel.AutoSize = true;
-            this.widthLabel.Location = new System.Drawing.Point(26, 61);
+            this.widthLabel.Location = new System.Drawing.Point(27, 149);
             this.widthLabel.Name = "widthLabel";
             this.widthLabel.Size = new System.Drawing.Size(52, 20);
             this.widthLabel.TabIndex = 1;
@@ -567,7 +640,7 @@ namespace AestheticTerrain {
             // resolutionLabel
             // 
             this.resolutionLabel.AutoSize = true;
-            this.resolutionLabel.Location = new System.Drawing.Point(13, 36);
+            this.resolutionLabel.Location = new System.Drawing.Point(13, 124);
             this.resolutionLabel.Name = "resolutionLabel";
             this.resolutionLabel.Size = new System.Drawing.Size(79, 20);
             this.resolutionLabel.TabIndex = 0;
@@ -575,6 +648,27 @@ namespace AestheticTerrain {
             // 
             // terrainOptions
             // 
+            this.terrainOptions.Controls.Add(this.lowerCutoffLabel);
+            this.terrainOptions.Controls.Add(this.upperCutoffLabel);
+            this.terrainOptions.Controls.Add(this.lowerCutoff);
+            this.terrainOptions.Controls.Add(this.upperCutoff);
+            this.terrainOptions.Controls.Add(this.interpolationDirection);
+            this.terrainOptions.Controls.Add(this.interpolationLabel);
+            this.terrainOptions.Controls.Add(this.backColourLabel);
+            this.terrainOptions.Controls.Add(this.backColourButton);
+            this.terrainOptions.Controls.Add(this.frontColourButton);
+            this.terrainOptions.Controls.Add(this.frontColourLabel);
+            this.terrainOptions.Controls.Add(this.terrainScaleLabel);
+            this.terrainOptions.Controls.Add(this.terrainColourOptionsLabel);
+            this.terrainOptions.Controls.Add(this.generalOptionsLabel);
+            this.terrainOptions.Controls.Add(this.noiseAmplitudeLabel);
+            this.terrainOptions.Controls.Add(this.terrainScale);
+            this.terrainOptions.Controls.Add(this.noiseAmplitude);
+            this.terrainOptions.Controls.Add(this.noiseFrequency);
+            this.terrainOptions.Controls.Add(this.noiseFreqLabel);
+            this.terrainOptions.Controls.Add(this.noiseSeed);
+            this.terrainOptions.Controls.Add(this.noiseSeedLabel);
+            this.terrainOptions.Controls.Add(this.noiseOptionsLabel);
             this.terrainOptions.Location = new System.Drawing.Point(4, 29);
             this.terrainOptions.Name = "terrainOptions";
             this.terrainOptions.Padding = new System.Windows.Forms.Padding(3);
@@ -582,6 +676,212 @@ namespace AestheticTerrain {
             this.terrainOptions.TabIndex = 1;
             this.terrainOptions.Text = "Terrain Options";
             this.terrainOptions.UseVisualStyleBackColor = true;
+            // 
+            // interpolationDirection
+            // 
+            this.interpolationDirection.FormattingEnabled = true;
+            this.interpolationDirection.Items.AddRange(new object[] {
+            "None",
+            "Front-Back",
+            "Top-Down"});
+            this.interpolationDirection.Location = new System.Drawing.Point(204, 433);
+            this.interpolationDirection.Name = "interpolationDirection";
+            this.interpolationDirection.Size = new System.Drawing.Size(151, 28);
+            this.interpolationDirection.TabIndex = 16;
+            this.interpolationDirection.Text = "None";
+            this.interpolationDirection.SelectedIndexChanged += new System.EventHandler(this.interpolationDirection_SelectedIndexChanged);
+            // 
+            // interpolationLabel
+            // 
+            this.interpolationLabel.AutoSize = true;
+            this.interpolationLabel.Location = new System.Drawing.Point(23, 436);
+            this.interpolationLabel.Name = "interpolationLabel";
+            this.interpolationLabel.Size = new System.Drawing.Size(163, 20);
+            this.interpolationLabel.TabIndex = 15;
+            this.interpolationLabel.Text = "Interpolation Direction:";
+            // 
+            // backColourLabel
+            // 
+            this.backColourLabel.AutoSize = true;
+            this.backColourLabel.Location = new System.Drawing.Point(23, 525);
+            this.backColourLabel.Name = "backColourLabel";
+            this.backColourLabel.Size = new System.Drawing.Size(91, 20);
+            this.backColourLabel.TabIndex = 14;
+            this.backColourLabel.Text = "Back Colour:";
+            // 
+            // backColourButton
+            // 
+            this.backColourButton.Location = new System.Drawing.Point(204, 521);
+            this.backColourButton.Name = "backColourButton";
+            this.backColourButton.Size = new System.Drawing.Size(94, 29);
+            this.backColourButton.TabIndex = 13;
+            this.backColourButton.Text = "Pick Colour";
+            this.backColourButton.UseVisualStyleBackColor = true;
+            this.backColourButton.Click += new System.EventHandler(this.backColourButton_Click);
+            // 
+            // frontColourButton
+            // 
+            this.frontColourButton.BackColor = System.Drawing.Color.White;
+            this.frontColourButton.Location = new System.Drawing.Point(204, 486);
+            this.frontColourButton.Name = "frontColourButton";
+            this.frontColourButton.Size = new System.Drawing.Size(94, 29);
+            this.frontColourButton.TabIndex = 12;
+            this.frontColourButton.Text = "Pick Colour";
+            this.frontColourButton.UseVisualStyleBackColor = false;
+            this.frontColourButton.Click += new System.EventHandler(this.frontColourButton_Click);
+            // 
+            // frontColourLabel
+            // 
+            this.frontColourLabel.AutoSize = true;
+            this.frontColourLabel.Location = new System.Drawing.Point(23, 490);
+            this.frontColourLabel.Name = "frontColourLabel";
+            this.frontColourLabel.Size = new System.Drawing.Size(94, 20);
+            this.frontColourLabel.TabIndex = 11;
+            this.frontColourLabel.Text = "Front Colour:";
+            // 
+            // terrainScaleLabel
+            // 
+            this.terrainScaleLabel.AutoSize = true;
+            this.terrainScaleLabel.Location = new System.Drawing.Point(23, 195);
+            this.terrainScaleLabel.Name = "terrainScaleLabel";
+            this.terrainScaleLabel.Size = new System.Drawing.Size(94, 20);
+            this.terrainScaleLabel.TabIndex = 10;
+            this.terrainScaleLabel.Text = "Terrain scale:";
+            // 
+            // terrainColourOptionsLabel
+            // 
+            this.terrainColourOptionsLabel.AutoSize = true;
+            this.terrainColourOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.terrainColourOptionsLabel.Location = new System.Drawing.Point(4, 390);
+            this.terrainColourOptionsLabel.Name = "terrainColourOptionsLabel";
+            this.terrainColourOptionsLabel.Size = new System.Drawing.Size(191, 23);
+            this.terrainColourOptionsLabel.TabIndex = 9;
+            this.terrainColourOptionsLabel.Text = "Terrain Colour Options";
+            // 
+            // generalOptionsLabel
+            // 
+            this.generalOptionsLabel.AutoSize = true;
+            this.generalOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.generalOptionsLabel.Location = new System.Drawing.Point(4, 152);
+            this.generalOptionsLabel.Name = "generalOptionsLabel";
+            this.generalOptionsLabel.Size = new System.Drawing.Size(199, 23);
+            this.generalOptionsLabel.TabIndex = 8;
+            this.generalOptionsLabel.Text = "General Terrain Options";
+            // 
+            // noiseAmplitudeLabel
+            // 
+            this.noiseAmplitudeLabel.AutoSize = true;
+            this.noiseAmplitudeLabel.Location = new System.Drawing.Point(23, 104);
+            this.noiseAmplitudeLabel.Name = "noiseAmplitudeLabel";
+            this.noiseAmplitudeLabel.Size = new System.Drawing.Size(122, 20);
+            this.noiseAmplitudeLabel.TabIndex = 7;
+            this.noiseAmplitudeLabel.Text = "Noise amplitude:";
+            // 
+            // terrainScale
+            // 
+            this.terrainScale.DecimalPlaces = 2;
+            this.terrainScale.Location = new System.Drawing.Point(204, 193);
+            this.terrainScale.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.terrainScale.Name = "terrainScale";
+            this.terrainScale.Size = new System.Drawing.Size(150, 27);
+            this.terrainScale.TabIndex = 6;
+            this.terrainScale.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.terrainScale.ValueChanged += new System.EventHandler(this.terrainScale_ValueChanged);
+            // 
+            // noiseAmplitude
+            // 
+            this.noiseAmplitude.Location = new System.Drawing.Point(204, 102);
+            this.noiseAmplitude.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.noiseAmplitude.Name = "noiseAmplitude";
+            this.noiseAmplitude.Size = new System.Drawing.Size(150, 27);
+            this.noiseAmplitude.TabIndex = 5;
+            this.noiseAmplitude.ValueChanged += new System.EventHandler(this.noiseAmplitude_ValueChanged);
+            // 
+            // noiseFrequency
+            // 
+            this.noiseFrequency.Location = new System.Drawing.Point(204, 68);
+            this.noiseFrequency.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.noiseFrequency.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noiseFrequency.Name = "noiseFrequency";
+            this.noiseFrequency.Size = new System.Drawing.Size(150, 27);
+            this.noiseFrequency.TabIndex = 4;
+            this.noiseFrequency.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noiseFrequency.ValueChanged += new System.EventHandler(this.noiseFrequency_ValueChanged);
+            // 
+            // noiseFreqLabel
+            // 
+            this.noiseFreqLabel.AutoSize = true;
+            this.noiseFreqLabel.Location = new System.Drawing.Point(23, 70);
+            this.noiseFreqLabel.Name = "noiseFreqLabel";
+            this.noiseFreqLabel.Size = new System.Drawing.Size(119, 20);
+            this.noiseFreqLabel.TabIndex = 3;
+            this.noiseFreqLabel.Text = "Noise frequency:";
+            // 
+            // noiseSeed
+            // 
+            this.noiseSeed.Location = new System.Drawing.Point(204, 34);
+            this.noiseSeed.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.noiseSeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noiseSeed.Name = "noiseSeed";
+            this.noiseSeed.Size = new System.Drawing.Size(150, 27);
+            this.noiseSeed.TabIndex = 2;
+            this.noiseSeed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.noiseSeed.ValueChanged += new System.EventHandler(this.noiseSeed_ValueChanged);
+            // 
+            // noiseSeedLabel
+            // 
+            this.noiseSeedLabel.AutoSize = true;
+            this.noiseSeedLabel.Location = new System.Drawing.Point(23, 36);
+            this.noiseSeedLabel.Name = "noiseSeedLabel";
+            this.noiseSeedLabel.Size = new System.Drawing.Size(85, 20);
+            this.noiseSeedLabel.TabIndex = 1;
+            this.noiseSeedLabel.Text = "Noise seed:";
+            // 
+            // noiseOptionsLabel
+            // 
+            this.noiseOptionsLabel.AutoSize = true;
+            this.noiseOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noiseOptionsLabel.Location = new System.Drawing.Point(4, 4);
+            this.noiseOptionsLabel.Name = "noiseOptionsLabel";
+            this.noiseOptionsLabel.Size = new System.Drawing.Size(182, 23);
+            this.noiseOptionsLabel.TabIndex = 0;
+            this.noiseOptionsLabel.Text = "Terrain Noise Options";
             // 
             // backgroundOptions
             // 
@@ -639,6 +939,7 @@ namespace AestheticTerrain {
             // 
             // imageRenderButton
             // 
+            this.imageRenderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.imageRenderButton.Location = new System.Drawing.Point(1303, 796);
             this.imageRenderButton.Name = "imageRenderButton";
             this.imageRenderButton.Size = new System.Drawing.Size(144, 29);
@@ -647,11 +948,79 @@ namespace AestheticTerrain {
             this.imageRenderButton.UseVisualStyleBackColor = true;
             this.imageRenderButton.Click += new System.EventHandler(this.imageRenderButton_Click);
             // 
+            // logBox
+            // 
+            this.logBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logBox.Location = new System.Drawing.Point(13, 761);
+            this.logBox.Name = "logBox";
+            this.logBox.ReadOnly = true;
+            this.logBox.Size = new System.Drawing.Size(1280, 113);
+            this.logBox.TabIndex = 7;
+            this.logBox.Text = "...\n";
+            // 
+            // upperCutoff
+            // 
+            this.upperCutoff.DecimalPlaces = 2;
+            this.upperCutoff.Location = new System.Drawing.Point(204, 226);
+            this.upperCutoff.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.upperCutoff.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.upperCutoff.Name = "upperCutoff";
+            this.upperCutoff.Size = new System.Drawing.Size(150, 27);
+            this.upperCutoff.TabIndex = 17;
+            this.upperCutoff.ValueChanged += new System.EventHandler(this.upperCutoff_ValueChanged);
+            // 
+            // lowerCutoff
+            // 
+            this.lowerCutoff.DecimalPlaces = 2;
+            this.lowerCutoff.Location = new System.Drawing.Point(204, 259);
+            this.lowerCutoff.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.lowerCutoff.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.lowerCutoff.Name = "lowerCutoff";
+            this.lowerCutoff.Size = new System.Drawing.Size(150, 27);
+            this.lowerCutoff.TabIndex = 18;
+            this.lowerCutoff.ValueChanged += new System.EventHandler(this.lowerCutoff_ValueChanged);
+            // 
+            // upperCutoffLabel
+            // 
+            this.upperCutoffLabel.AutoSize = true;
+            this.upperCutoffLabel.Location = new System.Drawing.Point(23, 228);
+            this.upperCutoffLabel.Name = "upperCutoffLabel";
+            this.upperCutoffLabel.Size = new System.Drawing.Size(98, 20);
+            this.upperCutoffLabel.TabIndex = 19;
+            this.upperCutoffLabel.Text = "Upper Cutoff:";
+            // 
+            // lowerCutoffLabel
+            // 
+            this.lowerCutoffLabel.AutoSize = true;
+            this.lowerCutoffLabel.Location = new System.Drawing.Point(23, 259);
+            this.lowerCutoffLabel.Name = "lowerCutoffLabel";
+            this.lowerCutoffLabel.Size = new System.Drawing.Size(97, 20);
+            this.lowerCutoffLabel.TabIndex = 20;
+            this.lowerCutoffLabel.Text = "Lower Cutoff:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1692, 886);
+            this.Controls.Add(this.logBox);
             this.Controls.Add(this.imageRenderButton);
             this.Controls.Add(this.previewImage);
             this.Controls.Add(this.previewRenderButton);
@@ -675,7 +1044,15 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.cameraXValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).EndInit();
+            this.terrainOptions.ResumeLayout(false);
+            this.terrainOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,9 +1110,32 @@ namespace AestheticTerrain {
         private System.Windows.Forms.Label cameraPitchLabel;
         private System.Windows.Forms.NumericUpDown cameraYaw;
         private System.Windows.Forms.Label cameraYawLabel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown cameraFov;
         private System.Windows.Forms.Label fovLabel;
+        private System.Windows.Forms.TextBox imageName;
+        private System.Windows.Forms.Label imageNameLabel;
+        private System.Windows.Forms.RichTextBox logBox;
+        private System.Windows.Forms.NumericUpDown noiseSeed;
+        private System.Windows.Forms.Label noiseSeedLabel;
+        private System.Windows.Forms.Label noiseOptionsLabel;
+        private System.Windows.Forms.NumericUpDown terrainScale;
+        private System.Windows.Forms.NumericUpDown noiseAmplitude;
+        private System.Windows.Forms.NumericUpDown noiseFrequency;
+        private System.Windows.Forms.Label noiseFreqLabel;
+        private System.Windows.Forms.Label noiseAmplitudeLabel;
+        private System.Windows.Forms.Label terrainScaleLabel;
+        private System.Windows.Forms.Label terrainColourOptionsLabel;
+        private System.Windows.Forms.Label generalOptionsLabel;
+        private System.Windows.Forms.ComboBox interpolationDirection;
+        private System.Windows.Forms.Label interpolationLabel;
+        private System.Windows.Forms.Label backColourLabel;
+        private System.Windows.Forms.Button backColourButton;
+        private System.Windows.Forms.Button frontColourButton;
+        private System.Windows.Forms.Label frontColourLabel;
+        private System.Windows.Forms.Label lowerCutoffLabel;
+        private System.Windows.Forms.Label upperCutoffLabel;
+        private System.Windows.Forms.NumericUpDown lowerCutoff;
+        private System.Windows.Forms.NumericUpDown upperCutoff;
     }
 }
 

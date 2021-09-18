@@ -8,7 +8,11 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace AestheticTerrain {
     class Mesh {
-        public Mesh(Vector3[] vertices, int[] indices) {
+        public Mesh(Vector3[] vertices, int[] indices) : this(vertices, indices, Matrix4.Identity) {
+
+        }
+
+        public Mesh(Vector3[] vertices, int[] indices, Matrix4 transform) {
             // Generate Vertex Array
             _VAO = GL.GenVertexArray();
             GL.BindVertexArray(_VAO);
@@ -27,6 +31,8 @@ namespace AestheticTerrain {
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _IBO);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
             _indexCount = indices.Length;
+
+            Transform = transform;
         }
 
         public void Bind() {
@@ -44,6 +50,8 @@ namespace AestheticTerrain {
             GL.DeleteBuffer(_IBO);
             GL.DeleteVertexArray(_VAO);
         }
+
+        public Matrix4 Transform { get; private set; }
 
         int _VAO;
         int _VBO;

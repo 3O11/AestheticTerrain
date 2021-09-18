@@ -7,6 +7,7 @@ using OpenTK.Mathematics;
 
 // This Camera class was taken from https://github.com/opentk/LearnOpenTK/blob/master/Common/Camera.cs
 // License: Creative Commons Attribution 4.0
+// Some changes have been made to accomodate its use in this project
 
 namespace AestheticTerrain {
     // This is the camera class as it could be set up after the tutorials on the website.
@@ -28,7 +29,7 @@ namespace AestheticTerrain {
         private float _pitch;
 
         // Rotation around the Y axis (radians)
-        private float _yaw = -MathHelper.PiOver2; // Without this, you would be started rotated 90 degrees right.
+        private float _yaw = 0;
 
         // The field of view of the camera (radians)
         private float _fov = MathHelper.PiOver2;

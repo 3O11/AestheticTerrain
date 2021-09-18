@@ -16,14 +16,6 @@ namespace AestheticTerrain {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(TempHandler);
-        }
-
-        static void TempHandler(object sender, UnhandledExceptionEventArgs args) {
-            Exception e = (Exception)args.ExceptionObject;
-            Debug.WriteLine(e.Message);
         }
     }
 }

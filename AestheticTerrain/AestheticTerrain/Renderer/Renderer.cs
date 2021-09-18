@@ -18,7 +18,7 @@ namespace AestheticTerrain {
             _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
         }
 
-        public Bitmap Render() {
+        public Bitmap Render(Mesh terrain) {
             GL.ClearColor(Color.FromArgb(80, 120, 255));
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
@@ -30,12 +30,9 @@ namespace AestheticTerrain {
 
             shader.SetUniformMat4f("u_View", _camera.GetViewMatrix());
             shader.SetUniformMat4f("u_Projection", _camera.GetProjectionMatrix());
-            Matrix4 transform = Matrix4.CreateScale(5, 1, 5);
-            shader.SetUniformMat4f("u_Model", transform);
+            shader.SetUniformMat4f("u_Model", terrain.Transform);
             shader.SetUniform1i("u_Texture", 0);
 
-
-            Mesh terrain = TerrainGenerator.GenerateTerrain(100, TerrainSeed, TerrainFrequency, TerrainMultiplier);
             terrain.Bind();
             GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
             GL.Flush();
@@ -121,8 +118,10 @@ namespace AestheticTerrain {
             set {
                 _width = value;
                 _camera.AspectRatio = (float)_width / _height;
-                if (_renderWindow != null)
+                if (_renderWindow != null) {
                     _renderWindow.Size = new Vector2i(_width, _height);
+                    GL.Viewport(0, 0, _width, _height);
+                }  
             }
         }
         int _height;
@@ -133,8 +132,10 @@ namespace AestheticTerrain {
             set {
                 _height = value;
                 _camera.AspectRatio = (float)_width / _height;
-                if (_renderWindow != null)
+                if (_renderWindow != null) {
                     _renderWindow.Size = new Vector2i(_width, _height);
+                    GL.Viewport(0, 0, _width, _height);
+                }
             }
         }
         public Vector3 CameraPosition {
@@ -150,15 +151,6 @@ namespace AestheticTerrain {
         public float CameraFov {
             set => _camera.Fov = value;
         }
-
-        public int TerrainSeed { get; set; }
-        public int TerrainMultiplier { get; set; }
-        public int TerrainFrequency { get; set; }
-        public Vector3i TerrainFrontColour { get; set; }
-        public Vector3i TerrainBackColour { get; set; }
-        public float TerrainLowerCutoff { get; set; }
-        public float TerrainUpperCutoff { get; set; }
-        public float TerrainFlattenCenterMult { get; set; }
         
         GameWindow _renderWindow;
         Camera _camera;

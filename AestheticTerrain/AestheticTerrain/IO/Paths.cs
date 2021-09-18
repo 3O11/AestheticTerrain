@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,6 +35,11 @@ namespace AestheticTerrain {
             }
 
             return path;
+        }
+
+        public static bool IsValidFilename(string filename) {
+            Regex checker = new Regex("^[a-zA-Z0-9-_]+$");
+            return checker.IsMatch(filename);
         }
     }
 }
