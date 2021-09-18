@@ -13,12 +13,6 @@ using OpenTK.Windowing.Desktop;
 using System.Diagnostics;
 
 namespace AestheticTerrain {
-    enum ImageType {
-        PNG,
-        JPG,
-        BMP
-    }
-
     class Renderer {
         public Renderer() {
             _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
@@ -41,7 +35,7 @@ namespace AestheticTerrain {
             shader.SetUniform1i("u_Texture", 0);
 
 
-            Mesh terrain = TerrainGenerator.GenerateTerrain(100, 41865);
+            Mesh terrain = TerrainGenerator.GenerateTerrain(100, TerrainSeed, TerrainFrequency, TerrainMultiplier);
             terrain.Bind();
             GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
             GL.Flush();
@@ -92,10 +86,6 @@ namespace AestheticTerrain {
             _renderWindow.Dispose();
         }
 
-        public void RefreshCanvas() {
-            _renderWindow.Size = new Vector2i(Width, Height);
-        }
-
         Bitmap createBackground() {
             Bitmap background = new Bitmap(Width, Height);
 
@@ -122,9 +112,31 @@ namespace AestheticTerrain {
             return bitmap;
         }
 
-        public int Width { private get; set; }
-        public int Height { private get; set; }
-        public ImageType ImageType { private get; set; }
+        // Image Options
+        int _width;
+        public int Width {
+            private get {
+                return _width;
+            }
+            set {
+                _width = value;
+                _camera.AspectRatio = (float)_width / _height;
+                if (_renderWindow != null)
+                    _renderWindow.Size = new Vector2i(_width, _height);
+            }
+        }
+        int _height;
+        public int Height {
+            private get {
+                return _height;
+            }
+            set {
+                _height = value;
+                _camera.AspectRatio = (float)_width / _height;
+                if (_renderWindow != null)
+                    _renderWindow.Size = new Vector2i(_width, _height);
+            }
+        }
         public Vector3 CameraPosition {
             get => _camera.Position;
             set => _camera.Position = value;
@@ -138,7 +150,10 @@ namespace AestheticTerrain {
         public float CameraFov {
             set => _camera.Fov = value;
         }
+
         public int TerrainSeed { get; set; }
+        public int TerrainMultiplier { get; set; }
+        public int TerrainFrequency { get; set; }
         public Vector3i TerrainFrontColour { get; set; }
         public Vector3i TerrainBackColour { get; set; }
         public float TerrainLowerCutoff { get; set; }

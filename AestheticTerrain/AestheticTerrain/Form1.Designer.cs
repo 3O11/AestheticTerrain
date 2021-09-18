@@ -304,28 +304,38 @@ namespace AestheticTerrain {
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 383);
+            this.label1.Location = new System.Drawing.Point(13, 470);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 20);
             this.label1.TabIndex = 22;
             // 
             // cameraFov
             // 
-            this.cameraFov.Location = new System.Drawing.Point(80, 340);
+            this.cameraFov.Location = new System.Drawing.Point(80, 427);
             this.cameraFov.Maximum = new decimal(new int[] {
             180,
+            0,
+            0,
+            0});
+            this.cameraFov.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.cameraFov.Name = "cameraFov";
             this.cameraFov.Size = new System.Drawing.Size(75, 27);
             this.cameraFov.TabIndex = 21;
+            this.cameraFov.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.cameraFov.ValueChanged += new System.EventHandler(this.cameraFov_ValueChanged);
             // 
             // fovLabel
             // 
             this.fovLabel.AutoSize = true;
-            this.fovLabel.Location = new System.Drawing.Point(13, 342);
+            this.fovLabel.Location = new System.Drawing.Point(13, 429);
             this.fovLabel.Name = "fovLabel";
             this.fovLabel.Size = new System.Drawing.Size(37, 20);
             this.fovLabel.TabIndex = 20;
@@ -333,7 +343,7 @@ namespace AestheticTerrain {
             // 
             // cameraPitch
             // 
-            this.cameraPitch.Location = new System.Drawing.Point(80, 307);
+            this.cameraPitch.Location = new System.Drawing.Point(80, 394);
             this.cameraPitch.Maximum = new decimal(new int[] {
             90,
             0,
@@ -352,7 +362,7 @@ namespace AestheticTerrain {
             // cameraPitchLabel
             // 
             this.cameraPitchLabel.AutoSize = true;
-            this.cameraPitchLabel.Location = new System.Drawing.Point(13, 309);
+            this.cameraPitchLabel.Location = new System.Drawing.Point(13, 396);
             this.cameraPitchLabel.Name = "cameraPitchLabel";
             this.cameraPitchLabel.Size = new System.Drawing.Size(44, 20);
             this.cameraPitchLabel.TabIndex = 18;
@@ -360,7 +370,7 @@ namespace AestheticTerrain {
             // 
             // cameraYaw
             // 
-            this.cameraYaw.Location = new System.Drawing.Point(80, 274);
+            this.cameraYaw.Location = new System.Drawing.Point(80, 361);
             this.cameraYaw.Maximum = new decimal(new int[] {
             16384,
             0,
@@ -379,7 +389,7 @@ namespace AestheticTerrain {
             // cameraYawLabel
             // 
             this.cameraYawLabel.AutoSize = true;
-            this.cameraYawLabel.Location = new System.Drawing.Point(13, 276);
+            this.cameraYawLabel.Location = new System.Drawing.Point(13, 363);
             this.cameraYawLabel.Name = "cameraYawLabel";
             this.cameraYawLabel.Size = new System.Drawing.Size(38, 20);
             this.cameraYawLabel.TabIndex = 16;
@@ -388,7 +398,7 @@ namespace AestheticTerrain {
             // cameraZ
             // 
             this.cameraZ.AutoSize = true;
-            this.cameraZ.Location = new System.Drawing.Point(242, 231);
+            this.cameraZ.Location = new System.Drawing.Point(242, 318);
             this.cameraZ.Name = "cameraZ";
             this.cameraZ.Size = new System.Drawing.Size(21, 20);
             this.cameraZ.TabIndex = 15;
@@ -397,7 +407,7 @@ namespace AestheticTerrain {
             // cameraYValue
             // 
             this.cameraYValue.DecimalPlaces = 2;
-            this.cameraYValue.Location = new System.Drawing.Point(161, 229);
+            this.cameraYValue.Location = new System.Drawing.Point(161, 316);
             this.cameraYValue.Name = "cameraYValue";
             this.cameraYValue.Size = new System.Drawing.Size(75, 27);
             this.cameraYValue.TabIndex = 14;
@@ -406,7 +416,7 @@ namespace AestheticTerrain {
             // cameraZValue
             // 
             this.cameraZValue.DecimalPlaces = 2;
-            this.cameraZValue.Location = new System.Drawing.Point(269, 229);
+            this.cameraZValue.Location = new System.Drawing.Point(269, 316);
             this.cameraZValue.Name = "cameraZValue";
             this.cameraZValue.Size = new System.Drawing.Size(75, 27);
             this.cameraZValue.TabIndex = 13;
@@ -415,7 +425,7 @@ namespace AestheticTerrain {
             // cameraY
             // 
             this.cameraY.AutoSize = true;
-            this.cameraY.Location = new System.Drawing.Point(135, 231);
+            this.cameraY.Location = new System.Drawing.Point(135, 318);
             this.cameraY.Name = "cameraY";
             this.cameraY.Size = new System.Drawing.Size(20, 20);
             this.cameraY.TabIndex = 12;
@@ -424,7 +434,7 @@ namespace AestheticTerrain {
             // cameraXValue
             // 
             this.cameraXValue.DecimalPlaces = 2;
-            this.cameraXValue.Location = new System.Drawing.Point(54, 229);
+            this.cameraXValue.Location = new System.Drawing.Point(54, 316);
             this.cameraXValue.Name = "cameraXValue";
             this.cameraXValue.Size = new System.Drawing.Size(75, 27);
             this.cameraXValue.TabIndex = 11;
@@ -433,7 +443,7 @@ namespace AestheticTerrain {
             // cameraX
             // 
             this.cameraX.AutoSize = true;
-            this.cameraX.Location = new System.Drawing.Point(27, 231);
+            this.cameraX.Location = new System.Drawing.Point(27, 318);
             this.cameraX.Name = "cameraX";
             this.cameraX.Size = new System.Drawing.Size(21, 20);
             this.cameraX.TabIndex = 10;
@@ -442,7 +452,7 @@ namespace AestheticTerrain {
             // cameraPosition
             // 
             this.cameraPosition.AutoSize = true;
-            this.cameraPosition.Location = new System.Drawing.Point(13, 205);
+            this.cameraPosition.Location = new System.Drawing.Point(13, 292);
             this.cameraPosition.Name = "cameraPosition";
             this.cameraPosition.Size = new System.Drawing.Size(61, 20);
             this.cameraPosition.TabIndex = 9;
@@ -462,7 +472,7 @@ namespace AestheticTerrain {
             // 
             this.cameraSettings.AutoSize = true;
             this.cameraSettings.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cameraSettings.Location = new System.Drawing.Point(4, 178);
+            this.cameraSettings.Location = new System.Drawing.Point(4, 265);
             this.cameraSettings.Name = "cameraSettings";
             this.cameraSettings.Size = new System.Drawing.Size(142, 23);
             this.cameraSettings.TabIndex = 7;
@@ -473,14 +483,13 @@ namespace AestheticTerrain {
             this.imageType.FormattingEnabled = true;
             this.imageType.Items.AddRange(new object[] {
             "PNG",
-            "JPEG",
+            "JPG",
             "BMP"});
             this.imageType.Location = new System.Drawing.Point(108, 134);
             this.imageType.Name = "imageType";
             this.imageType.Size = new System.Drawing.Size(151, 28);
             this.imageType.TabIndex = 6;
             this.imageType.Text = "PNG";
-            this.imageType.SelectedIndexChanged += new System.EventHandler(this.imageType_SelectedIndexChanged);
             // 
             // imageTypeLabel
             // 
@@ -499,9 +508,19 @@ namespace AestheticTerrain {
             0,
             0,
             0});
+            this.imageHeight.Minimum = new decimal(new int[] {
+            480,
+            0,
+            0,
+            0});
             this.imageHeight.Name = "imageHeight";
             this.imageHeight.Size = new System.Drawing.Size(86, 27);
             this.imageHeight.TabIndex = 4;
+            this.imageHeight.Value = new decimal(new int[] {
+            480,
+            0,
+            0,
+            0});
             this.imageHeight.ValueChanged += new System.EventHandler(this.imageHeight_ValueChanged);
             // 
             // imageWidth
@@ -512,9 +531,19 @@ namespace AestheticTerrain {
             0,
             0,
             0});
+            this.imageWidth.Minimum = new decimal(new int[] {
+            640,
+            0,
+            0,
+            0});
             this.imageWidth.Name = "imageWidth";
             this.imageWidth.Size = new System.Drawing.Size(86, 27);
             this.imageWidth.TabIndex = 3;
+            this.imageWidth.Value = new decimal(new int[] {
+            640,
+            0,
+            0,
+            0});
             this.imageWidth.ValueChanged += new System.EventHandler(this.imageWidth_ValueChanged);
             // 
             // heightLabel
