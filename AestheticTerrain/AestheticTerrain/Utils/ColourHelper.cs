@@ -23,8 +23,8 @@ namespace AestheticTerrain {
             }
         }
 
-        public static Vector3i ConvertToVector(Color colour) {
-            return new Vector3i(colour.R, colour.G, colour.B);
+        public static Vector3 ConvertToVector(Color colour) {
+            return new Vector3((float)colour.R / 255, (float)colour.G / 255, (float)colour.B / 255);
         }
     }
 }

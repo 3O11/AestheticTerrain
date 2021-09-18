@@ -18,29 +18,38 @@ namespace AestheticTerrain {
             _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
         }
 
-        public Bitmap Render(Mesh terrain) {
+        public Bitmap Render(Mesh terrain, Bitmap background) {
             GL.ClearColor(Color.FromArgb(80, 120, 255));
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            Texture terrainTexture = new Texture("Assets/03-terrainTile.jpeg");
-            terrainTexture.Bind(0);
+            if (background != null) {
+                _backgroundShader.Bind();
 
-            Shader shader = new Shader("Assets/01-vert.glsl", "Assets/02-frag.glsl");
-            shader.Bind();
+                Texture backgroundTex = new Texture(background);
+                backgroundTex.Bind(0);
+                _terrainShader.SetUniform1i("u_Texture", 0);
 
-            shader.SetUniformMat4f("u_View", _camera.GetViewMatrix());
-            shader.SetUniformMat4f("u_Projection", _camera.GetProjectionMatrix());
-            shader.SetUniformMat4f("u_Model", terrain.Transform);
-            shader.SetUniform1i("u_Texture", 0);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, _backgroundIbo);
+                GL.DrawElements(PrimitiveType.Triangles, 6, DrawElementsType.UnsignedInt, 0);
 
-            terrain.Bind();
-            GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
-            GL.Flush();
+                backgroundTex.Destroy();
+                background.Dispose();
+            }
+            if (terrain != null) {
+                _terrainTexture.Bind(0);
+                _terrainShader.Bind();
 
+                _terrainShader.SetUniformMat4f("u_View", _camera.GetViewMatrix());
+                _terrainShader.SetUniformMat4f("u_Projection", _camera.GetProjectionMatrix());
+                _terrainShader.SetUniformMat4f("u_Model", terrain.Transform);
+                _terrainShader.SetUniform1i("u_Texture", 0);
 
-            terrainTexture.Destroy();
-            shader.Destroy();
-            terrain.Destroy();
+                terrain.Bind();
+                GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
+                GL.Flush();
+
+                terrain.Destroy();
+            }
 
             // Return final product
             return createImage();
@@ -72,6 +81,15 @@ namespace AestheticTerrain {
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.Multisample);
+
+            _terrainShader = new Shader("Assets/01-vert.glsl", "Assets/02-frag.glsl");
+            _terrainTexture = new Texture("Assets/03-terrainTile.jpeg");
+            _backgroundShader = new Shader("Assets/04-vert.glsl", "Assets/05-frag.glsl");
+
+            int[] indices = { 0, 1, 2, 2, 3, 0 };
+            _backgroundIbo = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _backgroundIbo);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
         }
 
         /// <summary>
@@ -79,6 +97,11 @@ namespace AestheticTerrain {
         /// not needed anymore.
         /// </summary>
         public void DestroyContext() {
+            _terrainShader.Destroy();
+            _terrainTexture.Destroy();
+            _backgroundShader.Destroy();
+            GL.DeleteBuffer(_backgroundIbo);
+
             _renderWindow.Close();
             _renderWindow.Dispose();
         }
@@ -154,5 +177,9 @@ namespace AestheticTerrain {
         
         GameWindow _renderWindow;
         Camera _camera;
+        Texture _terrainTexture;
+        Shader _terrainShader;
+        Shader _backgroundShader;
+        int _backgroundIbo;
     }
 }

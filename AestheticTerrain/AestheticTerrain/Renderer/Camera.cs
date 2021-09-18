@@ -19,7 +19,7 @@ namespace AestheticTerrain {
     // Check out the web version if you don't know why we are doing a specific thing or want to know more about the code.
     public class Camera {
         // Those vectors are directions pointing outwards from the camera to define how it rotated.
-        private Vector3 _front = -Vector3.UnitZ;
+        private Vector3 _front = Vector3.UnitX;
 
         private Vector3 _up = Vector3.UnitY;
 

@@ -19,12 +19,15 @@ namespace AestheticTerrain {
             imageHeight.Value = 720;
             cameraYValue.Value = 10;
             cameraFov.Value = 90;
+            cameraYaw.Value = 0;
             noiseSeed.Value = 3011;
             noiseFrequency.Value = 60;
             noiseAmplitude.Value = 10;
             terrainScale.Value = 5;
             lowerCutoff.Value = -100;
             upperCutoff.Value = 100;
+            frontColourButton.BackColor = Color.FromArgb(255, 60, 255);
+            backColourButton.BackColor = Color.FromArgb(60, 255, 255);
 
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
@@ -36,11 +39,13 @@ namespace AestheticTerrain {
         // Image Options
 
         private void imageWidth_ValueChanged(object sender, EventArgs e) {
-            //_state.ImgResolution.Width = (int)imageWidth.Value;
+            _renderer.Width = (int)imageWidth.Value;
+            _backgroundGenerator.Width = (int)imageWidth.Value;
         }
 
         private void imageHeight_ValueChanged(object sender, EventArgs e) {
-            //_state.ImgResolution.Height = (int)imageHeight.Value;
+            _renderer.Height = (int)imageHeight.Value;
+            _backgroundGenerator.Height = (int)imageHeight.Value;
         }
 
         private void cameraXValue_ValueChanged(object sender, EventArgs e) {
@@ -76,19 +81,19 @@ namespace AestheticTerrain {
         // Terrain Options
 
         private void noiseSeed_ValueChanged(object sender, EventArgs e) {
-            _generator.Seed = (int)noiseSeed.Value;
+            _terrainGenerator.Seed = (int)noiseSeed.Value;
         }
 
         private void noiseFrequency_ValueChanged(object sender, EventArgs e) {
-            _generator.Frequency = (int)noiseFrequency.Value;
+            _terrainGenerator.Frequency = (int)noiseFrequency.Value;
         }
 
         private void noiseAmplitude_ValueChanged(object sender, EventArgs e) {
-            _generator.Multiplier = (int)noiseAmplitude.Value;
+            _terrainGenerator.Multiplier = (int)noiseAmplitude.Value;
         }
 
         private void terrainScale_ValueChanged(object sender, EventArgs e) {
-            _generator.Scale = (float)terrainScale.Value;
+            _terrainGenerator.Scale = (float)terrainScale.Value;
         }
 
         private void interpolationDirection_SelectedIndexChanged(object sender, EventArgs e) {
@@ -111,20 +116,30 @@ namespace AestheticTerrain {
 
         private void frontColourButton_Click(object sender, EventArgs e) {
             frontColourButton.BackColor = ColourHelper.GetColourFromDialog();
-            _generator.FrontColour = ColourHelper.ConvertToVector(frontColourButton.BackColor);
+        }
+
+        private void frontColourButton_BackColorChanged(object sender, EventArgs e) {
+            _terrainGenerator.FrontColour = ColourHelper.ConvertToVector(frontColourButton.BackColor);
         }
 
         private void backColourButton_Click(object sender, EventArgs e) {
             backColourButton.BackColor = ColourHelper.GetColourFromDialog();
-            _generator.BackColour = ColourHelper.ConvertToVector(backColourButton.BackColor);
+        }
+
+        private void backColourButton_BackColorChanged(object sender, EventArgs e) {
+            _terrainGenerator.BackColour = ColourHelper.ConvertToVector(backColourButton.BackColor);
         }
 
         private void upperCutoff_ValueChanged(object sender, EventArgs e) {
-            _generator.UpperCutoff = (float)upperCutoff.Value;
+            _terrainGenerator.UpperCutoff = (float)upperCutoff.Value;
         }
 
         private void lowerCutoff_ValueChanged(object sender, EventArgs e) {
-            _generator.LowerCutoff = (float)lowerCutoff.Value;
+            _terrainGenerator.LowerCutoff = (float)lowerCutoff.Value;
+        }
+
+        private void centerFlatteningMult_ValueChanged(object sender, EventArgs e) {
+            _terrainGenerator.FlattenCenterMult = (float)centerFlatteningMult.Value;
         }
 
         // General Options
@@ -134,11 +149,19 @@ namespace AestheticTerrain {
             // so we need to temporarily update the renderer with a different size to avoid problems.
             _renderer.Width = previewImage.Width;
             _renderer.Height = previewImage.Height;
+            _backgroundGenerator.Width = previewImage.Width;
+            _backgroundGenerator.Height = previewImage.Height;
 
-            previewImage.Image = _renderer.Render(_generator.GenerateTerrain());
+            Mesh terrain = terrainEnabled.Checked ? _terrainGenerator.GenerateTerrain() : null;
+            Bitmap background = backgroundEnabled.Checked ? _backgroundGenerator.GenerateBackground() : null;
+            previewImage.Image = _renderer.Render(terrain, background);
 
             _renderer.Width = (int)imageWidth.Value;
             _renderer.Height = (int)imageHeight.Value;
+            _backgroundGenerator.Width = (int)imageWidth.Value;
+            _backgroundGenerator.Height = (int)imageHeight.Value;
+
+            logBox.Text = "Preview rendered.\n";
         }
 
         private void imageRenderButton_Click(object sender, EventArgs e) {
@@ -154,9 +177,11 @@ namespace AestheticTerrain {
             }
 
             string imagePath = imageDir + "/" + imageName.Text;
-            Image renderedImage = _renderer.Render(_generator.GenerateTerrain());
-            
-            switch(imageType.SelectedIndex) {
+            Mesh terrain = terrainEnabled.Checked ? _terrainGenerator.GenerateTerrain() : null;
+            Bitmap background = backgroundEnabled.Checked ? _backgroundGenerator.GenerateBackground() : null;
+            Bitmap renderedImage = _renderer.Render(terrain, background);
+
+            switch (imageType.SelectedIndex) {
                 case 0:
                     imagePath += ".png";
                     renderedImage.Save(imagePath, ImageFormat.Png);
@@ -194,6 +219,7 @@ namespace AestheticTerrain {
 
         // Members
         Renderer _renderer = new Renderer();
-        TerrainGenerator _generator = new TerrainGenerator();
+        TerrainGenerator _terrainGenerator = new TerrainGenerator();
+        BackgroundGenerator _backgroundGenerator = new BackgroundGenerator();
     }
 }

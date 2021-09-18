@@ -7,12 +7,17 @@ using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
 
 namespace AestheticTerrain {
+    struct Vertex {
+        public Vector3 Position;
+        public Vector3 Colour;
+    }
+
     class Mesh {
-        public Mesh(Vector3[] vertices, int[] indices) : this(vertices, indices, Matrix4.Identity) {
+        public Mesh(Vertex[] vertices, int[] indices) : this(vertices, indices, Matrix4.Identity) {
 
         }
 
-        public Mesh(Vector3[] vertices, int[] indices, Matrix4 transform) {
+        public Mesh(Vertex[] vertices, int[] indices, Matrix4 transform) {
             // Generate Vertex Array
             _VAO = GL.GenVertexArray();
             GL.BindVertexArray(_VAO);
@@ -20,11 +25,13 @@ namespace AestheticTerrain {
             // Generate Vertex Buffer, fill it with data and declare interleaved layout
             _VBO = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ArrayBuffer, _VBO);
-            int vertexSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));
+            int vertexSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vertex));
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * vertexSize, vertices, BufferUsageHint.StaticDraw);
 
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, vertexSize, 0);
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, vertexSize, 3 * sizeof(float));
 
             // Generate Index Buffer and fill it with data
             _IBO = GL.GenBuffer();

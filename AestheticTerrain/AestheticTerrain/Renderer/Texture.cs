@@ -49,6 +49,43 @@ namespace AestheticTerrain {
             texture.Dispose();
         }
 
+        public Texture(Bitmap image) {
+            BitmapData rawTexture = image.LockBits(
+                new Rectangle(0, 0, image.Width, image.Height),
+                ImageLockMode.ReadOnly,
+                System.Drawing.Imaging.PixelFormat.Format32bppArgb
+            );
+
+            _textureID = GL.GenTexture();
+            GL.BindTexture(TextureTarget.Texture2D, _textureID);
+
+            GL.TexImage2D(
+                TextureTarget.Texture2D,
+                0,
+                PixelInternalFormat.Rgba,
+                image.Width,
+                image.Height,
+                0,
+                OpenTK.Graphics.OpenGL4.PixelFormat.Bgra,
+                PixelType.UnsignedByte,
+                rawTexture.Scan0
+            );
+
+            GL.TexParameterI(
+                TextureTarget.Texture2D,
+                TextureParameterName.TextureMinFilter,
+                new int[] {
+                    (int)TextureMagFilter.Linear,
+                    (int)TextureMinFilter.Linear,
+                    (int)TextureWrapMode.Repeat,
+                }
+            );
+
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+
+            image.UnlockBits(rawTexture);
+        }
+
         public void Bind(int slot) {
             GL.ActiveTexture((TextureUnit)((int)TextureUnit.Texture0 + slot));
             GL.BindTexture(TextureTarget.Texture2D, _textureID);

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using OpenTK.Mathematics;
 
 namespace AestheticTerrain {
+    enum TerrainLerpDirection {
+        FrontBack,
+        TopDown
+    }
+
     class TerrainGenerator {
         public TerrainGenerator() {
             Radius = 100;
@@ -13,14 +18,18 @@ namespace AestheticTerrain {
 
         public Mesh GenerateTerrain() {
             PerlinNoise noise = new PerlinNoise(Seed);
-            List<Vector3> vertices = new List<Vector3>();
+            List<Vertex> vertices = new List<Vertex>();
             List<int> indices = new List<int>();
 
             for (int i = 0; i < (Radius * 2) + 1; i++) {
                 for (int j = 0; j < (Radius * 2) + 1; j++) {
                     float vertexY = Multiplier * noise.Noise(i, j, Radius * 2 + 1, Radius * 2 + 1, Frequency);
-                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff);
-                    vertices.Add(new Vector3(i - Radius, vertexY, j - Radius));
+                    float flatteningMultiplier = FlattenCenterMult == 0 ? 1 : paraboloid(i - Radius, j - Radius);
+                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff) * flatteningMultiplier;
+                    vertices.Add(new Vertex {
+                        Position = new Vector3(i - Radius, vertexY, j - Radius),
+                        Colour = AdditionalMath.Lerp(FrontColour, BackColour, i / Radius)
+                    });
 
                     if (i > 0 && j > 0) {
                         int currentPoint = i * (Radius * 2 + 1) + j;
@@ -40,7 +49,11 @@ namespace AestheticTerrain {
                 }
             }
 
-            return new Mesh(vertices.ToArray(), indices.ToArray());
+            return new Mesh(vertices.ToArray(), indices.ToArray(), Matrix4.CreateScale(Scale, 1, Scale));
+        }
+
+        float paraboloid(float x, float y) {
+            return Math.Clamp((x * x + y * y) / (FlattenCenterMult), 0, 1);
         }
 
         public int Radius { get; set; }
@@ -48,8 +61,8 @@ namespace AestheticTerrain {
         public int Multiplier { get; set; }
         public int Frequency { get; set; }
         public float Scale { get; set; }
-        public Vector3i FrontColour { get; set; }
-        public Vector3i BackColour { get; set; }
+        public Vector3 FrontColour { get; set; }
+        public Vector3 BackColour { get; set; }
         public float LowerCutoff { get; set; }
         public float UpperCutoff { get; set; }
         public float FlattenCenterMult { get; set; }

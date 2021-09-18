@@ -73,6 +73,12 @@ namespace AestheticTerrain {
             this.widthLabel = new System.Windows.Forms.Label();
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.terrainOptions = new System.Windows.Forms.TabPage();
+            this.flatMultLabel = new System.Windows.Forms.Label();
+            this.centerFlatteningMult = new System.Windows.Forms.NumericUpDown();
+            this.lowerCutoffLabel = new System.Windows.Forms.Label();
+            this.upperCutoffLabel = new System.Windows.Forms.Label();
+            this.lowerCutoff = new System.Windows.Forms.NumericUpDown();
+            this.upperCutoff = new System.Windows.Forms.NumericUpDown();
             this.interpolationDirection = new System.Windows.Forms.ComboBox();
             this.interpolationLabel = new System.Windows.Forms.Label();
             this.backColourLabel = new System.Windows.Forms.Label();
@@ -97,10 +103,9 @@ namespace AestheticTerrain {
             this.previewImage = new System.Windows.Forms.PictureBox();
             this.imageRenderButton = new System.Windows.Forms.Button();
             this.logBox = new System.Windows.Forms.RichTextBox();
-            this.upperCutoff = new System.Windows.Forms.NumericUpDown();
-            this.lowerCutoff = new System.Windows.Forms.NumericUpDown();
-            this.upperCutoffLabel = new System.Windows.Forms.Label();
-            this.lowerCutoffLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.terrainEnabled = new System.Windows.Forms.CheckBox();
+            this.backgroundEnabled = new System.Windows.Forms.CheckBox();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
@@ -113,13 +118,14 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).BeginInit();
             this.terrainOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.centerFlatteningMult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).BeginInit();
             this.SuspendLayout();
             // 
             // topMenu
@@ -300,6 +306,9 @@ namespace AestheticTerrain {
             // 
             // imageOptions
             // 
+            this.imageOptions.Controls.Add(this.backgroundEnabled);
+            this.imageOptions.Controls.Add(this.terrainEnabled);
+            this.imageOptions.Controls.Add(this.label1);
             this.imageOptions.Controls.Add(this.imageName);
             this.imageOptions.Controls.Add(this.imageNameLabel);
             this.imageOptions.Controls.Add(this.cameraFov);
@@ -354,7 +363,7 @@ namespace AestheticTerrain {
             this.cameraFov.DecimalPlaces = 2;
             this.cameraFov.Location = new System.Drawing.Point(80, 386);
             this.cameraFov.Maximum = new decimal(new int[] {
-            180,
+            179,
             0,
             0,
             0});
@@ -648,6 +657,8 @@ namespace AestheticTerrain {
             // 
             // terrainOptions
             // 
+            this.terrainOptions.Controls.Add(this.flatMultLabel);
+            this.terrainOptions.Controls.Add(this.centerFlatteningMult);
             this.terrainOptions.Controls.Add(this.lowerCutoffLabel);
             this.terrainOptions.Controls.Add(this.upperCutoffLabel);
             this.terrainOptions.Controls.Add(this.lowerCutoff);
@@ -676,6 +687,85 @@ namespace AestheticTerrain {
             this.terrainOptions.TabIndex = 1;
             this.terrainOptions.Text = "Terrain Options";
             this.terrainOptions.UseVisualStyleBackColor = true;
+            // 
+            // flatMultLabel
+            // 
+            this.flatMultLabel.AutoSize = true;
+            this.flatMultLabel.Location = new System.Drawing.Point(23, 295);
+            this.flatMultLabel.Name = "flatMultLabel";
+            this.flatMultLabel.Size = new System.Drawing.Size(159, 20);
+            this.flatMultLabel.TabIndex = 22;
+            this.flatMultLabel.Text = "Center Flattening Mult:";
+            // 
+            // centerFlatteningMult
+            // 
+            this.centerFlatteningMult.DecimalPlaces = 2;
+            this.centerFlatteningMult.Location = new System.Drawing.Point(204, 293);
+            this.centerFlatteningMult.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.centerFlatteningMult.Name = "centerFlatteningMult";
+            this.centerFlatteningMult.Size = new System.Drawing.Size(150, 27);
+            this.centerFlatteningMult.TabIndex = 21;
+            this.centerFlatteningMult.ValueChanged += new System.EventHandler(this.centerFlatteningMult_ValueChanged);
+            // 
+            // lowerCutoffLabel
+            // 
+            this.lowerCutoffLabel.AutoSize = true;
+            this.lowerCutoffLabel.Location = new System.Drawing.Point(23, 261);
+            this.lowerCutoffLabel.Name = "lowerCutoffLabel";
+            this.lowerCutoffLabel.Size = new System.Drawing.Size(97, 20);
+            this.lowerCutoffLabel.TabIndex = 20;
+            this.lowerCutoffLabel.Text = "Lower Cutoff:";
+            // 
+            // upperCutoffLabel
+            // 
+            this.upperCutoffLabel.AutoSize = true;
+            this.upperCutoffLabel.Location = new System.Drawing.Point(23, 228);
+            this.upperCutoffLabel.Name = "upperCutoffLabel";
+            this.upperCutoffLabel.Size = new System.Drawing.Size(98, 20);
+            this.upperCutoffLabel.TabIndex = 19;
+            this.upperCutoffLabel.Text = "Upper Cutoff:";
+            // 
+            // lowerCutoff
+            // 
+            this.lowerCutoff.DecimalPlaces = 2;
+            this.lowerCutoff.Location = new System.Drawing.Point(204, 259);
+            this.lowerCutoff.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.lowerCutoff.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.lowerCutoff.Name = "lowerCutoff";
+            this.lowerCutoff.Size = new System.Drawing.Size(150, 27);
+            this.lowerCutoff.TabIndex = 18;
+            this.lowerCutoff.ValueChanged += new System.EventHandler(this.lowerCutoff_ValueChanged);
+            // 
+            // upperCutoff
+            // 
+            this.upperCutoff.DecimalPlaces = 2;
+            this.upperCutoff.Location = new System.Drawing.Point(204, 226);
+            this.upperCutoff.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.upperCutoff.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.upperCutoff.Name = "upperCutoff";
+            this.upperCutoff.Size = new System.Drawing.Size(150, 27);
+            this.upperCutoff.TabIndex = 17;
+            this.upperCutoff.ValueChanged += new System.EventHandler(this.upperCutoff_ValueChanged);
             // 
             // interpolationDirection
             // 
@@ -717,6 +807,7 @@ namespace AestheticTerrain {
             this.backColourButton.TabIndex = 13;
             this.backColourButton.Text = "Pick Colour";
             this.backColourButton.UseVisualStyleBackColor = true;
+            this.backColourButton.BackColorChanged += new System.EventHandler(this.backColourButton_BackColorChanged);
             this.backColourButton.Click += new System.EventHandler(this.backColourButton_Click);
             // 
             // frontColourButton
@@ -728,6 +819,7 @@ namespace AestheticTerrain {
             this.frontColourButton.TabIndex = 12;
             this.frontColourButton.Text = "Pick Colour";
             this.frontColourButton.UseVisualStyleBackColor = false;
+            this.frontColourButton.BackColorChanged += new System.EventHandler(this.frontColourButton_BackColorChanged);
             this.frontColourButton.Click += new System.EventHandler(this.frontColourButton_Click);
             // 
             // frontColourLabel
@@ -959,61 +1051,35 @@ namespace AestheticTerrain {
             this.logBox.TabIndex = 7;
             this.logBox.Text = "...\n";
             // 
-            // upperCutoff
+            // label1
             // 
-            this.upperCutoff.DecimalPlaces = 2;
-            this.upperCutoff.Location = new System.Drawing.Point(204, 226);
-            this.upperCutoff.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.upperCutoff.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.upperCutoff.Name = "upperCutoff";
-            this.upperCutoff.Size = new System.Drawing.Size(150, 27);
-            this.upperCutoff.TabIndex = 17;
-            this.upperCutoff.ValueChanged += new System.EventHandler(this.upperCutoff_ValueChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(4, 446);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 23);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Toggle Image Parts";
             // 
-            // lowerCutoff
+            // terrainEnabled
             // 
-            this.lowerCutoff.DecimalPlaces = 2;
-            this.lowerCutoff.Location = new System.Drawing.Point(204, 259);
-            this.lowerCutoff.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.lowerCutoff.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.lowerCutoff.Name = "lowerCutoff";
-            this.lowerCutoff.Size = new System.Drawing.Size(150, 27);
-            this.lowerCutoff.TabIndex = 18;
-            this.lowerCutoff.ValueChanged += new System.EventHandler(this.lowerCutoff_ValueChanged);
+            this.terrainEnabled.AutoSize = true;
+            this.terrainEnabled.Location = new System.Drawing.Point(13, 483);
+            this.terrainEnabled.Name = "terrainEnabled";
+            this.terrainEnabled.Size = new System.Drawing.Size(125, 24);
+            this.terrainEnabled.TabIndex = 26;
+            this.terrainEnabled.Text = "Enable Terrain";
+            this.terrainEnabled.UseVisualStyleBackColor = true;
             // 
-            // upperCutoffLabel
+            // backgroundEnabled
             // 
-            this.upperCutoffLabel.AutoSize = true;
-            this.upperCutoffLabel.Location = new System.Drawing.Point(23, 228);
-            this.upperCutoffLabel.Name = "upperCutoffLabel";
-            this.upperCutoffLabel.Size = new System.Drawing.Size(98, 20);
-            this.upperCutoffLabel.TabIndex = 19;
-            this.upperCutoffLabel.Text = "Upper Cutoff:";
-            // 
-            // lowerCutoffLabel
-            // 
-            this.lowerCutoffLabel.AutoSize = true;
-            this.lowerCutoffLabel.Location = new System.Drawing.Point(23, 259);
-            this.lowerCutoffLabel.Name = "lowerCutoffLabel";
-            this.lowerCutoffLabel.Size = new System.Drawing.Size(97, 20);
-            this.lowerCutoffLabel.TabIndex = 20;
-            this.lowerCutoffLabel.Text = "Lower Cutoff:";
+            this.backgroundEnabled.AutoSize = true;
+            this.backgroundEnabled.Location = new System.Drawing.Point(13, 514);
+            this.backgroundEnabled.Name = "backgroundEnabled";
+            this.backgroundEnabled.Size = new System.Drawing.Size(159, 24);
+            this.backgroundEnabled.TabIndex = 27;
+            this.backgroundEnabled.Text = "Enable Background";
+            this.backgroundEnabled.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1046,13 +1112,14 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).EndInit();
             this.terrainOptions.ResumeLayout(false);
             this.terrainOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.centerFlatteningMult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1136,6 +1203,11 @@ namespace AestheticTerrain {
         private System.Windows.Forms.Label upperCutoffLabel;
         private System.Windows.Forms.NumericUpDown lowerCutoff;
         private System.Windows.Forms.NumericUpDown upperCutoff;
+        private System.Windows.Forms.Label flatMultLabel;
+        private System.Windows.Forms.NumericUpDown centerFlatteningMult;
+        private System.Windows.Forms.CheckBox backgroundEnabled;
+        private System.Windows.Forms.CheckBox terrainEnabled;
+        private System.Windows.Forms.Label label1;
     }
 }
 
