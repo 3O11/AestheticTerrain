@@ -16,6 +16,9 @@ namespace AestheticTerrain {
 
             imageWidth.Value = 1280;
             imageHeight.Value = 720;
+            cameraYValue.Value = 10;
+            cameraFov.Value = 90;
+
 
             _renderer.InitContext((int)imageWidth.Value, (int)imageHeight.Value);
 
@@ -39,6 +42,33 @@ namespace AestheticTerrain {
             
         }
 
+        private void cameraXValue_ValueChanged(object sender, EventArgs e) {
+            var prevPos = _renderer.CameraPosition;
+            _renderer.CameraPosition = new Vector3((float)cameraXValue.Value, prevPos.Y, prevPos.Z);
+        }
+
+        private void cameraYValue_ValueChanged(object sender, EventArgs e) {
+            var prevPos = _renderer.CameraPosition;
+            _renderer.CameraPosition = new Vector3((float)cameraXValue.Value, prevPos.Y, prevPos.Z);
+        }
+
+        private void cameraZValue_ValueChanged(object sender, EventArgs e) {
+            var prevPos = _renderer.CameraPosition;
+            _renderer.CameraPosition = new Vector3((float)cameraXValue.Value, prevPos.Y, prevPos.Z);
+        }
+
+        private void cameraYaw_ValueChanged(object sender, EventArgs e) {
+            _renderer.CameraYaw = (float)cameraYaw.Value;
+        }
+
+        private void cameraPitch_ValueChanged(object sender, EventArgs e) {
+            _renderer.CameraPitch = (float)cameraPitch.Value;
+        }
+
+        private void cameraFov_ValueChanged(object sender, EventArgs e) {
+            _renderer.CameraFov = (float)cameraFov.Value;
+        }
+
         // Background Options
 
 
@@ -52,6 +82,15 @@ namespace AestheticTerrain {
         }
 
         private void imageRenderButton_Click(object sender, EventArgs e) {
+
+        }
+
+        private void presetSaveButton_Click(object sender, EventArgs e) {
+
+        }
+
+        private void presetLoadButton_Click(object sender, EventArgs e) {
+
         }
 
         private void window_Closing(object sender, EventArgs e) {

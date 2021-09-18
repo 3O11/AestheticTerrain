@@ -13,6 +13,12 @@ using OpenTK.Windowing.Desktop;
 using System.Diagnostics;
 
 namespace AestheticTerrain {
+    enum ImageType {
+        PNG,
+        JPG,
+        BMP
+    }
+
     class Renderer {
         public Renderer() {
             _camera = new Camera(new Vector3(0, 10, 0), 16.0f / 9.0f);
@@ -35,7 +41,7 @@ namespace AestheticTerrain {
             shader.SetUniform1i("u_Texture", 0);
 
 
-            Mesh terrain = Mesh.GenerateTerrain(100, 41865);
+            Mesh terrain = TerrainGenerator.GenerateTerrain(100, 41865);
             terrain.Bind();
             GL.DrawElements(BeginMode.Triangles, terrain.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
             GL.Flush();
@@ -55,11 +61,12 @@ namespace AestheticTerrain {
         /// </summary>
         /// <param name="res"> The initial window resolution. </param>
         public void InitContext(int width, int height) {
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
+
             var gameWindowSettings = GameWindowSettings.Default;
             var nativeWindowSettings = new NativeWindowSettings() {
-                Size = new Vector2i(_width, _height),
+                Size = new Vector2i(Width, Height),
                 Title = "Invisible."
             };
 
@@ -85,19 +92,17 @@ namespace AestheticTerrain {
             _renderWindow.Dispose();
         }
 
-        void updateCanvasSize(int width, int height) {
-            _width = width;
-            _height = height;
-            _renderWindow.Size = new Vector2i(_width, _height);
+        public void RefreshCanvas() {
+            _renderWindow.Size = new Vector2i(Width, Height);
         }
 
         Bitmap createBackground() {
-            Bitmap background = new Bitmap(_width, _height);
+            Bitmap background = new Bitmap(Width, Height);
 
             using (Graphics g = Graphics.FromImage(background)) {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
-                g.FillRectangle(Brushes.White, new Rectangle(0, 0, _width, _height));
+                g.FillRectangle(Brushes.White, new Rectangle(0, 0, Width, Height));
             }
 
             return background;
@@ -117,8 +122,29 @@ namespace AestheticTerrain {
             return bitmap;
         }
 
-        int _width;
-        int _height;
+        public int Width { private get; set; }
+        public int Height { private get; set; }
+        public ImageType ImageType { private get; set; }
+        public Vector3 CameraPosition {
+            get => _camera.Position;
+            set => _camera.Position = value;
+        }
+        public float CameraYaw {
+            set => _camera.Yaw = value;
+        }
+        public float CameraPitch {
+            set => _camera.Pitch = value;
+        }
+        public float CameraFov {
+            set => _camera.Fov = value;
+        }
+        public int TerrainSeed { get; set; }
+        public Vector3i TerrainFrontColour { get; set; }
+        public Vector3i TerrainBackColour { get; set; }
+        public float TerrainLowerCutoff { get; set; }
+        public float TerrainUpperCutoff { get; set; }
+        public float TerrainFlattenCenterMult { get; set; }
+        
         GameWindow _renderWindow;
         Camera _camera;
     }
