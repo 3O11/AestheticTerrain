@@ -33,6 +33,8 @@ namespace AestheticTerrain {
             upperCutoff.Value = 100;
             frontColourButton.BackColor = Color.FromArgb(255, 60, 255);
             backColourButton.BackColor = Color.FromArgb(60, 255, 255);
+            sunPositionX.Value = 0.5M;
+            sunPositionY.Value = 0.5M;
             terrainEnabled.Checked = true;
             backgroundEnabled.Checked = true;
             quadraticMultiplierEnabled.Checked = true;
@@ -111,58 +113,93 @@ namespace AestheticTerrain {
         // Background Options
 
         private void sunPositionX_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.SunPosition = new Vector2((float)sunPositionX.Value, _backgroundGenerator.SunPosition.Y);
         }
 
         private void sunPositionY_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.SunPosition = new Vector2(_backgroundGenerator.SunPosition.X, (float)sunPositionY.Value);
         }
 
         private void sunRadius_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.SunRadius = (int)sunRadius.Value;
         }
 
         private void sunGlowRadius_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.SunGlowRadius = (int)sunGlowRadius.Value;
         }
 
         private void sunColour_Click(object sender, EventArgs e) {
+            sunColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
 
+        private void sunColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.SunColour = sunColour.BackColor;
         }
 
         private void sunGlowColour_Click(object sender, EventArgs e) {
+            sunGlowColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
 
+        private void sunGlowColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.SunGlowColour = sunGlowColour.BackColor;
         }
 
         private void starSeed_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.Seed = (int)starSeed.Value;
         }
 
         private void starCount_ValueChanged(object sender, EventArgs e) {
+            _backgroundGenerator.StarCount = (int)starCount.Value;
+        }
 
+        private void minStarDistance_ValueChanged(object sender, EventArgs e) {
+            _backgroundGenerator.MinStarDistance = (float)minStarDistance.Value;
         }
 
         private void starRadius_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.StarRadius = (int)starRadius.Value;
         }
 
         private void starGlowRadius_ValueChanged(object sender, EventArgs e) {
-
+            _backgroundGenerator.StarGlowRadius = (int)starGlowRadius.Value;
         }
 
         private void starColour_Click(object sender, EventArgs e) {
+            starColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
 
+        private void starColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.StarColour = starColour.BackColor;
         }
 
         private void starGlowColour_Click(object sender, EventArgs e) {
+            starGlowColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
 
+        private void starGlowColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.StarGlowColour = starGlowColour.BackColor;
+        }
+
+        private void topBackgroundColour_Click(object sender, EventArgs e) {
+            topBackgroundColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
+
+        private void topBackgroundColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.TopColour = topBackgroundColour.BackColor;
+        }
+
+        private void bottomBackgroundColour_Click(object sender, EventArgs e) {
+            bottomBackgroundColour.BackColor = ColourHelper.GetColourFromDialog();
+        }
+
+        private void bottomBackgroundColour_BackColorChanged(object sender, EventArgs e) {
+            _backgroundGenerator.BottomColour = bottomBackgroundColour.BackColor;
         }
 
         // Terrain Options
 
         private void noiseSeed_ValueChanged(object sender, EventArgs e) {
             _terrainGenerator.Seed = (int)noiseSeed.Value;
-            _backgroundGenerator.Seed = (int)noiseSeed.Value;
         }
 
         private void noiseFrequency_ValueChanged(object sender, EventArgs e) {

@@ -9,16 +9,17 @@ using OpenTK.Mathematics;
 
 namespace AestheticTerrain {
     class DrawHelper {
-        public static void DrawCircle(Graphics g, Color colour, Vector2 center, float radius) {
+        public static void DrawCircle(Graphics g, Color colour, Vector2 center, int radius) {
             using (Brush b = new SolidBrush(colour)) {
                 g.FillEllipse(b, center.X - radius, center.Y - radius, radius * 2, radius * 2);
             }
         }
 
-        public static void DrawGlow(Graphics g, Color colour, Color bgColour, Vector2 center, float radius) {
-            Rectangle gradientRect = new Rectangle((int)center.X, (int)center.Y, (int)(center.X + radius * 2), (int)(center.Y + radius * 2));
-            using (Brush b = new LinearGradientBrush(gradientRect, colour, bgColour, LinearGradientMode.Vertical)) {
-                
+        public static void DrawGlow(Graphics g, Color colour, Vector2 center, int radius) {
+            for (int i = radius; i > 0; i--) {
+                int currentAlpha = (int)((float)155 * (radius - i) / radius);
+                Color currentColour = Color.FromArgb(currentAlpha, colour);
+                DrawCircle(g, currentColour, center, i);
             }
         }
 

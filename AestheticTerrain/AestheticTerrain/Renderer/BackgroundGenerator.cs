@@ -25,9 +25,6 @@ namespace AestheticTerrain {
         public Bitmap GenerateBackground() {
             Bitmap background = new Bitmap(Width, Height);
 
-            // This is Temporary !!
-            SunPosition = new Vector2(Width / 2, Height / 2);
-
             using (Graphics g = Graphics.FromImage(background)) {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -40,12 +37,14 @@ namespace AestheticTerrain {
                     Vector2 sample;
                     if (!sampler.TrySample(out sample)) break;
 
+                    DrawHelper.DrawGlow(g, StarGlowColour, sample, StarRadius);
                     DrawHelper.DrawCircle(g, StarColour, sample, StarRadius);
                 }
 
                 // Drawing sun
-                Vector2 sunPosAdjusted = SunPosition;
+                Vector2 sunPosAdjusted = SunPosition * new Vector2(Width, Height);
                 sunPosAdjusted.Y = Height - sunPosAdjusted.Y;
+                DrawHelper.DrawGlow(g, SunGlowColour, sunPosAdjusted, SunGlowRadius);
                 DrawHelper.DrawCircle(g, SunColour, sunPosAdjusted, SunRadius);
             }
 
@@ -58,11 +57,15 @@ namespace AestheticTerrain {
         public Color TopColour { get; set; }
         public Color BottomColour { get; set; }
         public Color StarColour { get; set; }
+        public Color StarGlowColour { get; set; }
         public Color SunColour { get; set; }
-        public float SunRadius { get; set; }
+        public Color SunGlowColour { get; set; }
+        public int SunRadius { get; set; }
+        public int SunGlowRadius { get; set; }
         public Vector2 SunPosition { get; set; }
         public int StarCount { get; set; }
-        public float StarRadius { get; set; }
+        public int StarRadius { get; set; }
+        public int StarGlowRadius { get; set; }
         public float MinStarDistance { get; set; }
         public float GlowMultiplier { get; set; }
     }

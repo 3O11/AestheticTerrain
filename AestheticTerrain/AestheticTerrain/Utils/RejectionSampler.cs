@@ -32,6 +32,8 @@ namespace AestheticTerrain {
                     _existingPoints.Add(newSample);
                     return new Vector2i((int)newSample.X, (int)newSample.Y);
                 }
+
+                ++tries;
             }
 
             return null;

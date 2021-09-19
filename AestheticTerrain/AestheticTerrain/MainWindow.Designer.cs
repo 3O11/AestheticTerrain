@@ -116,6 +116,8 @@ namespace AestheticTerrain {
             this.noiseSeedLabel = new System.Windows.Forms.Label();
             this.noiseOptionsLabel = new System.Windows.Forms.Label();
             this.backgroundOptions = new System.Windows.Forms.TabPage();
+            this.minStarDistanceLabel = new System.Windows.Forms.Label();
+            this.minStarDistance = new System.Windows.Forms.NumericUpDown();
             this.starGlowColourLabel = new System.Windows.Forms.Label();
             this.starColourLabel = new System.Windows.Forms.Label();
             this.starGlowRadiusLabel = new System.Windows.Forms.Label();
@@ -148,6 +150,11 @@ namespace AestheticTerrain {
             this.previewImage = new System.Windows.Forms.PictureBox();
             this.imageRenderButton = new System.Windows.Forms.Button();
             this.logBox = new System.Windows.Forms.RichTextBox();
+            this.backgroundColoursLabel = new System.Windows.Forms.Label();
+            this.topBackgroundColour = new System.Windows.Forms.Button();
+            this.bottomBackgroundColour = new System.Windows.Forms.Button();
+            this.topBackgroundColourLabel = new System.Windows.Forms.Label();
+            this.bottomBackgroundColourLabel = new System.Windows.Forms.Label();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
@@ -175,6 +182,7 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
             this.backgroundOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minStarDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starGlowRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starCount)).BeginInit();
@@ -1264,6 +1272,13 @@ namespace AestheticTerrain {
             // 
             // backgroundOptions
             // 
+            this.backgroundOptions.Controls.Add(this.bottomBackgroundColourLabel);
+            this.backgroundOptions.Controls.Add(this.topBackgroundColourLabel);
+            this.backgroundOptions.Controls.Add(this.bottomBackgroundColour);
+            this.backgroundOptions.Controls.Add(this.topBackgroundColour);
+            this.backgroundOptions.Controls.Add(this.backgroundColoursLabel);
+            this.backgroundOptions.Controls.Add(this.minStarDistanceLabel);
+            this.backgroundOptions.Controls.Add(this.minStarDistance);
             this.backgroundOptions.Controls.Add(this.starGlowColourLabel);
             this.backgroundOptions.Controls.Add(this.starColourLabel);
             this.backgroundOptions.Controls.Add(this.starGlowRadiusLabel);
@@ -1298,10 +1313,32 @@ namespace AestheticTerrain {
             this.backgroundOptions.Text = "Background Options";
             this.backgroundOptions.UseVisualStyleBackColor = true;
             // 
+            // minStarDistanceLabel
+            // 
+            this.minStarDistanceLabel.AutoSize = true;
+            this.minStarDistanceLabel.Location = new System.Drawing.Point(20, 375);
+            this.minStarDistanceLabel.Name = "minStarDistanceLabel";
+            this.minStarDistanceLabel.Size = new System.Drawing.Size(98, 20);
+            this.minStarDistanceLabel.TabIndex = 27;
+            this.minStarDistanceLabel.Text = "Min Distance:";
+            // 
+            // minStarDistance
+            // 
+            this.minStarDistance.Location = new System.Drawing.Point(145, 373);
+            this.minStarDistance.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+            this.minStarDistance.Name = "minStarDistance";
+            this.minStarDistance.Size = new System.Drawing.Size(106, 27);
+            this.minStarDistance.TabIndex = 26;
+            this.minStarDistance.ValueChanged += new System.EventHandler(this.minStarDistance_ValueChanged);
+            // 
             // starGlowColourLabel
             // 
             this.starGlowColourLabel.AutoSize = true;
-            this.starGlowColourLabel.Location = new System.Drawing.Point(20, 481);
+            this.starGlowColourLabel.Location = new System.Drawing.Point(20, 514);
             this.starGlowColourLabel.Name = "starGlowColourLabel";
             this.starGlowColourLabel.Size = new System.Drawing.Size(94, 20);
             this.starGlowColourLabel.TabIndex = 25;
@@ -1310,7 +1347,7 @@ namespace AestheticTerrain {
             // starColourLabel
             // 
             this.starColourLabel.AutoSize = true;
-            this.starColourLabel.Location = new System.Drawing.Point(20, 445);
+            this.starColourLabel.Location = new System.Drawing.Point(20, 478);
             this.starColourLabel.Name = "starColourLabel";
             this.starColourLabel.Size = new System.Drawing.Size(56, 20);
             this.starColourLabel.TabIndex = 24;
@@ -1319,7 +1356,7 @@ namespace AestheticTerrain {
             // starGlowRadiusLabel
             // 
             this.starGlowRadiusLabel.AutoSize = true;
-            this.starGlowRadiusLabel.Location = new System.Drawing.Point(20, 409);
+            this.starGlowRadiusLabel.Location = new System.Drawing.Point(20, 442);
             this.starGlowRadiusLabel.Name = "starGlowRadiusLabel";
             this.starGlowRadiusLabel.Size = new System.Drawing.Size(94, 20);
             this.starGlowRadiusLabel.TabIndex = 23;
@@ -1328,7 +1365,7 @@ namespace AestheticTerrain {
             // starRadiusLabel
             // 
             this.starRadiusLabel.AutoSize = true;
-            this.starRadiusLabel.Location = new System.Drawing.Point(20, 375);
+            this.starRadiusLabel.Location = new System.Drawing.Point(20, 408);
             this.starRadiusLabel.Name = "starRadiusLabel";
             this.starRadiusLabel.Size = new System.Drawing.Size(56, 20);
             this.starRadiusLabel.TabIndex = 22;
@@ -1354,27 +1391,34 @@ namespace AestheticTerrain {
             // 
             // starGlowColour
             // 
-            this.starGlowColour.Location = new System.Drawing.Point(145, 477);
+            this.starGlowColour.Location = new System.Drawing.Point(145, 510);
             this.starGlowColour.Name = "starGlowColour";
             this.starGlowColour.Size = new System.Drawing.Size(106, 29);
             this.starGlowColour.TabIndex = 19;
             this.starGlowColour.Text = "Pick Colour";
             this.starGlowColour.UseVisualStyleBackColor = true;
+            this.starGlowColour.BackColorChanged += new System.EventHandler(this.starGlowColour_BackColorChanged);
             this.starGlowColour.Click += new System.EventHandler(this.starGlowColour_Click);
             // 
             // starColour
             // 
-            this.starColour.Location = new System.Drawing.Point(145, 441);
+            this.starColour.Location = new System.Drawing.Point(145, 474);
             this.starColour.Name = "starColour";
             this.starColour.Size = new System.Drawing.Size(106, 29);
             this.starColour.TabIndex = 18;
             this.starColour.Text = "Pick Colour";
             this.starColour.UseVisualStyleBackColor = true;
+            this.starColour.BackColorChanged += new System.EventHandler(this.starColour_BackColorChanged);
             this.starColour.Click += new System.EventHandler(this.starColour_Click);
             // 
             // starGlowRadius
             // 
-            this.starGlowRadius.Location = new System.Drawing.Point(145, 407);
+            this.starGlowRadius.Location = new System.Drawing.Point(145, 440);
+            this.starGlowRadius.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
             this.starGlowRadius.Name = "starGlowRadius";
             this.starGlowRadius.Size = new System.Drawing.Size(106, 27);
             this.starGlowRadius.TabIndex = 17;
@@ -1382,7 +1426,12 @@ namespace AestheticTerrain {
             // 
             // starRadius
             // 
-            this.starRadius.Location = new System.Drawing.Point(145, 373);
+            this.starRadius.Location = new System.Drawing.Point(145, 406);
+            this.starRadius.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
             this.starRadius.Name = "starRadius";
             this.starRadius.Size = new System.Drawing.Size(106, 27);
             this.starRadius.TabIndex = 16;
@@ -1391,6 +1440,11 @@ namespace AestheticTerrain {
             // starCount
             // 
             this.starCount.Location = new System.Drawing.Point(145, 339);
+            this.starCount.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.starCount.Name = "starCount";
             this.starCount.Size = new System.Drawing.Size(106, 27);
             this.starCount.TabIndex = 15;
@@ -1399,9 +1453,24 @@ namespace AestheticTerrain {
             // starSeed
             // 
             this.starSeed.Location = new System.Drawing.Point(145, 305);
+            this.starSeed.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.starSeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.starSeed.Name = "starSeed";
             this.starSeed.Size = new System.Drawing.Size(106, 27);
             this.starSeed.TabIndex = 14;
+            this.starSeed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.starSeed.ValueChanged += new System.EventHandler(this.starSeed_ValueChanged);
             // 
             // starOptionsLabel
@@ -1440,6 +1509,7 @@ namespace AestheticTerrain {
             this.sunGlowColour.TabIndex = 10;
             this.sunGlowColour.Text = "Pick Colour";
             this.sunGlowColour.UseVisualStyleBackColor = true;
+            this.sunGlowColour.BackColorChanged += new System.EventHandler(this.sunGlowColour_BackColorChanged);
             this.sunGlowColour.Click += new System.EventHandler(this.sunGlowColour_Click);
             // 
             // sunColour
@@ -1450,11 +1520,17 @@ namespace AestheticTerrain {
             this.sunColour.TabIndex = 9;
             this.sunColour.Text = "Pick Colour";
             this.sunColour.UseVisualStyleBackColor = true;
+            this.sunColour.BackColorChanged += new System.EventHandler(this.sunColour_BackColorChanged);
             this.sunColour.Click += new System.EventHandler(this.sunColour_Click);
             // 
             // sunGlowRadius
             // 
             this.sunGlowRadius.Location = new System.Drawing.Point(145, 135);
+            this.sunGlowRadius.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
             this.sunGlowRadius.Name = "sunGlowRadius";
             this.sunGlowRadius.Size = new System.Drawing.Size(106, 27);
             this.sunGlowRadius.TabIndex = 8;
@@ -1472,6 +1548,11 @@ namespace AestheticTerrain {
             // sunRadius
             // 
             this.sunRadius.Location = new System.Drawing.Point(145, 102);
+            this.sunRadius.Maximum = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
             this.sunRadius.Name = "sunRadius";
             this.sunRadius.Size = new System.Drawing.Size(106, 27);
             this.sunRadius.TabIndex = 6;
@@ -1497,7 +1578,13 @@ namespace AestheticTerrain {
             // 
             // sunPositionY
             // 
+            this.sunPositionY.DecimalPlaces = 4;
             this.sunPositionY.Location = new System.Drawing.Point(145, 68);
+            this.sunPositionY.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.sunPositionY.Name = "sunPositionY";
             this.sunPositionY.Size = new System.Drawing.Size(106, 27);
             this.sunPositionY.TabIndex = 3;
@@ -1505,7 +1592,13 @@ namespace AestheticTerrain {
             // 
             // sunPositionX
             // 
+            this.sunPositionX.DecimalPlaces = 4;
             this.sunPositionX.Location = new System.Drawing.Point(145, 35);
+            this.sunPositionX.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.sunPositionX.Name = "sunPositionX";
             this.sunPositionX.Size = new System.Drawing.Size(106, 27);
             this.sunPositionX.TabIndex = 2;
@@ -1596,6 +1689,56 @@ namespace AestheticTerrain {
             this.logBox.TabIndex = 7;
             this.logBox.Text = "...\n";
             // 
+            // backgroundColoursLabel
+            // 
+            this.backgroundColoursLabel.AutoSize = true;
+            this.backgroundColoursLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.backgroundColoursLabel.Location = new System.Drawing.Point(4, 562);
+            this.backgroundColoursLabel.Name = "backgroundColoursLabel";
+            this.backgroundColoursLabel.Size = new System.Drawing.Size(172, 23);
+            this.backgroundColoursLabel.TabIndex = 28;
+            this.backgroundColoursLabel.Text = "Background Colours";
+            // 
+            // topBackgroundColour
+            // 
+            this.topBackgroundColour.Location = new System.Drawing.Point(145, 599);
+            this.topBackgroundColour.Name = "topBackgroundColour";
+            this.topBackgroundColour.Size = new System.Drawing.Size(106, 29);
+            this.topBackgroundColour.TabIndex = 29;
+            this.topBackgroundColour.Text = "Pick Colour";
+            this.topBackgroundColour.UseVisualStyleBackColor = true;
+            this.topBackgroundColour.BackColorChanged += new System.EventHandler(this.topBackgroundColour_BackColorChanged);
+            this.topBackgroundColour.Click += new System.EventHandler(this.topBackgroundColour_Click);
+            // 
+            // bottomBackgroundColour
+            // 
+            this.bottomBackgroundColour.Location = new System.Drawing.Point(145, 635);
+            this.bottomBackgroundColour.Name = "bottomBackgroundColour";
+            this.bottomBackgroundColour.Size = new System.Drawing.Size(106, 29);
+            this.bottomBackgroundColour.TabIndex = 30;
+            this.bottomBackgroundColour.Text = "Pick Colour";
+            this.bottomBackgroundColour.UseVisualStyleBackColor = true;
+            this.bottomBackgroundColour.BackColorChanged += new System.EventHandler(this.bottomBackgroundColour_BackColorChanged);
+            this.bottomBackgroundColour.Click += new System.EventHandler(this.bottomBackgroundColour_Click);
+            // 
+            // topBackgroundColourLabel
+            // 
+            this.topBackgroundColourLabel.AutoSize = true;
+            this.topBackgroundColourLabel.Location = new System.Drawing.Point(20, 603);
+            this.topBackgroundColourLabel.Name = "topBackgroundColourLabel";
+            this.topBackgroundColourLabel.Size = new System.Drawing.Size(85, 20);
+            this.topBackgroundColourLabel.TabIndex = 31;
+            this.topBackgroundColourLabel.Text = "Top Colour:";
+            // 
+            // bottomBackgroundColourLabel
+            // 
+            this.bottomBackgroundColourLabel.AutoSize = true;
+            this.bottomBackgroundColourLabel.Location = new System.Drawing.Point(20, 639);
+            this.bottomBackgroundColourLabel.Name = "bottomBackgroundColourLabel";
+            this.bottomBackgroundColourLabel.Size = new System.Drawing.Size(110, 20);
+            this.bottomBackgroundColourLabel.TabIndex = 32;
+            this.bottomBackgroundColourLabel.Text = "Bottom Colour:";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1643,6 +1786,7 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
             this.backgroundOptions.ResumeLayout(false);
             this.backgroundOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minStarDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starGlowRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starCount)).EndInit();
@@ -1782,6 +1926,13 @@ namespace AestheticTerrain {
         private System.Windows.Forms.NumericUpDown sunPositionX;
         private System.Windows.Forms.Label sunPositionXLabel;
         private System.Windows.Forms.Label sunOptionsLabel;
+        private System.Windows.Forms.Label minStarDistanceLabel;
+        private System.Windows.Forms.NumericUpDown minStarDistance;
+        private System.Windows.Forms.Label bottomBackgroundColourLabel;
+        private System.Windows.Forms.Label topBackgroundColourLabel;
+        private System.Windows.Forms.Button bottomBackgroundColour;
+        private System.Windows.Forms.Button topBackgroundColour;
+        private System.Windows.Forms.Label backgroundColoursLabel;
     }
 }
 
