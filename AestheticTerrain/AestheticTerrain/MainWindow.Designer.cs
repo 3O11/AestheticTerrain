@@ -116,6 +116,11 @@ namespace AestheticTerrain {
             this.noiseSeedLabel = new System.Windows.Forms.Label();
             this.noiseOptionsLabel = new System.Windows.Forms.Label();
             this.backgroundOptions = new System.Windows.Forms.TabPage();
+            this.bottomBackgroundColourLabel = new System.Windows.Forms.Label();
+            this.topBackgroundColourLabel = new System.Windows.Forms.Label();
+            this.bottomBackgroundColour = new System.Windows.Forms.Button();
+            this.topBackgroundColour = new System.Windows.Forms.Button();
+            this.backgroundColoursLabel = new System.Windows.Forms.Label();
             this.minStarDistanceLabel = new System.Windows.Forms.Label();
             this.minStarDistance = new System.Windows.Forms.NumericUpDown();
             this.starGlowColourLabel = new System.Windows.Forms.Label();
@@ -150,11 +155,6 @@ namespace AestheticTerrain {
             this.previewImage = new System.Windows.Forms.PictureBox();
             this.imageRenderButton = new System.Windows.Forms.Button();
             this.logBox = new System.Windows.Forms.RichTextBox();
-            this.backgroundColoursLabel = new System.Windows.Forms.Label();
-            this.topBackgroundColour = new System.Windows.Forms.Button();
-            this.bottomBackgroundColour = new System.Windows.Forms.Button();
-            this.topBackgroundColourLabel = new System.Windows.Forms.Label();
-            this.bottomBackgroundColourLabel = new System.Windows.Forms.Label();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
@@ -557,12 +557,12 @@ namespace AestheticTerrain {
             this.cameraYValue.DecimalPlaces = 2;
             this.cameraYValue.Location = new System.Drawing.Point(161, 275);
             this.cameraYValue.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
             this.cameraYValue.Minimum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             -2147483648});
@@ -576,12 +576,12 @@ namespace AestheticTerrain {
             this.cameraZValue.DecimalPlaces = 2;
             this.cameraZValue.Location = new System.Drawing.Point(269, 275);
             this.cameraZValue.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
             this.cameraZValue.Minimum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             -2147483648});
@@ -604,12 +604,12 @@ namespace AestheticTerrain {
             this.cameraXValue.DecimalPlaces = 2;
             this.cameraXValue.Location = new System.Drawing.Point(54, 275);
             this.cameraXValue.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
             this.cameraXValue.Minimum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             -2147483648});
@@ -1187,7 +1187,7 @@ namespace AestheticTerrain {
             // 
             this.noiseAmplitude.Location = new System.Drawing.Point(204, 102);
             this.noiseAmplitude.Maximum = new decimal(new int[] {
-            10000,
+            1000,
             0,
             0,
             0});
@@ -1313,6 +1313,56 @@ namespace AestheticTerrain {
             this.backgroundOptions.Text = "Background Options";
             this.backgroundOptions.UseVisualStyleBackColor = true;
             // 
+            // bottomBackgroundColourLabel
+            // 
+            this.bottomBackgroundColourLabel.AutoSize = true;
+            this.bottomBackgroundColourLabel.Location = new System.Drawing.Point(20, 639);
+            this.bottomBackgroundColourLabel.Name = "bottomBackgroundColourLabel";
+            this.bottomBackgroundColourLabel.Size = new System.Drawing.Size(110, 20);
+            this.bottomBackgroundColourLabel.TabIndex = 32;
+            this.bottomBackgroundColourLabel.Text = "Bottom Colour:";
+            // 
+            // topBackgroundColourLabel
+            // 
+            this.topBackgroundColourLabel.AutoSize = true;
+            this.topBackgroundColourLabel.Location = new System.Drawing.Point(20, 603);
+            this.topBackgroundColourLabel.Name = "topBackgroundColourLabel";
+            this.topBackgroundColourLabel.Size = new System.Drawing.Size(85, 20);
+            this.topBackgroundColourLabel.TabIndex = 31;
+            this.topBackgroundColourLabel.Text = "Top Colour:";
+            // 
+            // bottomBackgroundColour
+            // 
+            this.bottomBackgroundColour.Location = new System.Drawing.Point(145, 635);
+            this.bottomBackgroundColour.Name = "bottomBackgroundColour";
+            this.bottomBackgroundColour.Size = new System.Drawing.Size(106, 29);
+            this.bottomBackgroundColour.TabIndex = 30;
+            this.bottomBackgroundColour.Text = "Pick Colour";
+            this.bottomBackgroundColour.UseVisualStyleBackColor = true;
+            this.bottomBackgroundColour.BackColorChanged += new System.EventHandler(this.bottomBackgroundColour_BackColorChanged);
+            this.bottomBackgroundColour.Click += new System.EventHandler(this.bottomBackgroundColour_Click);
+            // 
+            // topBackgroundColour
+            // 
+            this.topBackgroundColour.Location = new System.Drawing.Point(145, 599);
+            this.topBackgroundColour.Name = "topBackgroundColour";
+            this.topBackgroundColour.Size = new System.Drawing.Size(106, 29);
+            this.topBackgroundColour.TabIndex = 29;
+            this.topBackgroundColour.Text = "Pick Colour";
+            this.topBackgroundColour.UseVisualStyleBackColor = true;
+            this.topBackgroundColour.BackColorChanged += new System.EventHandler(this.topBackgroundColour_BackColorChanged);
+            this.topBackgroundColour.Click += new System.EventHandler(this.topBackgroundColour_Click);
+            // 
+            // backgroundColoursLabel
+            // 
+            this.backgroundColoursLabel.AutoSize = true;
+            this.backgroundColoursLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.backgroundColoursLabel.Location = new System.Drawing.Point(4, 562);
+            this.backgroundColoursLabel.Name = "backgroundColoursLabel";
+            this.backgroundColoursLabel.Size = new System.Drawing.Size(172, 23);
+            this.backgroundColoursLabel.TabIndex = 28;
+            this.backgroundColoursLabel.Text = "Background Colours";
+            // 
             // minStarDistanceLabel
             // 
             this.minStarDistanceLabel.AutoSize = true;
@@ -1326,7 +1376,7 @@ namespace AestheticTerrain {
             // 
             this.minStarDistance.Location = new System.Drawing.Point(145, 373);
             this.minStarDistance.Maximum = new decimal(new int[] {
-            16384,
+            2048,
             0,
             0,
             0});
@@ -1415,7 +1465,7 @@ namespace AestheticTerrain {
             // 
             this.starGlowRadius.Location = new System.Drawing.Point(145, 440);
             this.starGlowRadius.Maximum = new decimal(new int[] {
-            16384,
+            4096,
             0,
             0,
             0});
@@ -1428,7 +1478,7 @@ namespace AestheticTerrain {
             // 
             this.starRadius.Location = new System.Drawing.Point(145, 406);
             this.starRadius.Maximum = new decimal(new int[] {
-            16384,
+            4096,
             0,
             0,
             0});
@@ -1441,7 +1491,7 @@ namespace AestheticTerrain {
             // 
             this.starCount.Location = new System.Drawing.Point(145, 339);
             this.starCount.Maximum = new decimal(new int[] {
-            100000,
+            2000,
             0,
             0,
             0});
@@ -1527,7 +1577,7 @@ namespace AestheticTerrain {
             // 
             this.sunGlowRadius.Location = new System.Drawing.Point(145, 135);
             this.sunGlowRadius.Maximum = new decimal(new int[] {
-            16384,
+            4096,
             0,
             0,
             0});
@@ -1549,7 +1599,7 @@ namespace AestheticTerrain {
             // 
             this.sunRadius.Location = new System.Drawing.Point(145, 102);
             this.sunRadius.Maximum = new decimal(new int[] {
-            16384,
+            4096,
             0,
             0,
             0});
@@ -1688,56 +1738,6 @@ namespace AestheticTerrain {
             this.logBox.Size = new System.Drawing.Size(1280, 113);
             this.logBox.TabIndex = 7;
             this.logBox.Text = "...\n";
-            // 
-            // backgroundColoursLabel
-            // 
-            this.backgroundColoursLabel.AutoSize = true;
-            this.backgroundColoursLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.backgroundColoursLabel.Location = new System.Drawing.Point(4, 562);
-            this.backgroundColoursLabel.Name = "backgroundColoursLabel";
-            this.backgroundColoursLabel.Size = new System.Drawing.Size(172, 23);
-            this.backgroundColoursLabel.TabIndex = 28;
-            this.backgroundColoursLabel.Text = "Background Colours";
-            // 
-            // topBackgroundColour
-            // 
-            this.topBackgroundColour.Location = new System.Drawing.Point(145, 599);
-            this.topBackgroundColour.Name = "topBackgroundColour";
-            this.topBackgroundColour.Size = new System.Drawing.Size(106, 29);
-            this.topBackgroundColour.TabIndex = 29;
-            this.topBackgroundColour.Text = "Pick Colour";
-            this.topBackgroundColour.UseVisualStyleBackColor = true;
-            this.topBackgroundColour.BackColorChanged += new System.EventHandler(this.topBackgroundColour_BackColorChanged);
-            this.topBackgroundColour.Click += new System.EventHandler(this.topBackgroundColour_Click);
-            // 
-            // bottomBackgroundColour
-            // 
-            this.bottomBackgroundColour.Location = new System.Drawing.Point(145, 635);
-            this.bottomBackgroundColour.Name = "bottomBackgroundColour";
-            this.bottomBackgroundColour.Size = new System.Drawing.Size(106, 29);
-            this.bottomBackgroundColour.TabIndex = 30;
-            this.bottomBackgroundColour.Text = "Pick Colour";
-            this.bottomBackgroundColour.UseVisualStyleBackColor = true;
-            this.bottomBackgroundColour.BackColorChanged += new System.EventHandler(this.bottomBackgroundColour_BackColorChanged);
-            this.bottomBackgroundColour.Click += new System.EventHandler(this.bottomBackgroundColour_Click);
-            // 
-            // topBackgroundColourLabel
-            // 
-            this.topBackgroundColourLabel.AutoSize = true;
-            this.topBackgroundColourLabel.Location = new System.Drawing.Point(20, 603);
-            this.topBackgroundColourLabel.Name = "topBackgroundColourLabel";
-            this.topBackgroundColourLabel.Size = new System.Drawing.Size(85, 20);
-            this.topBackgroundColourLabel.TabIndex = 31;
-            this.topBackgroundColourLabel.Text = "Top Colour:";
-            // 
-            // bottomBackgroundColourLabel
-            // 
-            this.bottomBackgroundColourLabel.AutoSize = true;
-            this.bottomBackgroundColourLabel.Location = new System.Drawing.Point(20, 639);
-            this.bottomBackgroundColourLabel.Name = "bottomBackgroundColourLabel";
-            this.bottomBackgroundColourLabel.Size = new System.Drawing.Size(110, 20);
-            this.bottomBackgroundColourLabel.TabIndex = 32;
-            this.bottomBackgroundColourLabel.Text = "Bottom Colour:";
             // 
             // MainWindow
             // 

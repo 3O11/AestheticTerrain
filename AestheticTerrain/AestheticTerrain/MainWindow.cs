@@ -15,6 +15,7 @@ namespace AestheticTerrain {
         public MainWindow() {
             InitializeComponent();
             this.Text = "AestheticTerrain";
+            //this.Icon = new Icon()
 
             initTooltips();
 
