@@ -11,33 +11,62 @@ using System.Windows.Forms;
 using OpenTK.Mathematics;
 
 namespace AestheticTerrain {
-    public partial class Form1 : Form {
-        public Form1() {
+    public partial class MainWindow : Form {
+        public MainWindow() {
             InitializeComponent();
+            this.Text = "AestheticTerrain";
+
+            initTooltips();
 
             imageWidth.Value = 1280;
             imageHeight.Value = 720;
-            cameraXValue.Value = -150;
-            cameraYValue.Value = 100;
-            cameraFov.Value = 90;
+            cameraXValue.Value = -80;
+            cameraYValue.Value = 5;
+            cameraFov.Value = 70;
             cameraYaw.Value = 0;
-            cameraPitch.Value = -30;
+            cameraPitch.Value = 0;
             noiseSeed.Value = 3011;
-            noiseFrequency.Value = 60;
-            noiseAmplitude.Value = 10;
-            terrainScale.Value = 5;
+            noiseFrequency.Value = 15;
+            noiseAmplitude.Value = 1;
+            terrainScale.Value = 3;
             lowerCutoff.Value = -100;
             upperCutoff.Value = 100;
             frontColourButton.BackColor = Color.FromArgb(255, 60, 255);
             backColourButton.BackColor = Color.FromArgb(60, 255, 255);
             terrainEnabled.Checked = true;
             backgroundEnabled.Checked = true;
+            quadraticMultiplierEnabled.Checked = true;
+            quadraticMultiplierEnabled.Checked = false;
 
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
             _renderer.InitContext((int)imageWidth.Value, (int)imageHeight.Value);
 
             FormClosing += window_Closing;
+        }
+
+        private void prepareQuadratic() {
+            if (quadraticMultiplierEnabled.Checked) {
+                var quadratic = _terrainGenerator.FuncMultiplier;
+                quadratic.xQuad = (float)xQuad.Value;
+                quadratic.yQuad = (float)zQuad.Value;
+                quadratic.xyLin = (float)xzLin.Value;
+                quadratic.xLin = (float)xLin.Value;
+                quadratic.yLin = (float)zLin.Value;
+                quadratic.Const = (float)Const.Value;
+
+                if (clampFunction.Checked) {
+                    quadratic.Clamp = true;
+                    quadratic.TopClamp = (float)upperClamp.Value;
+                    quadratic.BottomClamp = (float)lowerClamp.Value;
+                }
+                else {
+                    quadratic.Clamp = false;
+                }
+            }
+            else {
+                _terrainGenerator.FuncMultiplier = new Quadratic2D(0, 0, 1);
+            }
         }
 
         // Image Options
@@ -81,6 +110,53 @@ namespace AestheticTerrain {
 
         // Background Options
 
+        private void sunPositionX_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void sunPositionY_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void sunRadius_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void sunGlowRadius_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void sunColour_Click(object sender, EventArgs e) {
+
+        }
+
+        private void sunGlowColour_Click(object sender, EventArgs e) {
+
+        }
+
+        private void starSeed_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void starCount_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void starRadius_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void starGlowRadius_ValueChanged(object sender, EventArgs e) {
+
+        }
+
+        private void starColour_Click(object sender, EventArgs e) {
+
+        }
+
+        private void starGlowColour_Click(object sender, EventArgs e) {
+
+        }
 
         // Terrain Options
 
@@ -99,24 +175,6 @@ namespace AestheticTerrain {
 
         private void terrainScale_ValueChanged(object sender, EventArgs e) {
             _terrainGenerator.Scale = (float)terrainScale.Value;
-        }
-
-        private void interpolationDirection_SelectedIndexChanged(object sender, EventArgs e) {
-            switch(interpolationDirection.SelectedIndex) {
-                case 0:
-                    break;
-                case 1:
-                    frontColourLabel.Text = "Front Colour:";
-                    backColourLabel.Text = "Back Colour:";
-                    break;
-                case 2:
-                    frontColourLabel.Text = "Top Colour:";
-                    backColourLabel.Text = "Bottom Colour:";
-                    break;
-                default:
-                    break;
-            }
-            // Propagate the selection to renderer
         }
 
         private void frontColourButton_Click(object sender, EventArgs e) {
@@ -143,13 +201,30 @@ namespace AestheticTerrain {
             _terrainGenerator.LowerCutoff = (float)lowerCutoff.Value;
         }
 
-        private void centerFlatteningMult_ValueChanged(object sender, EventArgs e) {
-            _terrainGenerator.FlattenCenterMult = (float)centerFlatteningMult.Value;
+        private void quadraticMultiplierEnabled_CheckedChanged(object sender, EventArgs e) {
+            bool newState = quadraticMultiplierEnabled.Checked;
+            xQuad.Enabled = newState;
+            zQuad.Enabled = newState;
+            xzLin.Enabled = newState;
+            xLin.Enabled = newState;
+            zLin.Enabled = newState;
+            Const.Enabled = newState;
+            clampFunction.Enabled = newState;
+            upperClamp.Enabled = newState;
+            lowerClamp.Enabled = newState;
+        }
+
+        private void clampFunction_CheckedChanged(object sender, EventArgs e) {
+            bool newState = clampFunction.Checked;
+            upperClamp.Enabled = newState;
+            lowerClamp.Enabled = newState;
         }
 
         // General Options
 
         private void previewRenderButton_Click(object sender, EventArgs e) {
+            prepareQuadratic();
+
             // The preview image can have very different size from the actual rendered image,
             // so we need to temporarily update the renderer with a different size to avoid problems.
             _renderer.Width = previewImage.Width;
@@ -170,6 +245,8 @@ namespace AestheticTerrain {
         }
 
         private void imageRenderButton_Click(object sender, EventArgs e) {
+            prepareQuadratic();
+
             if (!Paths.IsValidFilename(imageName.Text)) {
                 logBox.Text = "The image name is not a valid filename, aborting operation!\n";
                 return;

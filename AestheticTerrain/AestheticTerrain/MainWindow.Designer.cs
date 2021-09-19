@@ -1,6 +1,6 @@
 ﻿
 namespace AestheticTerrain {
-    partial class Form1 {
+    partial class MainWindow {
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -24,7 +24,7 @@ namespace AestheticTerrain {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.topMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +48,9 @@ namespace AestheticTerrain {
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.options = new System.Windows.Forms.TabControl();
             this.imageOptions = new System.Windows.Forms.TabPage();
+            this.backgroundEnabled = new System.Windows.Forms.CheckBox();
+            this.terrainEnabled = new System.Windows.Forms.CheckBox();
+            this.imagePartToggleLabel = new System.Windows.Forms.Label();
             this.imageName = new System.Windows.Forms.TextBox();
             this.imageNameLabel = new System.Windows.Forms.Label();
             this.cameraFov = new System.Windows.Forms.NumericUpDown();
@@ -73,14 +76,30 @@ namespace AestheticTerrain {
             this.widthLabel = new System.Windows.Forms.Label();
             this.resolutionLabel = new System.Windows.Forms.Label();
             this.terrainOptions = new System.Windows.Forms.TabPage();
-            this.flatMultLabel = new System.Windows.Forms.Label();
-            this.centerFlatteningMult = new System.Windows.Forms.NumericUpDown();
+            this.lowerClampLabel = new System.Windows.Forms.Label();
+            this.lowerClamp = new System.Windows.Forms.NumericUpDown();
+            this.upperClamp = new System.Windows.Forms.NumericUpDown();
+            this.upperClampLabel = new System.Windows.Forms.Label();
+            this.clampFunction = new System.Windows.Forms.CheckBox();
+            this.z = new System.Windows.Forms.Label();
+            this.x = new System.Windows.Forms.Label();
+            this.xz = new System.Windows.Forms.Label();
+            this.ysquared2 = new System.Windows.Forms.Label();
+            this.zsquaredz = new System.Windows.Forms.Label();
+            this.xsquared2 = new System.Windows.Forms.Label();
+            this.xsquaredx = new System.Windows.Forms.Label();
+            this.Const = new System.Windows.Forms.NumericUpDown();
+            this.xLin = new System.Windows.Forms.NumericUpDown();
+            this.zLin = new System.Windows.Forms.NumericUpDown();
+            this.xzLin = new System.Windows.Forms.NumericUpDown();
+            this.zQuad = new System.Windows.Forms.NumericUpDown();
+            this.xQuad = new System.Windows.Forms.NumericUpDown();
+            this.quadraticMultiplierEnabled = new System.Windows.Forms.CheckBox();
+            this.quadraticMultiplierLabel = new System.Windows.Forms.Label();
             this.lowerCutoffLabel = new System.Windows.Forms.Label();
             this.upperCutoffLabel = new System.Windows.Forms.Label();
             this.lowerCutoff = new System.Windows.Forms.NumericUpDown();
             this.upperCutoff = new System.Windows.Forms.NumericUpDown();
-            this.interpolationDirection = new System.Windows.Forms.ComboBox();
-            this.interpolationLabel = new System.Windows.Forms.Label();
             this.backColourLabel = new System.Windows.Forms.Label();
             this.backColourButton = new System.Windows.Forms.Button();
             this.frontColourButton = new System.Windows.Forms.Button();
@@ -97,15 +116,38 @@ namespace AestheticTerrain {
             this.noiseSeedLabel = new System.Windows.Forms.Label();
             this.noiseOptionsLabel = new System.Windows.Forms.Label();
             this.backgroundOptions = new System.Windows.Forms.TabPage();
+            this.starGlowColourLabel = new System.Windows.Forms.Label();
+            this.starColourLabel = new System.Windows.Forms.Label();
+            this.starGlowRadiusLabel = new System.Windows.Forms.Label();
+            this.starRadiusLabel = new System.Windows.Forms.Label();
+            this.starCountLabel = new System.Windows.Forms.Label();
+            this.starSeedLabel = new System.Windows.Forms.Label();
+            this.starGlowColour = new System.Windows.Forms.Button();
+            this.starColour = new System.Windows.Forms.Button();
+            this.starGlowRadius = new System.Windows.Forms.NumericUpDown();
+            this.starRadius = new System.Windows.Forms.NumericUpDown();
+            this.starCount = new System.Windows.Forms.NumericUpDown();
+            this.starSeed = new System.Windows.Forms.NumericUpDown();
+            this.starOptionsLabel = new System.Windows.Forms.Label();
+            this.sunGlowColourLabel = new System.Windows.Forms.Label();
+            this.sunColourLabel = new System.Windows.Forms.Label();
+            this.sunGlowColour = new System.Windows.Forms.Button();
+            this.sunColour = new System.Windows.Forms.Button();
+            this.sunGlowRadius = new System.Windows.Forms.NumericUpDown();
+            this.sunGlowRadiusLabel = new System.Windows.Forms.Label();
+            this.sunRadius = new System.Windows.Forms.NumericUpDown();
+            this.sunRadiusLabel = new System.Windows.Forms.Label();
+            this.sunPositionYLabel = new System.Windows.Forms.Label();
+            this.sunPositionY = new System.Windows.Forms.NumericUpDown();
+            this.sunPositionX = new System.Windows.Forms.NumericUpDown();
+            this.sunPositionXLabel = new System.Windows.Forms.Label();
+            this.sunOptionsLabel = new System.Windows.Forms.Label();
             this.presetSaveButton = new System.Windows.Forms.Button();
             this.presetLoadButton = new System.Windows.Forms.Button();
             this.previewRenderButton = new System.Windows.Forms.Button();
             this.previewImage = new System.Windows.Forms.PictureBox();
             this.imageRenderButton = new System.Windows.Forms.Button();
             this.logBox = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.terrainEnabled = new System.Windows.Forms.CheckBox();
-            this.backgroundEnabled = new System.Windows.Forms.CheckBox();
             this.topMenu.SuspendLayout();
             this.options.SuspendLayout();
             this.imageOptions.SuspendLayout();
@@ -118,13 +160,29 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.imageHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).BeginInit();
             this.terrainOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.centerFlatteningMult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerClamp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperClamp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Const)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xLin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zLin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xzLin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zQuad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xQuad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).BeginInit();
+            this.backgroundOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.starGlowRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starSeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunGlowRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunPositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunPositionX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -308,7 +366,7 @@ namespace AestheticTerrain {
             // 
             this.imageOptions.Controls.Add(this.backgroundEnabled);
             this.imageOptions.Controls.Add(this.terrainEnabled);
-            this.imageOptions.Controls.Add(this.label1);
+            this.imageOptions.Controls.Add(this.imagePartToggleLabel);
             this.imageOptions.Controls.Add(this.imageName);
             this.imageOptions.Controls.Add(this.imageNameLabel);
             this.imageOptions.Controls.Add(this.cameraFov);
@@ -340,6 +398,36 @@ namespace AestheticTerrain {
             this.imageOptions.TabIndex = 0;
             this.imageOptions.Text = "Image Options";
             this.imageOptions.UseVisualStyleBackColor = true;
+            // 
+            // backgroundEnabled
+            // 
+            this.backgroundEnabled.AutoSize = true;
+            this.backgroundEnabled.Location = new System.Drawing.Point(13, 514);
+            this.backgroundEnabled.Name = "backgroundEnabled";
+            this.backgroundEnabled.Size = new System.Drawing.Size(159, 24);
+            this.backgroundEnabled.TabIndex = 27;
+            this.backgroundEnabled.Text = "Enable Background";
+            this.backgroundEnabled.UseVisualStyleBackColor = true;
+            // 
+            // terrainEnabled
+            // 
+            this.terrainEnabled.AutoSize = true;
+            this.terrainEnabled.Location = new System.Drawing.Point(13, 483);
+            this.terrainEnabled.Name = "terrainEnabled";
+            this.terrainEnabled.Size = new System.Drawing.Size(125, 24);
+            this.terrainEnabled.TabIndex = 26;
+            this.terrainEnabled.Text = "Enable Terrain";
+            this.terrainEnabled.UseVisualStyleBackColor = true;
+            // 
+            // imagePartToggleLabel
+            // 
+            this.imagePartToggleLabel.AutoSize = true;
+            this.imagePartToggleLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.imagePartToggleLabel.Location = new System.Drawing.Point(4, 446);
+            this.imagePartToggleLabel.Name = "imagePartToggleLabel";
+            this.imagePartToggleLabel.Size = new System.Drawing.Size(164, 23);
+            this.imagePartToggleLabel.TabIndex = 25;
+            this.imagePartToggleLabel.Text = "Toggle Image Parts";
             // 
             // imageName
             // 
@@ -657,14 +745,30 @@ namespace AestheticTerrain {
             // 
             // terrainOptions
             // 
-            this.terrainOptions.Controls.Add(this.flatMultLabel);
-            this.terrainOptions.Controls.Add(this.centerFlatteningMult);
+            this.terrainOptions.Controls.Add(this.lowerClampLabel);
+            this.terrainOptions.Controls.Add(this.lowerClamp);
+            this.terrainOptions.Controls.Add(this.upperClamp);
+            this.terrainOptions.Controls.Add(this.upperClampLabel);
+            this.terrainOptions.Controls.Add(this.clampFunction);
+            this.terrainOptions.Controls.Add(this.z);
+            this.terrainOptions.Controls.Add(this.x);
+            this.terrainOptions.Controls.Add(this.xz);
+            this.terrainOptions.Controls.Add(this.ysquared2);
+            this.terrainOptions.Controls.Add(this.zsquaredz);
+            this.terrainOptions.Controls.Add(this.xsquared2);
+            this.terrainOptions.Controls.Add(this.xsquaredx);
+            this.terrainOptions.Controls.Add(this.Const);
+            this.terrainOptions.Controls.Add(this.xLin);
+            this.terrainOptions.Controls.Add(this.zLin);
+            this.terrainOptions.Controls.Add(this.xzLin);
+            this.terrainOptions.Controls.Add(this.zQuad);
+            this.terrainOptions.Controls.Add(this.xQuad);
+            this.terrainOptions.Controls.Add(this.quadraticMultiplierEnabled);
+            this.terrainOptions.Controls.Add(this.quadraticMultiplierLabel);
             this.terrainOptions.Controls.Add(this.lowerCutoffLabel);
             this.terrainOptions.Controls.Add(this.upperCutoffLabel);
             this.terrainOptions.Controls.Add(this.lowerCutoff);
             this.terrainOptions.Controls.Add(this.upperCutoff);
-            this.terrainOptions.Controls.Add(this.interpolationDirection);
-            this.terrainOptions.Controls.Add(this.interpolationLabel);
             this.terrainOptions.Controls.Add(this.backColourLabel);
             this.terrainOptions.Controls.Add(this.backColourButton);
             this.terrainOptions.Controls.Add(this.frontColourButton);
@@ -688,28 +792,234 @@ namespace AestheticTerrain {
             this.terrainOptions.Text = "Terrain Options";
             this.terrainOptions.UseVisualStyleBackColor = true;
             // 
-            // flatMultLabel
+            // lowerClampLabel
             // 
-            this.flatMultLabel.AutoSize = true;
-            this.flatMultLabel.Location = new System.Drawing.Point(23, 295);
-            this.flatMultLabel.Name = "flatMultLabel";
-            this.flatMultLabel.Size = new System.Drawing.Size(159, 20);
-            this.flatMultLabel.TabIndex = 22;
-            this.flatMultLabel.Text = "Center Flattening Mult:";
+            this.lowerClampLabel.AutoSize = true;
+            this.lowerClampLabel.Location = new System.Drawing.Point(44, 650);
+            this.lowerClampLabel.Name = "lowerClampLabel";
+            this.lowerClampLabel.Size = new System.Drawing.Size(99, 20);
+            this.lowerClampLabel.TabIndex = 41;
+            this.lowerClampLabel.Text = "Lower Clamp:";
             // 
-            // centerFlatteningMult
+            // lowerClamp
             // 
-            this.centerFlatteningMult.DecimalPlaces = 2;
-            this.centerFlatteningMult.Location = new System.Drawing.Point(204, 293);
-            this.centerFlatteningMult.Minimum = new decimal(new int[] {
+            this.lowerClamp.DecimalPlaces = 2;
+            this.lowerClamp.Location = new System.Drawing.Point(150, 648);
+            this.lowerClamp.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.lowerClamp.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.lowerClamp.Name = "lowerClamp";
+            this.lowerClamp.Size = new System.Drawing.Size(79, 27);
+            this.lowerClamp.TabIndex = 40;
+            // 
+            // upperClamp
+            // 
+            this.upperClamp.DecimalPlaces = 2;
+            this.upperClamp.Location = new System.Drawing.Point(150, 615);
+            this.upperClamp.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.upperClamp.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.upperClamp.Name = "upperClamp";
+            this.upperClamp.Size = new System.Drawing.Size(79, 27);
+            this.upperClamp.TabIndex = 39;
+            // 
+            // upperClampLabel
+            // 
+            this.upperClampLabel.AutoSize = true;
+            this.upperClampLabel.Location = new System.Drawing.Point(44, 617);
+            this.upperClampLabel.Name = "upperClampLabel";
+            this.upperClampLabel.Size = new System.Drawing.Size(100, 20);
+            this.upperClampLabel.TabIndex = 38;
+            this.upperClampLabel.Text = "Upper Clamp:";
+            // 
+            // clampFunction
+            // 
+            this.clampFunction.AutoSize = true;
+            this.clampFunction.Location = new System.Drawing.Point(20, 577);
+            this.clampFunction.Name = "clampFunction";
+            this.clampFunction.Size = new System.Drawing.Size(134, 24);
+            this.clampFunction.TabIndex = 37;
+            this.clampFunction.Text = "Clamp Function";
+            this.clampFunction.UseVisualStyleBackColor = true;
+            this.clampFunction.CheckedChanged += new System.EventHandler(this.clampFunction_CheckedChanged);
+            // 
+            // z
+            // 
+            this.z.AutoSize = true;
+            this.z.Location = new System.Drawing.Point(224, 526);
+            this.z.Name = "z";
+            this.z.Size = new System.Drawing.Size(42, 20);
+            this.z.TabIndex = 36;
+            this.z.Text = "z    +";
+            // 
+            // x
+            // 
+            this.x.AutoSize = true;
+            this.x.Location = new System.Drawing.Point(109, 526);
+            this.x.Name = "x";
+            this.x.Size = new System.Drawing.Size(42, 20);
+            this.x.TabIndex = 35;
+            this.x.Text = "x    +";
+            // 
+            // xz
+            // 
+            this.xz.AutoSize = true;
+            this.xz.Location = new System.Drawing.Point(339, 491);
+            this.xz.Name = "xz";
+            this.xz.Size = new System.Drawing.Size(37, 20);
+            this.xz.TabIndex = 34;
+            this.xz.Text = "xz +";
+            // 
+            // ysquared2
+            // 
+            this.ysquared2.AutoSize = true;
+            this.ysquared2.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ysquared2.Location = new System.Drawing.Point(236, 486);
+            this.ysquared2.Name = "ysquared2";
+            this.ysquared2.Size = new System.Drawing.Size(13, 15);
+            this.ysquared2.TabIndex = 33;
+            this.ysquared2.Text = "2";
+            // 
+            // zsquaredz
+            // 
+            this.zsquaredz.AutoSize = true;
+            this.zsquaredz.Location = new System.Drawing.Point(224, 491);
+            this.zsquaredz.Name = "zsquaredz";
+            this.zsquaredz.Size = new System.Drawing.Size(42, 20);
+            this.zsquaredz.TabIndex = 32;
+            this.zsquaredz.Text = "z    +";
+            // 
+            // xsquared2
+            // 
+            this.xsquared2.AutoSize = true;
+            this.xsquared2.Font = new System.Drawing.Font("Segoe UI", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.xsquared2.Location = new System.Drawing.Point(120, 486);
+            this.xsquared2.Name = "xsquared2";
+            this.xsquared2.Size = new System.Drawing.Size(13, 15);
+            this.xsquared2.TabIndex = 31;
+            this.xsquared2.Text = "2";
+            // 
+            // xsquaredx
+            // 
+            this.xsquaredx.AutoSize = true;
+            this.xsquaredx.Location = new System.Drawing.Point(109, 491);
+            this.xsquaredx.Name = "xsquaredx";
+            this.xsquaredx.Size = new System.Drawing.Size(42, 20);
+            this.xsquaredx.TabIndex = 30;
+            this.xsquaredx.Text = "x    +";
+            // 
+            // Const
+            // 
+            this.Const.DecimalPlaces = 2;
+            this.Const.Location = new System.Drawing.Point(272, 524);
+            this.Const.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.centerFlatteningMult.Name = "centerFlatteningMult";
-            this.centerFlatteningMult.Size = new System.Drawing.Size(150, 27);
-            this.centerFlatteningMult.TabIndex = 21;
-            this.centerFlatteningMult.ValueChanged += new System.EventHandler(this.centerFlatteningMult_ValueChanged);
+            this.Const.Name = "Const";
+            this.Const.Size = new System.Drawing.Size(61, 27);
+            this.Const.TabIndex = 29;
+            // 
+            // xLin
+            // 
+            this.xLin.DecimalPlaces = 2;
+            this.xLin.Location = new System.Drawing.Point(44, 524);
+            this.xLin.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.xLin.Name = "xLin";
+            this.xLin.Size = new System.Drawing.Size(61, 27);
+            this.xLin.TabIndex = 28;
+            // 
+            // zLin
+            // 
+            this.zLin.DecimalPlaces = 2;
+            this.zLin.Location = new System.Drawing.Point(157, 524);
+            this.zLin.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.zLin.Name = "zLin";
+            this.zLin.Size = new System.Drawing.Size(61, 27);
+            this.zLin.TabIndex = 27;
+            // 
+            // xzLin
+            // 
+            this.xzLin.DecimalPlaces = 2;
+            this.xzLin.Location = new System.Drawing.Point(272, 489);
+            this.xzLin.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.xzLin.Name = "xzLin";
+            this.xzLin.Size = new System.Drawing.Size(61, 27);
+            this.xzLin.TabIndex = 26;
+            // 
+            // zQuad
+            // 
+            this.zQuad.DecimalPlaces = 2;
+            this.zQuad.Location = new System.Drawing.Point(157, 489);
+            this.zQuad.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.zQuad.Name = "zQuad";
+            this.zQuad.Size = new System.Drawing.Size(61, 27);
+            this.zQuad.TabIndex = 25;
+            // 
+            // xQuad
+            // 
+            this.xQuad.DecimalPlaces = 2;
+            this.xQuad.Location = new System.Drawing.Point(44, 489);
+            this.xQuad.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.xQuad.Name = "xQuad";
+            this.xQuad.Size = new System.Drawing.Size(61, 27);
+            this.xQuad.TabIndex = 24;
+            // 
+            // quadraticMultiplierEnabled
+            // 
+            this.quadraticMultiplierEnabled.AutoSize = true;
+            this.quadraticMultiplierEnabled.Location = new System.Drawing.Point(20, 447);
+            this.quadraticMultiplierEnabled.Name = "quadraticMultiplierEnabled";
+            this.quadraticMultiplierEnabled.Size = new System.Drawing.Size(145, 24);
+            this.quadraticMultiplierEnabled.TabIndex = 22;
+            this.quadraticMultiplierEnabled.Text = "Function Enabled";
+            this.quadraticMultiplierEnabled.UseVisualStyleBackColor = true;
+            this.quadraticMultiplierEnabled.CheckedChanged += new System.EventHandler(this.quadraticMultiplierEnabled_CheckedChanged);
+            // 
+            // quadraticMultiplierLabel
+            // 
+            this.quadraticMultiplierLabel.AutoSize = true;
+            this.quadraticMultiplierLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.quadraticMultiplierLabel.Location = new System.Drawing.Point(4, 410);
+            this.quadraticMultiplierLabel.Name = "quadraticMultiplierLabel";
+            this.quadraticMultiplierLabel.Size = new System.Drawing.Size(262, 23);
+            this.quadraticMultiplierLabel.TabIndex = 21;
+            this.quadraticMultiplierLabel.Text = "2D Quadratic Terrain Multiplier";
             // 
             // lowerCutoffLabel
             // 
@@ -767,33 +1077,10 @@ namespace AestheticTerrain {
             this.upperCutoff.TabIndex = 17;
             this.upperCutoff.ValueChanged += new System.EventHandler(this.upperCutoff_ValueChanged);
             // 
-            // interpolationDirection
-            // 
-            this.interpolationDirection.FormattingEnabled = true;
-            this.interpolationDirection.Items.AddRange(new object[] {
-            "None",
-            "Front-Back",
-            "Top-Down"});
-            this.interpolationDirection.Location = new System.Drawing.Point(204, 433);
-            this.interpolationDirection.Name = "interpolationDirection";
-            this.interpolationDirection.Size = new System.Drawing.Size(151, 28);
-            this.interpolationDirection.TabIndex = 16;
-            this.interpolationDirection.Text = "None";
-            this.interpolationDirection.SelectedIndexChanged += new System.EventHandler(this.interpolationDirection_SelectedIndexChanged);
-            // 
-            // interpolationLabel
-            // 
-            this.interpolationLabel.AutoSize = true;
-            this.interpolationLabel.Location = new System.Drawing.Point(23, 436);
-            this.interpolationLabel.Name = "interpolationLabel";
-            this.interpolationLabel.Size = new System.Drawing.Size(163, 20);
-            this.interpolationLabel.TabIndex = 15;
-            this.interpolationLabel.Text = "Interpolation Direction:";
-            // 
             // backColourLabel
             // 
             this.backColourLabel.AutoSize = true;
-            this.backColourLabel.Location = new System.Drawing.Point(23, 525);
+            this.backColourLabel.Location = new System.Drawing.Point(23, 364);
             this.backColourLabel.Name = "backColourLabel";
             this.backColourLabel.Size = new System.Drawing.Size(91, 20);
             this.backColourLabel.TabIndex = 14;
@@ -801,9 +1088,9 @@ namespace AestheticTerrain {
             // 
             // backColourButton
             // 
-            this.backColourButton.Location = new System.Drawing.Point(204, 521);
+            this.backColourButton.Location = new System.Drawing.Point(203, 360);
             this.backColourButton.Name = "backColourButton";
-            this.backColourButton.Size = new System.Drawing.Size(94, 29);
+            this.backColourButton.Size = new System.Drawing.Size(151, 29);
             this.backColourButton.TabIndex = 13;
             this.backColourButton.Text = "Pick Colour";
             this.backColourButton.UseVisualStyleBackColor = true;
@@ -813,9 +1100,9 @@ namespace AestheticTerrain {
             // frontColourButton
             // 
             this.frontColourButton.BackColor = System.Drawing.Color.White;
-            this.frontColourButton.Location = new System.Drawing.Point(204, 486);
+            this.frontColourButton.Location = new System.Drawing.Point(204, 325);
             this.frontColourButton.Name = "frontColourButton";
-            this.frontColourButton.Size = new System.Drawing.Size(94, 29);
+            this.frontColourButton.Size = new System.Drawing.Size(151, 29);
             this.frontColourButton.TabIndex = 12;
             this.frontColourButton.Text = "Pick Colour";
             this.frontColourButton.UseVisualStyleBackColor = false;
@@ -825,7 +1112,7 @@ namespace AestheticTerrain {
             // frontColourLabel
             // 
             this.frontColourLabel.AutoSize = true;
-            this.frontColourLabel.Location = new System.Drawing.Point(23, 490);
+            this.frontColourLabel.Location = new System.Drawing.Point(23, 329);
             this.frontColourLabel.Name = "frontColourLabel";
             this.frontColourLabel.Size = new System.Drawing.Size(94, 20);
             this.frontColourLabel.TabIndex = 11;
@@ -844,7 +1131,7 @@ namespace AestheticTerrain {
             // 
             this.terrainColourOptionsLabel.AutoSize = true;
             this.terrainColourOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.terrainColourOptionsLabel.Location = new System.Drawing.Point(4, 390);
+            this.terrainColourOptionsLabel.Location = new System.Drawing.Point(4, 297);
             this.terrainColourOptionsLabel.Name = "terrainColourOptionsLabel";
             this.terrainColourOptionsLabel.Size = new System.Drawing.Size(191, 23);
             this.terrainColourOptionsLabel.TabIndex = 9;
@@ -977,6 +1264,32 @@ namespace AestheticTerrain {
             // 
             // backgroundOptions
             // 
+            this.backgroundOptions.Controls.Add(this.starGlowColourLabel);
+            this.backgroundOptions.Controls.Add(this.starColourLabel);
+            this.backgroundOptions.Controls.Add(this.starGlowRadiusLabel);
+            this.backgroundOptions.Controls.Add(this.starRadiusLabel);
+            this.backgroundOptions.Controls.Add(this.starCountLabel);
+            this.backgroundOptions.Controls.Add(this.starSeedLabel);
+            this.backgroundOptions.Controls.Add(this.starGlowColour);
+            this.backgroundOptions.Controls.Add(this.starColour);
+            this.backgroundOptions.Controls.Add(this.starGlowRadius);
+            this.backgroundOptions.Controls.Add(this.starRadius);
+            this.backgroundOptions.Controls.Add(this.starCount);
+            this.backgroundOptions.Controls.Add(this.starSeed);
+            this.backgroundOptions.Controls.Add(this.starOptionsLabel);
+            this.backgroundOptions.Controls.Add(this.sunGlowColourLabel);
+            this.backgroundOptions.Controls.Add(this.sunColourLabel);
+            this.backgroundOptions.Controls.Add(this.sunGlowColour);
+            this.backgroundOptions.Controls.Add(this.sunColour);
+            this.backgroundOptions.Controls.Add(this.sunGlowRadius);
+            this.backgroundOptions.Controls.Add(this.sunGlowRadiusLabel);
+            this.backgroundOptions.Controls.Add(this.sunRadius);
+            this.backgroundOptions.Controls.Add(this.sunRadiusLabel);
+            this.backgroundOptions.Controls.Add(this.sunPositionYLabel);
+            this.backgroundOptions.Controls.Add(this.sunPositionY);
+            this.backgroundOptions.Controls.Add(this.sunPositionX);
+            this.backgroundOptions.Controls.Add(this.sunPositionXLabel);
+            this.backgroundOptions.Controls.Add(this.sunOptionsLabel);
             this.backgroundOptions.Location = new System.Drawing.Point(4, 29);
             this.backgroundOptions.Name = "backgroundOptions";
             this.backgroundOptions.Padding = new System.Windows.Forms.Padding(3);
@@ -984,6 +1297,238 @@ namespace AestheticTerrain {
             this.backgroundOptions.TabIndex = 2;
             this.backgroundOptions.Text = "Background Options";
             this.backgroundOptions.UseVisualStyleBackColor = true;
+            // 
+            // starGlowColourLabel
+            // 
+            this.starGlowColourLabel.AutoSize = true;
+            this.starGlowColourLabel.Location = new System.Drawing.Point(20, 481);
+            this.starGlowColourLabel.Name = "starGlowColourLabel";
+            this.starGlowColourLabel.Size = new System.Drawing.Size(94, 20);
+            this.starGlowColourLabel.TabIndex = 25;
+            this.starGlowColourLabel.Text = "Glow Colour:";
+            // 
+            // starColourLabel
+            // 
+            this.starColourLabel.AutoSize = true;
+            this.starColourLabel.Location = new System.Drawing.Point(20, 445);
+            this.starColourLabel.Name = "starColourLabel";
+            this.starColourLabel.Size = new System.Drawing.Size(56, 20);
+            this.starColourLabel.TabIndex = 24;
+            this.starColourLabel.Text = "Colour:";
+            // 
+            // starGlowRadiusLabel
+            // 
+            this.starGlowRadiusLabel.AutoSize = true;
+            this.starGlowRadiusLabel.Location = new System.Drawing.Point(20, 409);
+            this.starGlowRadiusLabel.Name = "starGlowRadiusLabel";
+            this.starGlowRadiusLabel.Size = new System.Drawing.Size(94, 20);
+            this.starGlowRadiusLabel.TabIndex = 23;
+            this.starGlowRadiusLabel.Text = "Glow Radius:";
+            // 
+            // starRadiusLabel
+            // 
+            this.starRadiusLabel.AutoSize = true;
+            this.starRadiusLabel.Location = new System.Drawing.Point(20, 375);
+            this.starRadiusLabel.Name = "starRadiusLabel";
+            this.starRadiusLabel.Size = new System.Drawing.Size(56, 20);
+            this.starRadiusLabel.TabIndex = 22;
+            this.starRadiusLabel.Text = "Radius:";
+            // 
+            // starCountLabel
+            // 
+            this.starCountLabel.AutoSize = true;
+            this.starCountLabel.Location = new System.Drawing.Point(20, 341);
+            this.starCountLabel.Name = "starCountLabel";
+            this.starCountLabel.Size = new System.Drawing.Size(51, 20);
+            this.starCountLabel.TabIndex = 21;
+            this.starCountLabel.Text = "Count:";
+            // 
+            // starSeedLabel
+            // 
+            this.starSeedLabel.AutoSize = true;
+            this.starSeedLabel.Location = new System.Drawing.Point(20, 307);
+            this.starSeedLabel.Name = "starSeedLabel";
+            this.starSeedLabel.Size = new System.Drawing.Size(45, 20);
+            this.starSeedLabel.TabIndex = 20;
+            this.starSeedLabel.Text = "Seed:";
+            // 
+            // starGlowColour
+            // 
+            this.starGlowColour.Location = new System.Drawing.Point(145, 477);
+            this.starGlowColour.Name = "starGlowColour";
+            this.starGlowColour.Size = new System.Drawing.Size(106, 29);
+            this.starGlowColour.TabIndex = 19;
+            this.starGlowColour.Text = "Pick Colour";
+            this.starGlowColour.UseVisualStyleBackColor = true;
+            this.starGlowColour.Click += new System.EventHandler(this.starGlowColour_Click);
+            // 
+            // starColour
+            // 
+            this.starColour.Location = new System.Drawing.Point(145, 441);
+            this.starColour.Name = "starColour";
+            this.starColour.Size = new System.Drawing.Size(106, 29);
+            this.starColour.TabIndex = 18;
+            this.starColour.Text = "Pick Colour";
+            this.starColour.UseVisualStyleBackColor = true;
+            this.starColour.Click += new System.EventHandler(this.starColour_Click);
+            // 
+            // starGlowRadius
+            // 
+            this.starGlowRadius.Location = new System.Drawing.Point(145, 407);
+            this.starGlowRadius.Name = "starGlowRadius";
+            this.starGlowRadius.Size = new System.Drawing.Size(106, 27);
+            this.starGlowRadius.TabIndex = 17;
+            this.starGlowRadius.ValueChanged += new System.EventHandler(this.starGlowRadius_ValueChanged);
+            // 
+            // starRadius
+            // 
+            this.starRadius.Location = new System.Drawing.Point(145, 373);
+            this.starRadius.Name = "starRadius";
+            this.starRadius.Size = new System.Drawing.Size(106, 27);
+            this.starRadius.TabIndex = 16;
+            this.starRadius.ValueChanged += new System.EventHandler(this.starRadius_ValueChanged);
+            // 
+            // starCount
+            // 
+            this.starCount.Location = new System.Drawing.Point(145, 339);
+            this.starCount.Name = "starCount";
+            this.starCount.Size = new System.Drawing.Size(106, 27);
+            this.starCount.TabIndex = 15;
+            this.starCount.ValueChanged += new System.EventHandler(this.starCount_ValueChanged);
+            // 
+            // starSeed
+            // 
+            this.starSeed.Location = new System.Drawing.Point(145, 305);
+            this.starSeed.Name = "starSeed";
+            this.starSeed.Size = new System.Drawing.Size(106, 27);
+            this.starSeed.TabIndex = 14;
+            this.starSeed.ValueChanged += new System.EventHandler(this.starSeed_ValueChanged);
+            // 
+            // starOptionsLabel
+            // 
+            this.starOptionsLabel.AutoSize = true;
+            this.starOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.starOptionsLabel.Location = new System.Drawing.Point(4, 267);
+            this.starOptionsLabel.Name = "starOptionsLabel";
+            this.starOptionsLabel.Size = new System.Drawing.Size(111, 23);
+            this.starOptionsLabel.TabIndex = 13;
+            this.starOptionsLabel.Text = "Star Options";
+            // 
+            // sunGlowColourLabel
+            // 
+            this.sunGlowColourLabel.AutoSize = true;
+            this.sunGlowColourLabel.Location = new System.Drawing.Point(20, 209);
+            this.sunGlowColourLabel.Name = "sunGlowColourLabel";
+            this.sunGlowColourLabel.Size = new System.Drawing.Size(94, 20);
+            this.sunGlowColourLabel.TabIndex = 12;
+            this.sunGlowColourLabel.Text = "Glow Colour:";
+            // 
+            // sunColourLabel
+            // 
+            this.sunColourLabel.AutoSize = true;
+            this.sunColourLabel.Location = new System.Drawing.Point(20, 173);
+            this.sunColourLabel.Name = "sunColourLabel";
+            this.sunColourLabel.Size = new System.Drawing.Size(56, 20);
+            this.sunColourLabel.TabIndex = 11;
+            this.sunColourLabel.Text = "Colour:";
+            // 
+            // sunGlowColour
+            // 
+            this.sunGlowColour.Location = new System.Drawing.Point(145, 205);
+            this.sunGlowColour.Name = "sunGlowColour";
+            this.sunGlowColour.Size = new System.Drawing.Size(106, 29);
+            this.sunGlowColour.TabIndex = 10;
+            this.sunGlowColour.Text = "Pick Colour";
+            this.sunGlowColour.UseVisualStyleBackColor = true;
+            this.sunGlowColour.Click += new System.EventHandler(this.sunGlowColour_Click);
+            // 
+            // sunColour
+            // 
+            this.sunColour.Location = new System.Drawing.Point(145, 169);
+            this.sunColour.Name = "sunColour";
+            this.sunColour.Size = new System.Drawing.Size(106, 29);
+            this.sunColour.TabIndex = 9;
+            this.sunColour.Text = "Pick Colour";
+            this.sunColour.UseVisualStyleBackColor = true;
+            this.sunColour.Click += new System.EventHandler(this.sunColour_Click);
+            // 
+            // sunGlowRadius
+            // 
+            this.sunGlowRadius.Location = new System.Drawing.Point(145, 135);
+            this.sunGlowRadius.Name = "sunGlowRadius";
+            this.sunGlowRadius.Size = new System.Drawing.Size(106, 27);
+            this.sunGlowRadius.TabIndex = 8;
+            this.sunGlowRadius.ValueChanged += new System.EventHandler(this.sunGlowRadius_ValueChanged);
+            // 
+            // sunGlowRadiusLabel
+            // 
+            this.sunGlowRadiusLabel.AutoSize = true;
+            this.sunGlowRadiusLabel.Location = new System.Drawing.Point(20, 137);
+            this.sunGlowRadiusLabel.Name = "sunGlowRadiusLabel";
+            this.sunGlowRadiusLabel.Size = new System.Drawing.Size(94, 20);
+            this.sunGlowRadiusLabel.TabIndex = 7;
+            this.sunGlowRadiusLabel.Text = "Glow Radius:";
+            // 
+            // sunRadius
+            // 
+            this.sunRadius.Location = new System.Drawing.Point(145, 102);
+            this.sunRadius.Name = "sunRadius";
+            this.sunRadius.Size = new System.Drawing.Size(106, 27);
+            this.sunRadius.TabIndex = 6;
+            this.sunRadius.ValueChanged += new System.EventHandler(this.sunRadius_ValueChanged);
+            // 
+            // sunRadiusLabel
+            // 
+            this.sunRadiusLabel.AutoSize = true;
+            this.sunRadiusLabel.Location = new System.Drawing.Point(20, 104);
+            this.sunRadiusLabel.Name = "sunRadiusLabel";
+            this.sunRadiusLabel.Size = new System.Drawing.Size(56, 20);
+            this.sunRadiusLabel.TabIndex = 5;
+            this.sunRadiusLabel.Text = "Radius:";
+            // 
+            // sunPositionYLabel
+            // 
+            this.sunPositionYLabel.AutoSize = true;
+            this.sunPositionYLabel.Location = new System.Drawing.Point(20, 70);
+            this.sunPositionYLabel.Name = "sunPositionYLabel";
+            this.sunPositionYLabel.Size = new System.Drawing.Size(76, 20);
+            this.sunPositionYLabel.TabIndex = 4;
+            this.sunPositionYLabel.Text = "Y Position:";
+            // 
+            // sunPositionY
+            // 
+            this.sunPositionY.Location = new System.Drawing.Point(145, 68);
+            this.sunPositionY.Name = "sunPositionY";
+            this.sunPositionY.Size = new System.Drawing.Size(106, 27);
+            this.sunPositionY.TabIndex = 3;
+            this.sunPositionY.ValueChanged += new System.EventHandler(this.sunPositionY_ValueChanged);
+            // 
+            // sunPositionX
+            // 
+            this.sunPositionX.Location = new System.Drawing.Point(145, 35);
+            this.sunPositionX.Name = "sunPositionX";
+            this.sunPositionX.Size = new System.Drawing.Size(106, 27);
+            this.sunPositionX.TabIndex = 2;
+            this.sunPositionX.ValueChanged += new System.EventHandler(this.sunPositionX_ValueChanged);
+            // 
+            // sunPositionXLabel
+            // 
+            this.sunPositionXLabel.AutoSize = true;
+            this.sunPositionXLabel.Location = new System.Drawing.Point(20, 37);
+            this.sunPositionXLabel.Name = "sunPositionXLabel";
+            this.sunPositionXLabel.Size = new System.Drawing.Size(77, 20);
+            this.sunPositionXLabel.TabIndex = 1;
+            this.sunPositionXLabel.Text = "X Position:";
+            // 
+            // sunOptionsLabel
+            // 
+            this.sunOptionsLabel.AutoSize = true;
+            this.sunOptionsLabel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.sunOptionsLabel.Location = new System.Drawing.Point(4, 4);
+            this.sunOptionsLabel.Name = "sunOptionsLabel";
+            this.sunOptionsLabel.Size = new System.Drawing.Size(108, 23);
+            this.sunOptionsLabel.TabIndex = 0;
+            this.sunOptionsLabel.Text = "Sun Options";
             // 
             // presetSaveButton
             // 
@@ -1051,37 +1596,7 @@ namespace AestheticTerrain {
             this.logBox.TabIndex = 7;
             this.logBox.Text = "...\n";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(4, 446);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 23);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Toggle Image Parts";
-            // 
-            // terrainEnabled
-            // 
-            this.terrainEnabled.AutoSize = true;
-            this.terrainEnabled.Location = new System.Drawing.Point(13, 483);
-            this.terrainEnabled.Name = "terrainEnabled";
-            this.terrainEnabled.Size = new System.Drawing.Size(125, 24);
-            this.terrainEnabled.TabIndex = 26;
-            this.terrainEnabled.Text = "Enable Terrain";
-            this.terrainEnabled.UseVisualStyleBackColor = true;
-            // 
-            // backgroundEnabled
-            // 
-            this.backgroundEnabled.AutoSize = true;
-            this.backgroundEnabled.Location = new System.Drawing.Point(13, 514);
-            this.backgroundEnabled.Name = "backgroundEnabled";
-            this.backgroundEnabled.Size = new System.Drawing.Size(159, 24);
-            this.backgroundEnabled.TabIndex = 27;
-            this.backgroundEnabled.Text = "Enable Background";
-            this.backgroundEnabled.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1095,7 +1610,7 @@ namespace AestheticTerrain {
             this.Controls.Add(this.options);
             this.Controls.Add(this.topMenu);
             this.MainMenuStrip = this.topMenu;
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Form1";
             this.topMenu.ResumeLayout(false);
             this.topMenu.PerformLayout();
@@ -1112,13 +1627,30 @@ namespace AestheticTerrain {
             ((System.ComponentModel.ISupportInitialize)(this.imageWidth)).EndInit();
             this.terrainOptions.ResumeLayout(false);
             this.terrainOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.centerFlatteningMult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lowerClamp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upperClamp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Const)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xLin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zLin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xzLin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zQuad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xQuad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lowerCutoff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upperCutoff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.terrainScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseAmplitude)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseFrequency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noiseSeed)).EndInit();
+            this.backgroundOptions.ResumeLayout(false);
+            this.backgroundOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.starGlowRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.starSeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunGlowRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sunPositionX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previewImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1193,8 +1725,6 @@ namespace AestheticTerrain {
         private System.Windows.Forms.Label terrainScaleLabel;
         private System.Windows.Forms.Label terrainColourOptionsLabel;
         private System.Windows.Forms.Label generalOptionsLabel;
-        private System.Windows.Forms.ComboBox interpolationDirection;
-        private System.Windows.Forms.Label interpolationLabel;
         private System.Windows.Forms.Label backColourLabel;
         private System.Windows.Forms.Button backColourButton;
         private System.Windows.Forms.Button frontColourButton;
@@ -1203,11 +1733,55 @@ namespace AestheticTerrain {
         private System.Windows.Forms.Label upperCutoffLabel;
         private System.Windows.Forms.NumericUpDown lowerCutoff;
         private System.Windows.Forms.NumericUpDown upperCutoff;
-        private System.Windows.Forms.Label flatMultLabel;
-        private System.Windows.Forms.NumericUpDown centerFlatteningMult;
         private System.Windows.Forms.CheckBox backgroundEnabled;
         private System.Windows.Forms.CheckBox terrainEnabled;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label imagePartToggleLabel;
+        private System.Windows.Forms.CheckBox quadraticMultiplierEnabled;
+        private System.Windows.Forms.Label quadraticMultiplierLabel;
+        private System.Windows.Forms.NumericUpDown xQuad;
+        private System.Windows.Forms.Label xsquared2;
+        private System.Windows.Forms.Label xsquaredx;
+        private System.Windows.Forms.NumericUpDown Const;
+        private System.Windows.Forms.NumericUpDown xLin;
+        private System.Windows.Forms.NumericUpDown zLin;
+        private System.Windows.Forms.NumericUpDown xzLin;
+        private System.Windows.Forms.NumericUpDown zQuad;
+        private System.Windows.Forms.CheckBox clampFunction;
+        private System.Windows.Forms.Label z;
+        private System.Windows.Forms.Label x;
+        private System.Windows.Forms.Label xz;
+        private System.Windows.Forms.Label ysquared2;
+        private System.Windows.Forms.Label zsquaredz;
+        private System.Windows.Forms.Label lowerClampLabel;
+        private System.Windows.Forms.NumericUpDown lowerClamp;
+        private System.Windows.Forms.NumericUpDown upperClamp;
+        private System.Windows.Forms.Label upperClampLabel;
+        private System.Windows.Forms.Label starGlowColourLabel;
+        private System.Windows.Forms.Label starColourLabel;
+        private System.Windows.Forms.Label starGlowRadiusLabel;
+        private System.Windows.Forms.Label starRadiusLabel;
+        private System.Windows.Forms.Label starCountLabel;
+        private System.Windows.Forms.Label starSeedLabel;
+        private System.Windows.Forms.Button starGlowColour;
+        private System.Windows.Forms.Button starColour;
+        private System.Windows.Forms.NumericUpDown starGlowRadius;
+        private System.Windows.Forms.NumericUpDown starRadius;
+        private System.Windows.Forms.NumericUpDown starCount;
+        private System.Windows.Forms.NumericUpDown starSeed;
+        private System.Windows.Forms.Label starOptionsLabel;
+        private System.Windows.Forms.Label sunGlowColourLabel;
+        private System.Windows.Forms.Label sunColourLabel;
+        private System.Windows.Forms.Button sunGlowColour;
+        private System.Windows.Forms.Button sunColour;
+        private System.Windows.Forms.NumericUpDown sunGlowRadius;
+        private System.Windows.Forms.Label sunGlowRadiusLabel;
+        private System.Windows.Forms.NumericUpDown sunRadius;
+        private System.Windows.Forms.Label sunRadiusLabel;
+        private System.Windows.Forms.Label sunPositionYLabel;
+        private System.Windows.Forms.NumericUpDown sunPositionY;
+        private System.Windows.Forms.NumericUpDown sunPositionX;
+        private System.Windows.Forms.Label sunPositionXLabel;
+        private System.Windows.Forms.Label sunOptionsLabel;
     }
 }
 

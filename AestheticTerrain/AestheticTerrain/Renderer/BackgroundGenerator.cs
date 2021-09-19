@@ -44,7 +44,9 @@ namespace AestheticTerrain {
                 }
 
                 // Drawing sun
-                DrawHelper.DrawCircle(g, SunColour, SunPosition, SunRadius);
+                Vector2 sunPosAdjusted = SunPosition;
+                sunPosAdjusted.Y = Height - sunPosAdjusted.Y;
+                DrawHelper.DrawCircle(g, SunColour, sunPosAdjusted, SunRadius);
             }
 
             return background;

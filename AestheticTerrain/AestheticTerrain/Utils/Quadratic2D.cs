@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace AestheticTerrain {
     class Quadratic2D {
         public Quadratic2D() {
-
+            Clamp = false;
+            TopClamp = 100;
+            BottomClamp = -100;
         }
 
-        public Quadratic2D(float quadraticParameter, float linearParameter, float constantParameter) {
+        public Quadratic2D(float quadraticParameter, float linearParameter, float constantParameter) : this() {
             xQuad = yQuad = quadraticParameter;
             xLin  = yLin  = linearParameter;
             Const = constantParameter;

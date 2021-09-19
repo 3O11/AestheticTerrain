@@ -14,6 +14,7 @@ namespace AestheticTerrain {
     class TerrainGenerator {
         public TerrainGenerator() {
             Radius = 30;
+            FuncMultiplier = new Quadratic2D();
         }
 
         public Mesh GenerateTerrain() {
@@ -24,7 +25,7 @@ namespace AestheticTerrain {
             for (int i = 0; i < (Radius * 2) + 1; i++) {
                 for (int j = 0; j < (Radius * 2) + 1; j++) {
                     float vertexY = Multiplier * noise.Noise(i, j, Radius * 2 + 1, Radius * 2 + 1, Frequency);
-                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff);
+                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff) * FuncMultiplier.GetValue(i - Radius, j - Radius);
                     vertices.Add(new Vertex {
                         Position = new Vector3(i - Radius, vertexY, j - Radius),
                         Colour = Vector3.Lerp(FrontColour, BackColour, (float)i / Radius)
@@ -60,6 +61,6 @@ namespace AestheticTerrain {
         public Vector3 BackColour { get; set; }
         public float LowerCutoff { get; set; }
         public float UpperCutoff { get; set; }
-        public float FlattenCenterMult { get; set; }
+        public Quadratic2D FuncMultiplier { get; set; }
     }
 }

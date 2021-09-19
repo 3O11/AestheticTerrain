@@ -65,11 +65,12 @@ namespace AestheticTerrain {
             Width = width;
             Height = height;
 
-            var gameWindowSettings = GameWindowSettings.Default;
+            var gameWindowSettings = new GameWindowSettings();
             var nativeWindowSettings = new NativeWindowSettings() {
                 Size = new Vector2i(Width, Height),
                 Title = "Invisible."
             };
+            nativeWindowSettings.NumberOfSamples = 16;
 
             _renderWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
             _renderWindow.IsVisible = false;

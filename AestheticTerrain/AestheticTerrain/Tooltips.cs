@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AestheticTerrain {
-    partial class Form1 : Form {
+    partial class MainWindow : Form {
+        private void initTooltips() {
+        }
     }
 }

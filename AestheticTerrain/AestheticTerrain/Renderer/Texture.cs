@@ -19,7 +19,15 @@ namespace AestheticTerrain {
             );
 
             _textureID = GL.GenTexture();
-            GL.BindTexture(TextureTarget.Texture2D, _textureID);
+            GL.BindTexture(TextureTarget.Texture2DMultisample, _textureID);
+            GL.TexStorage2DMultisample(
+                TextureTargetMultisample2d.Texture2DMultisample,
+                8,
+                SizedInternalFormat.Rgba8,
+                texture.Width,
+                texture.Height,
+                false
+            );
 
             GL.TexImage2D(
                 TextureTarget.Texture2D,
