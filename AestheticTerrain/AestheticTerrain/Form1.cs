@@ -17,9 +17,11 @@ namespace AestheticTerrain {
 
             imageWidth.Value = 1280;
             imageHeight.Value = 720;
-            cameraYValue.Value = 10;
+            cameraXValue.Value = -150;
+            cameraYValue.Value = 100;
             cameraFov.Value = 90;
             cameraYaw.Value = 0;
+            cameraPitch.Value = -30;
             noiseSeed.Value = 3011;
             noiseFrequency.Value = 60;
             noiseAmplitude.Value = 10;
@@ -28,6 +30,8 @@ namespace AestheticTerrain {
             upperCutoff.Value = 100;
             frontColourButton.BackColor = Color.FromArgb(255, 60, 255);
             backColourButton.BackColor = Color.FromArgb(60, 255, 255);
+            terrainEnabled.Checked = true;
+            backgroundEnabled.Checked = true;
 
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
@@ -82,6 +86,7 @@ namespace AestheticTerrain {
 
         private void noiseSeed_ValueChanged(object sender, EventArgs e) {
             _terrainGenerator.Seed = (int)noiseSeed.Value;
+            _backgroundGenerator.Seed = (int)noiseSeed.Value;
         }
 
         private void noiseFrequency_ValueChanged(object sender, EventArgs e) {

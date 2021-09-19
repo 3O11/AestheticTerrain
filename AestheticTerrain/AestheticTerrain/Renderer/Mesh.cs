@@ -9,7 +9,9 @@ using OpenTK.Graphics.OpenGL4;
 namespace AestheticTerrain {
     struct Vertex {
         public Vector3 Position;
+        public Vector3 Normal;
         public Vector3 Colour;
+        public Vector2 TexCoords;
     }
 
     class Mesh {
@@ -32,6 +34,10 @@ namespace AestheticTerrain {
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, vertexSize, 0);
             GL.EnableVertexAttribArray(1);
             GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, vertexSize, 3 * sizeof(float));
+            GL.EnableVertexAttribArray(2);
+            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, vertexSize, 6 * sizeof(float));
+            GL.EnableVertexAttribArray(3);
+            GL.VertexAttribPointer(3, 2, VertexAttribPointerType.Float, false, vertexSize, 9 * sizeof(float));
 
             // Generate Index Buffer and fill it with data
             _IBO = GL.GenBuffer();

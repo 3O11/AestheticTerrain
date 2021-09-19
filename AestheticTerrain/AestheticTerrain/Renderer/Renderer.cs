@@ -27,10 +27,11 @@ namespace AestheticTerrain {
 
                 Texture backgroundTex = new Texture(background);
                 backgroundTex.Bind(0);
-                _terrainShader.SetUniform1i("u_Texture", 0);
+                _backgroundShader.SetUniform1i("u_Texture", 0);
 
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, _backgroundIbo);
-                GL.DrawElements(PrimitiveType.Triangles, 6, DrawElementsType.UnsignedInt, 0);
+                _backgroundMesh.Bind();
+
+                GL.DrawElements(PrimitiveType.Triangles, _backgroundMesh.GetIndexCount(), DrawElementsType.UnsignedInt, 0);
 
                 backgroundTex.Destroy();
                 background.Dispose();
@@ -86,10 +87,15 @@ namespace AestheticTerrain {
             _terrainTexture = new Texture("Assets/03-terrainTile.jpeg");
             _backgroundShader = new Shader("Assets/04-vert.glsl", "Assets/05-frag.glsl");
 
-            int[] indices = { 0, 1, 2, 2, 3, 0 };
-            _backgroundIbo = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _backgroundIbo);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(int), indices, BufferUsageHint.StaticDraw);
+            Vertex[] backgroundVertices = {
+                new Vertex { Position = new Vector3( -1.0f, -1.0f,  1.0f ), TexCoords = new Vector2(0.0f, 0.0f) },
+                new Vertex { Position = new Vector3(  1.0f, -1.0f,  1.0f ), TexCoords = new Vector2(1.0f, 0.0f) },
+                new Vertex { Position = new Vector3(  1.0f,  1.0f,  1.0f ), TexCoords = new Vector2(1.0f, 1.0f) },
+                new Vertex { Position = new Vector3( -1.0f,  1.0f,  1.0f ), TexCoords = new Vector2(0.0f, 1.0f) },
+            };
+            int[] backgroundIndices = { 0, 1, 2, 2, 3, 0 };
+            _backgroundMesh = new Mesh(backgroundVertices, backgroundIndices);
+            
         }
 
         /// <summary>
@@ -100,22 +106,10 @@ namespace AestheticTerrain {
             _terrainShader.Destroy();
             _terrainTexture.Destroy();
             _backgroundShader.Destroy();
-            GL.DeleteBuffer(_backgroundIbo);
+            _backgroundMesh.Destroy();
 
             _renderWindow.Close();
             _renderWindow.Dispose();
-        }
-
-        Bitmap createBackground() {
-            Bitmap background = new Bitmap(Width, Height);
-
-            using (Graphics g = Graphics.FromImage(background)) {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-
-                g.FillRectangle(Brushes.White, new Rectangle(0, 0, Width, Height));
-            }
-
-            return background;
         }
 
         Bitmap createImage() {
@@ -180,6 +174,6 @@ namespace AestheticTerrain {
         Texture _terrainTexture;
         Shader _terrainShader;
         Shader _backgroundShader;
-        int _backgroundIbo;
+        Mesh _backgroundMesh;
     }
 }

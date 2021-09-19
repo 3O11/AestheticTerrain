@@ -13,7 +13,7 @@ namespace AestheticTerrain {
 
     class TerrainGenerator {
         public TerrainGenerator() {
-            Radius = 100;
+            Radius = 30;
         }
 
         public Mesh GenerateTerrain() {
@@ -24,11 +24,10 @@ namespace AestheticTerrain {
             for (int i = 0; i < (Radius * 2) + 1; i++) {
                 for (int j = 0; j < (Radius * 2) + 1; j++) {
                     float vertexY = Multiplier * noise.Noise(i, j, Radius * 2 + 1, Radius * 2 + 1, Frequency);
-                    float flatteningMultiplier = FlattenCenterMult == 0 ? 1 : paraboloid(i - Radius, j - Radius);
-                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff) * flatteningMultiplier;
+                    vertexY = Math.Clamp(vertexY, LowerCutoff, UpperCutoff);
                     vertices.Add(new Vertex {
                         Position = new Vector3(i - Radius, vertexY, j - Radius),
-                        Colour = AdditionalMath.Lerp(FrontColour, BackColour, i / Radius)
+                        Colour = Vector3.Lerp(FrontColour, BackColour, (float)i / Radius)
                     });
 
                     if (i > 0 && j > 0) {
@@ -50,10 +49,6 @@ namespace AestheticTerrain {
             }
 
             return new Mesh(vertices.ToArray(), indices.ToArray(), Matrix4.CreateScale(Scale, 1, Scale));
-        }
-
-        float paraboloid(float x, float y) {
-            return Math.Clamp((x * x + y * y) / (FlattenCenterMult), 0, 1);
         }
 
         public int Radius { get; set; }

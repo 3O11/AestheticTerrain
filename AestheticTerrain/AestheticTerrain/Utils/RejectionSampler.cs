@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Mathematics;
 
-namespace AestheticTerrain.Utils {
+namespace AestheticTerrain {
     class RejectionSampler {
-        public RejectionSampler(int width, int height, float minDistance, int maxTries) {
+        public RejectionSampler(int width, int height, float minDistance, int maxTries, int seed) {
             _width = width;
             _height = height;
             _minDistance = minDistance;
             _maxTries = maxTries;
+            _rand = new Random(seed);
         }
 
         public Vector2i? Sample() {
@@ -36,12 +37,25 @@ namespace AestheticTerrain.Utils {
             return null;
         }
 
+        public bool TrySample(out Vector2 sample) {
+            Vector2? triedSample = Sample();
+
+            if (triedSample == null) {
+                sample = new Vector2(0);
+                return false;
+            }
+            else {
+                sample = (Vector2)triedSample;
+                return true;
+            }
+        }
+
         int _width;
         int _height;
         float _minDistance;
         int _maxTries;
 
-        Random _rand = new Random();
+        Random _rand;
         List<Vector2> _existingPoints = new List<Vector2>();
     }
 }

@@ -26,5 +26,9 @@ namespace AestheticTerrain {
         public static Vector3 ConvertToVector(Color colour) {
             return new Vector3((float)colour.R / 255, (float)colour.G / 255, (float)colour.B / 255);
         }
+
+        public static Vector3 GetGradient(Vector3 u, Vector3 v, float blend) {
+            return new Vector3(blend * u + (1 - blend) * v);
+        }
     }
 }
