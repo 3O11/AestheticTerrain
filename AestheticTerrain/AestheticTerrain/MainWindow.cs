@@ -18,27 +18,58 @@ namespace AestheticTerrain {
 
             initTooltips();
 
+            // Image values
+            imageName.Text = "001-Render";
+            imageType.SelectedIndex = 0;
             imageWidth.Value = 1280;
             imageHeight.Value = 720;
             cameraXValue.Value = -80;
             cameraYValue.Value = 5;
-            cameraFov.Value = 70;
+            cameraZValue.Value = 0;
             cameraYaw.Value = 0;
             cameraPitch.Value = 0;
+            cameraFov.Value = 70;
+            terrainEnabled.Checked = true;
+            backgroundEnabled.Checked = true;
+
+            // Terrain values
             noiseSeed.Value = 3011;
             noiseFrequency.Value = 15;
             noiseAmplitude.Value = 1;
             terrainScale.Value = 3;
             lowerCutoff.Value = -100;
             upperCutoff.Value = 100;
-            frontColourButton.BackColor = Color.FromArgb(255, 60, 255);
-            backColourButton.BackColor = Color.FromArgb(60, 255, 255);
-            sunPositionX.Value = 0.5M;
-            sunPositionY.Value = 0.5M;
-            terrainEnabled.Checked = true;
-            backgroundEnabled.Checked = true;
+            frontColourButton.BackColor = Color.FromArgb(0, 0, 255);
+            backColourButton.BackColor = Color.FromArgb(255, 0, 0);
             quadraticMultiplierEnabled.Checked = true;
-            quadraticMultiplierEnabled.Checked = false;
+            xQuad.Value = 0;
+            zQuad.Value = 0.3M;
+            xzLin.Value = 0;
+            xLin.Value = 0;
+            zLin.Value = 0;
+            Const.Value = 0;
+            clampFunction.Checked = false;
+            upperClamp.Enabled = false;
+            upperClamp.Value = 0;
+            lowerClamp.Enabled = false;
+            lowerClamp.Value = 0;
+
+            //Bagkcgound options
+            sunPositionX.Value = 0.5M;
+            sunPositionY.Value = 0.3M;
+            sunRadius.Value = 150;
+            sunGlowRadius.Value = 200;
+            sunColour.BackColor = Color.FromArgb(255, 237, 11);
+            sunGlowColour.BackColor = Color.FromArgb(255, 72, 12);
+            starSeed.Value = 3011;
+            starCount.Value = 200;
+            minStarDistance.Value = 50;
+            starRadius.Value = 3;
+            starGlowRadius.Value = 8;
+            starColour.BackColor = Color.FromArgb(255, 255, 128);
+            starGlowColour.BackColor = Color.FromArgb(26, 255, 232);
+            topBackgroundColour.BackColor = Color.FromArgb(252, 29, 168);
+            bottomBackgroundColour.BackColor = Color.FromArgb(8, 1, 160);
 
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 

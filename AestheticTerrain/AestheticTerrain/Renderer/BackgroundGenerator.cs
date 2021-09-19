@@ -37,7 +37,7 @@ namespace AestheticTerrain {
                     Vector2 sample;
                     if (!sampler.TrySample(out sample)) break;
 
-                    DrawHelper.DrawGlow(g, StarGlowColour, sample, StarRadius);
+                    DrawHelper.DrawGlow(g, StarGlowColour, sample, StarGlowRadius);
                     DrawHelper.DrawCircle(g, StarColour, sample, StarRadius);
                 }
 
