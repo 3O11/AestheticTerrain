@@ -62,6 +62,7 @@ namespace AestheticTerrain {
         /// </summary>
         /// <param name="res"> The initial window resolution. </param>
         public void InitContext() {
+
             var gameWindowSettings = new GameWindowSettings();
             var nativeWindowSettings = new NativeWindowSettings() {
                 Size = new Vector2i(Width, Height),
@@ -128,14 +129,6 @@ namespace AestheticTerrain {
             return bitmap;
         }
 
-        void refresh() {
-            _camera.AspectRatio = (float)_width / _height;
-            if (_renderWindow != null) {
-                _renderWindow.Size = new Vector2i(_width, _height);
-                GL.Viewport(0, 0, _width, _height);
-            }
-        }
-
         // Image Options
         int _width;
         public int Width {
@@ -143,8 +136,12 @@ namespace AestheticTerrain {
                 return _width;
             }
             set {
-                refresh();
                 _width = value;
+                _camera.AspectRatio = (float)_width / _height;
+                if (_renderWindow != null) {
+                    _renderWindow.Size = new Vector2i(_width, _height);
+                    GL.Viewport(0, 0, _width, _height);
+                }  
             }
         }
         int _height;
@@ -153,8 +150,12 @@ namespace AestheticTerrain {
                 return _height;
             }
             set {
-                refresh();
                 _height = value;
+                _camera.AspectRatio = (float)_width / _height;
+                if (_renderWindow != null) {
+                    _renderWindow.Size = new Vector2i(_width, _height);
+                    GL.Viewport(0, 0, _width, _height);
+                }
             }
         }
         public Vector3 CameraPosition {

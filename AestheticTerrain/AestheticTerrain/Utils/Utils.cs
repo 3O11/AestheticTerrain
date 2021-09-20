@@ -91,7 +91,7 @@ namespace AestheticTerrain {
 
         static Quadratic2D parseQuadratic2D(string val) {
             // This regex is very chonky, I'm sorry for that
-            Regex regex = new Regex(@"^\((?<xQuad>-?[0-9.]+), (?<yQuad>-?[0-9.]+), (?<xyLin>-?[0-9.]+), (?<xLin>-?[0-9.]+), (?<yLin>-?[0-9.]+), (?<Const>-?[0-9.]+), (?<Clamp>True|False), (?<TopClamp>-?[0-9.]+), (?<BottomClamp>-?[0-9.]+)\)$");
+            Regex regex = new Regex(@"^\((?<xQuad>-?[0-9.]+), (?<yQuad>-?[0-9.]+), (?<xyLin>-?[0-9.]+), (?<xLin>-?[0-9.]+), (?<yLin>-?[0-9.]+), (?<Const>-?[0-9.]+); (?<Clamp>True|False), (?<TopClamp>-?[0-9.]+), (?<BottomClamp>-?[0-9.]+)\)$");
             Match m = regex.Match(val);
             if (m.Success) {
                 Quadratic2D func = new Quadratic2D();

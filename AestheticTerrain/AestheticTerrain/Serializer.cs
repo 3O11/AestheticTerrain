@@ -11,7 +11,7 @@ using OpenTK.Mathematics;
 using System.Reflection;
 
 namespace AestheticTerrain {
-    struct ImageMetadata {
+    class ImageMetadata {
         public string ImageName { get; set; }
         public int ImageTypeIndex { get; set; }
     }

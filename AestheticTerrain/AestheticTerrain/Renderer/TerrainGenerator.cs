@@ -7,11 +7,6 @@ using System.Drawing;
 using OpenTK.Mathematics;
 
 namespace AestheticTerrain {
-    enum TerrainLerpDirection {
-        FrontBack,
-        TopDown
-    }
-
     class TerrainGenerator {
         public TerrainGenerator() {
             TerrainRadius = 30;
