@@ -11,6 +11,8 @@ namespace AestheticTerrain {
             this.Text = "AestheticTerrain";
             this.Icon = new Icon("Assets/06-icon.ico");
 
+            loadFormStateFromFile("Assets/07-terrainState.ats");
+
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
             _renderer.Width = 1280;
@@ -18,6 +20,25 @@ namespace AestheticTerrain {
             _renderer.InitContext();
 
             FormClosing += window_Closing;
+        }
+
+        private void loadFormStateFromFile(string filepath) {
+            if (_renderer.IsContextCreated()) _renderer.DestroyContext();
+
+            Serializer.Deserialize(
+                filepath,
+                out ImageMetadata metadata,
+                out _renderer,
+                out _terrainGenerator,
+                out _backgroundGenerator
+            );
+
+            _renderer.InitContext();
+
+            imageName.Text = metadata.ImageName;
+            imageType.SelectedIndex = metadata.ImageTypeIndex;
+
+            syncFormWithState();
         }
 
         private void prepareQuadratic() {
@@ -366,22 +387,7 @@ namespace AestheticTerrain {
         }
 
         private void presetLoadButton_Click(object sender, EventArgs e) {
-            if (_renderer.IsContextCreated()) _renderer.DestroyContext();
-
-            Serializer.Deserialize(
-                Serializer.GetOpenpathFromDialog(),
-                out ImageMetadata metadata,
-                out _renderer,
-                out _terrainGenerator,
-                out _backgroundGenerator
-            );
-
-            _renderer.InitContext();
-
-            imageName.Text = metadata.ImageName;
-            imageType.SelectedIndex = metadata.ImageTypeIndex;
-
-            syncFormWithState();
+            loadFormStateFromFile(Serializer.GetOpenpathFromDialog());
         }
 
         private void window_Closing(object sender, EventArgs e) {
