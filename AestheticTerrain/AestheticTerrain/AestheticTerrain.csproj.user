@@ -4,8 +4,5 @@
     <Compile Update="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Tooltips.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

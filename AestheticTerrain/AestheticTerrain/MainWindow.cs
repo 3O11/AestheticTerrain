@@ -11,8 +11,6 @@ namespace AestheticTerrain {
             this.Text = "AestheticTerrain";
             this.Icon = new Icon("Assets/06-icon.ico");
 
-            initTooltips();
-
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
             _renderer.Width = 1280;

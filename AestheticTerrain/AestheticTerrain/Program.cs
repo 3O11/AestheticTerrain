@@ -1,4 +1,7 @@
 using System;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace AestheticTerrain {
@@ -9,7 +12,45 @@ namespace AestheticTerrain {
         [STAThread]
         static void Main(string[] args) {
             if (args.Length > 0) {
-                // Check parameters, render image, exit
+                if (!File.Exists(args[0])) {
+                    Console.WriteLine("File does not exist! Aborting ...");
+                    return;
+                }
+                else {
+                    Serializer.Deserialize(
+                        args[0],
+                        out ImageMetadata metadata,
+                        out Renderer renderer,
+                        out TerrainGenerator terrainGen,
+                        out BackgroundGenerator backgroundGen
+                    );
+
+                    renderer.InitContext();
+
+                    Bitmap renderedImage = renderer.Render(terrainGen.GenerateTerrain(), backgroundGen.GenerateBackground());
+
+                    switch (metadata.ImageTypeIndex) {
+                        case 0:
+                            metadata.ImageName += ".png";
+                            renderedImage.Save(metadata.ImageName, ImageFormat.Png);
+                            break;
+                        case 1:
+                            metadata.ImageName += ".jpg";
+                            renderedImage.Save(metadata.ImageName, ImageFormat.Jpeg);
+                            break;
+                        case 2:
+                            metadata.ImageName += ".bmp";
+                            renderedImage.Save(metadata.ImageName, ImageFormat.Bmp);
+                            break;
+                        default:
+                            metadata.ImageName += ".png";
+                            renderedImage.Save(metadata.ImageName, ImageFormat.Png);
+                            break;
+                    }
+
+                    renderer.DestroyContext();
+                    renderedImage.Dispose();
+                }
             }
             else {
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
