@@ -7,3 +7,6 @@ The `Docs` directory contains the User and Programmer documentation along with a
 
 The original specification can be found on this link:
 https://docs.google.com/document/d/18roJYaEG_xB0-vtlvRNaS2krFCCDXiSAWKXuPE9Zic0/
+
+Direct Link to Documentation: 
+https://github.com/3O11/AestheticTerrain/blob/master/Docs/Docs.md
