@@ -61,10 +61,7 @@ namespace AestheticTerrain {
         /// Must be called before trying to call the Render() method!
         /// </summary>
         /// <param name="res"> The initial window resolution. </param>
-        public void InitContext(int width, int height) {
-            Width = width;
-            Height = height;
-
+        public void InitContext() {
             var gameWindowSettings = new GameWindowSettings();
             var nativeWindowSettings = new NativeWindowSettings() {
                 Size = new Vector2i(Width, Height),
@@ -99,6 +96,10 @@ namespace AestheticTerrain {
             
         }
 
+        public bool IsContextCreated() {
+            return (_renderWindow != null);
+        }
+
         /// <summary>
         /// Closes the invisible window, should be called when all the Render() calls are done and the renderer is
         /// not needed anymore.
@@ -127,33 +128,33 @@ namespace AestheticTerrain {
             return bitmap;
         }
 
+        void refresh() {
+            _camera.AspectRatio = (float)_width / _height;
+            if (_renderWindow != null) {
+                _renderWindow.Size = new Vector2i(_width, _height);
+                GL.Viewport(0, 0, _width, _height);
+            }
+        }
+
         // Image Options
         int _width;
         public int Width {
-            private get {
+            get {
                 return _width;
             }
             set {
+                refresh();
                 _width = value;
-                _camera.AspectRatio = (float)_width / _height;
-                if (_renderWindow != null) {
-                    _renderWindow.Size = new Vector2i(_width, _height);
-                    GL.Viewport(0, 0, _width, _height);
-                }  
             }
         }
         int _height;
         public int Height {
-            private get {
+            get {
                 return _height;
             }
             set {
+                refresh();
                 _height = value;
-                _camera.AspectRatio = (float)_width / _height;
-                if (_renderWindow != null) {
-                    _renderWindow.Size = new Vector2i(_width, _height);
-                    GL.Viewport(0, 0, _width, _height);
-                }
             }
         }
         public Vector3 CameraPosition {
@@ -161,12 +162,15 @@ namespace AestheticTerrain {
             set => _camera.Position = value;
         }
         public float CameraYaw {
+            get => _camera.Yaw;
             set => _camera.Yaw = value;
         }
         public float CameraPitch {
+            get => _camera.Pitch;
             set => _camera.Pitch = value;
         }
         public float CameraFov {
+            get => _camera.Fov;
             set => _camera.Fov = value;
         }
         

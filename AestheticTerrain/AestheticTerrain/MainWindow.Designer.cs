@@ -687,7 +687,7 @@ namespace AestheticTerrain {
             0,
             0});
             this.imageHeight.Minimum = new decimal(new int[] {
-            480,
+            32,
             0,
             0,
             0});
@@ -710,7 +710,7 @@ namespace AestheticTerrain {
             0,
             0});
             this.imageWidth.Minimum = new decimal(new int[] {
-            640,
+            32,
             0,
             0,
             0});
@@ -1752,6 +1752,7 @@ namespace AestheticTerrain {
             this.Controls.Add(this.presetSaveButton);
             this.Controls.Add(this.options);
             this.Controls.Add(this.topMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.topMenu;
             this.Name = "MainWindow";
             this.Text = "Form1";

@@ -15,66 +15,15 @@ namespace AestheticTerrain {
         public MainWindow() {
             InitializeComponent();
             this.Text = "AestheticTerrain";
-            //this.Icon = new Icon()
+            this.Icon = new Icon("Assets/06-icon.ico");
 
             initTooltips();
 
-            // Image values
-            imageName.Text = "001-Render";
-            imageType.SelectedIndex = 0;
-            imageWidth.Value = 1280;
-            imageHeight.Value = 720;
-            cameraXValue.Value = -80;
-            cameraYValue.Value = 5;
-            cameraZValue.Value = 0;
-            cameraYaw.Value = 0;
-            cameraPitch.Value = 0;
-            cameraFov.Value = 70;
-            terrainEnabled.Checked = true;
-            backgroundEnabled.Checked = true;
-
-            // Terrain values
-            noiseSeed.Value = 3011;
-            noiseFrequency.Value = 15;
-            noiseAmplitude.Value = 1;
-            terrainScale.Value = 3;
-            lowerCutoff.Value = -100;
-            upperCutoff.Value = 100;
-            frontColourButton.BackColor = Color.FromArgb(0, 0, 255);
-            backColourButton.BackColor = Color.FromArgb(255, 0, 0);
-            quadraticMultiplierEnabled.Checked = true;
-            xQuad.Value = 0;
-            zQuad.Value = 0.3M;
-            xzLin.Value = 0;
-            xLin.Value = 0;
-            zLin.Value = 0;
-            Const.Value = 0;
-            clampFunction.Checked = false;
-            upperClamp.Enabled = false;
-            upperClamp.Value = 0;
-            lowerClamp.Enabled = false;
-            lowerClamp.Value = 0;
-
-            //Bagkcgound options
-            sunPositionX.Value = 0.5M;
-            sunPositionY.Value = 0.3M;
-            sunRadius.Value = 150;
-            sunGlowRadius.Value = 200;
-            sunColour.BackColor = Color.FromArgb(255, 237, 11);
-            sunGlowColour.BackColor = Color.FromArgb(255, 72, 12);
-            starSeed.Value = 3011;
-            starCount.Value = 200;
-            minStarDistance.Value = 50;
-            starRadius.Value = 3;
-            starGlowRadius.Value = 8;
-            starColour.BackColor = Color.FromArgb(255, 255, 128);
-            starGlowColour.BackColor = Color.FromArgb(26, 255, 232);
-            topBackgroundColour.BackColor = Color.FromArgb(252, 29, 168);
-            bottomBackgroundColour.BackColor = Color.FromArgb(8, 1, 160);
-
             logBox.Text = "Setting up default values and Initializing renderer.\n";
 
-            _renderer.InitContext((int)imageWidth.Value, (int)imageHeight.Value);
+            _renderer.Width = 1280;
+            _renderer.Height = 720;
+            _renderer.InitContext();
 
             FormClosing += window_Closing;
         }
@@ -103,16 +52,74 @@ namespace AestheticTerrain {
             }
         }
 
+        private void syncFormWithState() {
+            // Image values
+
+            //imageName.Text = "01-out";
+            //imageType.SelectedIndex = 0;
+
+            // Renderer
+            imageWidth.Value = _renderer.Width;
+            imageHeight.Value = _renderer.Height;
+            cameraXValue.Value = (decimal)_renderer.CameraPosition.X;
+            cameraYValue.Value = (decimal)_renderer.CameraPosition.Y;
+            cameraZValue.Value = (decimal)_renderer.CameraPosition.Z;
+            cameraYaw.Value = (decimal)_renderer.CameraYaw;
+            cameraPitch.Value = (decimal)_renderer.CameraPitch;
+            cameraFov.Value = (decimal)_renderer.CameraFov;
+            terrainEnabled.Checked = true;
+            backgroundEnabled.Checked = true;
+
+            // Terrain values
+            noiseSeed.Value = _terrainGenerator.NoiseSeed;
+            noiseFrequency.Value = _terrainGenerator.Frequency;
+            noiseAmplitude.Value = _terrainGenerator.Multiplier;
+            terrainScale.Value = (decimal)_terrainGenerator.Scale;
+            lowerCutoff.Value = (decimal)_terrainGenerator.LowerCutoff;
+            upperCutoff.Value = (decimal)_terrainGenerator.UpperCutoff;
+            frontColourButton.BackColor = _terrainGenerator.FrontColour;
+            backColourButton.BackColor = _terrainGenerator.BackColour;
+            quadraticMultiplierEnabled.Checked = true;
+            xQuad.Value = (decimal)_terrainGenerator.FuncMultiplier.xQuad;
+            zQuad.Value = (decimal)_terrainGenerator.FuncMultiplier.yQuad;
+            xzLin.Value = (decimal)_terrainGenerator.FuncMultiplier.xyLin;
+            xLin.Value = (decimal)_terrainGenerator.FuncMultiplier.xLin;
+            zLin.Value = (decimal)_terrainGenerator.FuncMultiplier.yLin;
+            Const.Value = (decimal)_terrainGenerator.FuncMultiplier.Const;
+            clampFunction.Checked = false;
+            upperClamp.Enabled = false;
+            upperClamp.Value = (decimal)_terrainGenerator.FuncMultiplier.TopClamp;
+            lowerClamp.Enabled = false;
+            lowerClamp.Value = (decimal)_terrainGenerator.FuncMultiplier.BottomClamp;
+
+            //Bagkcgound options
+            sunPositionX.Value = (decimal)_backgroundGenerator.SunPosition.X;
+            sunPositionY.Value = (decimal)_backgroundGenerator.SunPosition.Y;
+            sunRadius.Value = _backgroundGenerator.SunRadius;
+            sunGlowRadius.Value = _backgroundGenerator.SunGlowRadius;
+            sunColour.BackColor = _backgroundGenerator.SunColour;
+            sunGlowColour.BackColor = _backgroundGenerator.SunGlowColour;
+            starSeed.Value = _backgroundGenerator.StarSeed;
+            starCount.Value = _backgroundGenerator.StarCount;
+            minStarDistance.Value = (decimal)_backgroundGenerator.MinStarDistance;
+            starRadius.Value = _backgroundGenerator.StarRadius;
+            starGlowRadius.Value = _backgroundGenerator.StarGlowRadius;
+            starColour.BackColor = _backgroundGenerator.StarColour;
+            starGlowColour.BackColor = _backgroundGenerator.StarGlowColour;
+            topBackgroundColour.BackColor = _backgroundGenerator.TopColour;
+            bottomBackgroundColour.BackColor = _backgroundGenerator.BottomColour;
+        }
+
         // Image Options
 
         private void imageWidth_ValueChanged(object sender, EventArgs e) {
             _renderer.Width = (int)imageWidth.Value;
-            _backgroundGenerator.Width = (int)imageWidth.Value;
+            _backgroundGenerator.BackgroundWidth = (int)imageWidth.Value;
         }
 
         private void imageHeight_ValueChanged(object sender, EventArgs e) {
             _renderer.Height = (int)imageHeight.Value;
-            _backgroundGenerator.Height = (int)imageHeight.Value;
+            _backgroundGenerator.BackgroundHeight = (int)imageHeight.Value;
         }
 
         private void cameraXValue_ValueChanged(object sender, EventArgs e) {
@@ -161,7 +168,7 @@ namespace AestheticTerrain {
         }
 
         private void sunColour_Click(object sender, EventArgs e) {
-            sunColour.BackColor = ColourHelper.GetColourFromDialog();
+            sunColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void sunColour_BackColorChanged(object sender, EventArgs e) {
@@ -169,7 +176,7 @@ namespace AestheticTerrain {
         }
 
         private void sunGlowColour_Click(object sender, EventArgs e) {
-            sunGlowColour.BackColor = ColourHelper.GetColourFromDialog();
+            sunGlowColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void sunGlowColour_BackColorChanged(object sender, EventArgs e) {
@@ -177,7 +184,7 @@ namespace AestheticTerrain {
         }
 
         private void starSeed_ValueChanged(object sender, EventArgs e) {
-            _backgroundGenerator.Seed = (int)starSeed.Value;
+            _backgroundGenerator.StarSeed = (int)starSeed.Value;
         }
 
         private void starCount_ValueChanged(object sender, EventArgs e) {
@@ -197,7 +204,7 @@ namespace AestheticTerrain {
         }
 
         private void starColour_Click(object sender, EventArgs e) {
-            starColour.BackColor = ColourHelper.GetColourFromDialog();
+            starColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void starColour_BackColorChanged(object sender, EventArgs e) {
@@ -205,7 +212,7 @@ namespace AestheticTerrain {
         }
 
         private void starGlowColour_Click(object sender, EventArgs e) {
-            starGlowColour.BackColor = ColourHelper.GetColourFromDialog();
+            starGlowColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void starGlowColour_BackColorChanged(object sender, EventArgs e) {
@@ -213,7 +220,7 @@ namespace AestheticTerrain {
         }
 
         private void topBackgroundColour_Click(object sender, EventArgs e) {
-            topBackgroundColour.BackColor = ColourHelper.GetColourFromDialog();
+            topBackgroundColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void topBackgroundColour_BackColorChanged(object sender, EventArgs e) {
@@ -221,7 +228,7 @@ namespace AestheticTerrain {
         }
 
         private void bottomBackgroundColour_Click(object sender, EventArgs e) {
-            bottomBackgroundColour.BackColor = ColourHelper.GetColourFromDialog();
+            bottomBackgroundColour.BackColor = Utils.GetColourFromDialog();
         }
 
         private void bottomBackgroundColour_BackColorChanged(object sender, EventArgs e) {
@@ -231,7 +238,7 @@ namespace AestheticTerrain {
         // Terrain Options
 
         private void noiseSeed_ValueChanged(object sender, EventArgs e) {
-            _terrainGenerator.Seed = (int)noiseSeed.Value;
+            _terrainGenerator.NoiseSeed = (int)noiseSeed.Value;
         }
 
         private void noiseFrequency_ValueChanged(object sender, EventArgs e) {
@@ -247,19 +254,19 @@ namespace AestheticTerrain {
         }
 
         private void frontColourButton_Click(object sender, EventArgs e) {
-            frontColourButton.BackColor = ColourHelper.GetColourFromDialog();
+            frontColourButton.BackColor = Utils.GetColourFromDialog();
         }
 
         private void frontColourButton_BackColorChanged(object sender, EventArgs e) {
-            _terrainGenerator.FrontColour = ColourHelper.ConvertToVector(frontColourButton.BackColor);
+            _terrainGenerator.FrontColour = frontColourButton.BackColor;
         }
 
         private void backColourButton_Click(object sender, EventArgs e) {
-            backColourButton.BackColor = ColourHelper.GetColourFromDialog();
+            backColourButton.BackColor = Utils.GetColourFromDialog();
         }
 
         private void backColourButton_BackColorChanged(object sender, EventArgs e) {
-            _terrainGenerator.BackColour = ColourHelper.ConvertToVector(backColourButton.BackColor);
+            _terrainGenerator.BackColour = backColourButton.BackColor;
         }
 
         private void upperCutoff_ValueChanged(object sender, EventArgs e) {
@@ -298,8 +305,8 @@ namespace AestheticTerrain {
             // so we need to temporarily update the renderer with a different size to avoid problems.
             _renderer.Width = previewImage.Width;
             _renderer.Height = previewImage.Height;
-            _backgroundGenerator.Width = previewImage.Width;
-            _backgroundGenerator.Height = previewImage.Height;
+            _backgroundGenerator.BackgroundWidth = previewImage.Width;
+            _backgroundGenerator.BackgroundHeight = previewImage.Height;
 
             Mesh terrain = terrainEnabled.Checked ? _terrainGenerator.GenerateTerrain() : null;
             Bitmap background = backgroundEnabled.Checked ? _backgroundGenerator.GenerateBackground() : null;
@@ -307,8 +314,8 @@ namespace AestheticTerrain {
 
             _renderer.Width = (int)imageWidth.Value;
             _renderer.Height = (int)imageHeight.Value;
-            _backgroundGenerator.Width = (int)imageWidth.Value;
-            _backgroundGenerator.Height = (int)imageHeight.Value;
+            _backgroundGenerator.BackgroundWidth = (int)imageWidth.Value;
+            _backgroundGenerator.BackgroundHeight = (int)imageHeight.Value;
 
             logBox.Text = "Preview rendered.\n";
         }
@@ -316,12 +323,12 @@ namespace AestheticTerrain {
         private void imageRenderButton_Click(object sender, EventArgs e) {
             prepareQuadratic();
 
-            if (!Paths.IsValidFilename(imageName.Text)) {
+            if (!Utils.IsValidFilename(imageName.Text)) {
                 logBox.Text = "The image name is not a valid filename, aborting operation!\n";
                 return;
             }
 
-            string imageDir = Paths.GetDir();
+            string imageDir = Utils.GetDir();
             if (imageDir == "") {
                 logBox.Text = "The image folder is not selected, aborting operation!\n";
                 return;
@@ -357,11 +364,32 @@ namespace AestheticTerrain {
         }
 
         private void presetSaveButton_Click(object sender, EventArgs e) {
-
+            Serializer.Serialize(
+                Serializer.GetSavepathFromDialog(),
+                new ImageMetadata() { ImageName = imageName.Text, ImageTypeIndex = imageType.SelectedIndex }, 
+                _renderer,
+                _terrainGenerator,
+                _backgroundGenerator
+            );
         }
 
         private void presetLoadButton_Click(object sender, EventArgs e) {
+            if (_renderer.IsContextCreated()) _renderer.DestroyContext();
 
+            Serializer.Deserialize(
+                Serializer.GetOpenpathFromDialog(),
+                out ImageMetadata metadata,
+                out _renderer,
+                out _terrainGenerator,
+                out _backgroundGenerator
+            );
+
+            _renderer.InitContext();
+
+            imageName.Text = metadata.ImageName;
+            imageType.SelectedIndex = metadata.ImageTypeIndex;
+
+            syncFormWithState();
         }
 
         private void window_Closing(object sender, EventArgs e) {

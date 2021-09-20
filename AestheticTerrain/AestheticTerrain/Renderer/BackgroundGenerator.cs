@@ -23,37 +23,37 @@ namespace AestheticTerrain {
         }
 
         public Bitmap GenerateBackground() {
-            Bitmap background = new Bitmap(Width, Height);
+            Bitmap background = new Bitmap(BackgroundWidth, BackgroundHeight);
 
             using (Graphics g = Graphics.FromImage(background)) {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
                 // Drawing background
-                DrawHelper.DrawGradientRectangle(g, new Vector2(0, 0), new Vector2(Width, Height), TopColour, BottomColour);
+                Utils.DrawGradientRectangle(g, new Vector2(0, 0), new Vector2(BackgroundWidth, BackgroundHeight), TopColour, BottomColour);
 
                 // Drawing stars
-                RejectionSampler sampler = new RejectionSampler(Width, Height, MinStarDistance, 1000, Seed);
+                RejectionSampler sampler = new RejectionSampler(BackgroundWidth, BackgroundHeight, MinStarDistance, 1000, StarSeed);
                 for (int i = 0; i < StarCount; i++) {
                     Vector2 sample;
                     if (!sampler.TrySample(out sample)) break;
 
-                    DrawHelper.DrawGlow(g, StarGlowColour, sample, StarGlowRadius);
-                    DrawHelper.DrawCircle(g, StarColour, sample, StarRadius);
+                    Utils.DrawGlow(g, StarGlowColour, sample, StarGlowRadius);
+                    Utils.DrawCircle(g, StarColour, sample, StarRadius);
                 }
 
                 // Drawing sun
-                Vector2 sunPosAdjusted = SunPosition * new Vector2(Width, Height);
-                sunPosAdjusted.Y = Height - sunPosAdjusted.Y;
-                DrawHelper.DrawGlow(g, SunGlowColour, sunPosAdjusted, SunGlowRadius);
-                DrawHelper.DrawCircle(g, SunColour, sunPosAdjusted, SunRadius);
+                Vector2 sunPosAdjusted = SunPosition * new Vector2(BackgroundWidth, BackgroundHeight);
+                sunPosAdjusted.Y = BackgroundHeight - sunPosAdjusted.Y;
+                Utils.DrawGlow(g, SunGlowColour, sunPosAdjusted, SunGlowRadius);
+                Utils.DrawCircle(g, SunColour, sunPosAdjusted, SunRadius);
             }
 
             return background;
         }
 
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Seed { get; set; }
+        public int BackgroundWidth { get; set; }
+        public int BackgroundHeight { get; set; }
+        public int StarSeed { get; set; }
         public Color TopColour { get; set; }
         public Color BottomColour { get; set; }
         public Color StarColour { get; set; }

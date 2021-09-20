@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AestheticTerrain {
-    class Quadratic2D {
+    public class Quadratic2D {
         public Quadratic2D() {
             Clamp = false;
             TopClamp = 100;
