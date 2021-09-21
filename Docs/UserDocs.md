@@ -18,10 +18,13 @@ This is the type of image that can be created using this program:
 ### Usage Instructions
 
 This repository contains a finished build, which should be executable out of the box,
-provided the user had .NET 5.0 installed on their machine(it can 
-be downloaded from: https://dotnet.microsoft.com/download/dotnet/5.0). Another option is to
-create a build from source, using Visual Studio, it should just be the case of opening
-the `.sln` file, waiting a little bit and then hitting the Build and Run button.
+provided the user had .NET 5.0 installed on their machine. It can 
+be downloaded from: https://dotnet.microsoft.com/download/dotnet/5.0.
+
+Another option is to
+create a build from source, using Visual Studio 19. When using VS, please insure you have .NET 5.0
+installed for development. After building, copy the `Assets` directory into the directory where
+the resulting `.exe` file is located so that it has access to all the necessary additional files.
 
 ### Graphical interface
 
