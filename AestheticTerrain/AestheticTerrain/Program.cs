@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
@@ -11,6 +12,9 @@ namespace AestheticTerrain {
         /// </summary>
         [STAThread]
         static void Main(string[] args) {
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
+
             if (args.Length > 0) {
                 if (!File.Exists(args[0])) {
                     Console.WriteLine("File does not exist! Aborting ...");
