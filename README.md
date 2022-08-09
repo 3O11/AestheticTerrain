@@ -1,5 +1,9 @@
 # AestheticTerrain
 
+## CURRENTLY BROKEN
+
+I have noticed after coming back to this repository that the project no longer works.
+
 A simple vaporwave inspired image generator written in C#.
 
 The project root directory is `AestheticTerrain`, it contains the Visual Studio files, and the actual source code.
